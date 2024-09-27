@@ -1,0 +1,25 @@
+<p>turma works!</p>
+
+<table>
+    <th>id</th>
+    <th>ano</th>
+    <th>identificação</th>
+    <th>ano letivo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    
+    <tr *ngFor="let turma of turmas">
+        <td>{{turma.id}}</td>
+        <td>{{turma.serie}}</td>
+        <td>{{turma.identificacao}}</td>
+        <td>{{test(turma.ano_id)}}</td>
+        <td><button [routerLink]="['gerenciar', turma.id]">Gerenciar</button></td>
+        <td><button [routerLink]="['editar', turma.id]">Editar</button></td>
+        <td><button (click)="Excluir(turma.id)">Excluir</button></td>
+    </tr>
+</table>
+
+<button routerLink="cadastrar">Criar nova turma</button>
+
+<router-outlet></router-outlet>

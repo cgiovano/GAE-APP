@@ -3,16 +3,65 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CadastroAlunoComponent } from './aluno/cadastro-aluno/cadastro-aluno.component';
+import { EditarAlunoComponent } from './aluno/editar-aluno/editar-aluno.component';
+import { GerenciarAlunoComponent } from './aluno/gerenciar-aluno/gerenciar-aluno.component';
+import { CadastroAtividadeComponent } from './atividade/cadastro-atividade/cadastro-atividade.component';
+import { EditarAtividadeComponent } from './atividade/editar-atividade/editar-atividade.component';
+import { GerenciarAtividadeComponent } from './atividade/gerenciar-atividade/gerenciar-atividade.component';
+import { CadastrarCorrecaoComponent } from './correcao/cadastrar-correcao/cadastrar-correcao.component';
+import { EditarCorrecaoComponent } from './correcao/editar-correcao/editar-correcao.component';
+import { EditarCriterioComponent } from './criterio/editar-criterio/editar-criterio.component';
+import { CadastrarCriterioComponent } from './criterio/cadastrar-criterio/cadastrar-criterio.component';
+import { GerenciarCriterioComponent } from './criterio/gerenciar-criterio/gerenciar-criterio.component';
+import { GerenciarTurmaComponent } from './turma/gerenciar-turma/gerenciar-turma.component';
+import { EditarTurmaComponent } from './turma/editar-turma/editar-turma.component';
+import { CadastrarTurmaComponent } from './turma/cadastrar-turma/cadastrar-turma.component';
+import { AlunoComponent } from './aluno/aluno.component';
+import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { AnoLetivoComponent } from './ano-letivo/ano-letivo.component';
+import { CadastrarAnoLetivoComponent } from './ano-letivo/cadastrar-ano-letivo/cadastrar-ano-letivo.component';
+import { EditarAnoLetivoComponent } from './ano-letivo/editar-ano-letivo/editar-ano-letivo.component';
+import { TurmaComponent } from './turma/turma.component';
+import { AtividadeComponent } from './atividade/atividade.component';
+import { CadastrarAtividadeComponent } from './atividade/cadastrar-atividade/cadastrar-atividade.component';
+import { CriterioComponent } from './criterio/criterio.component';
+import { CorrecaoComponent } from './correcao/correcao.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CadastroAlunoComponent,
+    EditarAlunoComponent,
+    GerenciarAlunoComponent,
+    CadastroAtividadeComponent,
+    EditarAtividadeComponent,
+    GerenciarAtividadeComponent,
+    CadastrarCorrecaoComponent,
+    EditarCorrecaoComponent,
+    EditarCriterioComponent,
+    CadastrarCriterioComponent,
+    GerenciarCriterioComponent,
+    GerenciarTurmaComponent,
+    EditarTurmaComponent,
+    CadastrarTurmaComponent,
+    AlunoComponent,
+    AnoLetivoComponent,
+    CadastrarAnoLetivoComponent,
+    EditarAnoLetivoComponent,
+    TurmaComponent,
+    AtividadeComponent,
+    CadastrarAtividadeComponent,
+    CriterioComponent,
+    CorrecaoComponent, 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    FormsModule
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

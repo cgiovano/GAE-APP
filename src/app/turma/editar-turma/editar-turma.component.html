@@ -1,0 +1,12 @@
+<p>Editaando {{turma.serie}} "{{turma.identificacao}}"</p>
+
+<div><span>serie</span><input type="text" [(ngModel)]="serie"/></div>
+<div><span>Identificação</span><input type="text" [(ngModel)]="identificacao"/></div>
+<div>
+    <span>ano letivo</span>
+    <select [(ngModel)]="ano_id" (change)="anoLetivoSelecionado($event)">
+        <option *ngFor="let anoLetivo of anosLetivos" [value]="anoLetivo.id">{{anoLetivo.ano}}</option>
+    </select>
+
+    <button (click)="Cadastrar()">Atualizar ano letivo</button>
+</div>

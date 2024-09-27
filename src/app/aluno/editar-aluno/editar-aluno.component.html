@@ -1,0 +1,7 @@
+<h3>Editando aluno {{aluno.nome}} com id: {{aluno.id}}</h3>
+<div>
+    <span>Nome:</span><input type="text" [(ngModel)]="aluno.nome"/>
+    <button (click)="Atualizar()">Atualizar dados</button>
+</div>
+
+<button (click)="Cancelar()">Cancelar</button>
