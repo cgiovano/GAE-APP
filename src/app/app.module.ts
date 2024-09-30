@@ -28,6 +28,7 @@ import { AtividadeComponent } from './atividade/atividade.component';
 import { CadastrarAtividadeComponent } from './atividade/cadastrar-atividade/cadastrar-atividade.component';
 import { CriterioComponent } from './criterio/criterio.component';
 import { CorrecaoComponent } from './correcao/correcao.component';
+import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CorrecaoComponent } from './correcao/correcao.component';
     AtividadeComponent,
     CadastrarAtividadeComponent,
     CriterioComponent,
-    CorrecaoComponent, 
+    CorrecaoComponent,
+    AdicionarAlunoTurmaComponent, 
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,17 @@
 <p>gerenciar-turma works!</p>
 
 <p>Adicionar alunos para a turma</p>
+
+<table>
+    <th>Nome do Aluno</th>
+    <th>Turma</th>
+
+    <tr *ngFor="let alunoTurma of alunosTurma">
+        <td>{{ObterNomeAluno(alunoTurma.id_aluno)}}</td>
+        <td>{{alunoTurma.id_turma}}</td>
+    </tr>
+</table>
+
+<button routerLink="adicionar-aluno-turma">Adicionar alunos</button>
+
+<router-outlet></router-outlet>

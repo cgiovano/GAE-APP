@@ -19,6 +19,7 @@ import { CadastrarCriterioComponent } from './criterio/cadastrar-criterio/cadast
 import { CorrecaoComponent } from './correcao/correcao.component';
 import { EditarCorrecaoComponent } from './correcao/editar-correcao/editar-correcao.component';
 import { CadastrarCorrecaoComponent } from './correcao/cadastrar-correcao/cadastrar-correcao.component';
+import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
 
 const routes: Routes = [
   {path: 'aluno', component: AlunoComponent}, 
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'turma/editar/:id', component: EditarTurmaComponent}, 
   {path: 'turma/cadastrar', component: CadastrarTurmaComponent}, 
   {path: 'turma/gerenciar/:id', component: GerenciarTurmaComponent},
+  {path: 'turma/gerenciar/:id/adicionar-aluno-turma', component: AdicionarAlunoTurmaComponent}, 
   {path: 'ano-letivo', component: AnoLetivoComponent}, 
   {path: 'ano-letivo/editar/:id', component: EditarAnoLetivoComponent}, 
   {path: 'ano-letivo/cadastrar', component: CadastrarAnoLetivoComponent}, 

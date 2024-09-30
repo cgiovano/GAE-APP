@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UrlBaseService } from '../../UrlBaseService';
 import { Turma } from '../../models/turma';
 import { Aluno } from '../../models/aluno';
+import { AlunoTurma } from '../../models/aluno_turma';
 
 @Component({
   selector: 'app-gerenciar-turma',
@@ -13,13 +14,19 @@ import { Aluno } from '../../models/aluno';
 export class GerenciarTurmaComponent implements OnInit{
 
   turma: Turma;
-  alunoLista: Aluno[] = [];
-  alunoTurma: Aluno[] = []
+  alunos: Aluno[] = [];
+  alunosTurma: AlunoTurma[] = [];
 
-  constructor(private httpClient: HttpClient, private ativatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) {}
+  constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.httpClient.get<Turma>(`${this.urlBase.getUrl()}/turma/${id}`).subscribe(dados => this.turma = dados);
+    this.httpClient.get<AlunoTurma[]>(`${this.urlBase.getUrl()}/aluno-turma/${id}`).subscribe(dados => this.alunosTurma = dados);
   }
 
+  ObterNomeAluno(id: number) {
+    const aluno = this.alunos.find((item) => item.id === id);
+    return(aluno?.nome);
+  }
 }
