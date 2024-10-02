@@ -29,4 +29,8 @@ export class GerenciarTurmaComponent implements OnInit{
     const aluno = this.alunos.find((item) => item.id === id);
     return(aluno?.nome);
   }
+
+  ExcluirRegistroDaTurma(idAluno: number) {
+    this.httpClient.delete(`${this.urlBase.getUrl()}/aluno-turma/deletar?id_turma=${this.id_turma}&id_aluno=${idAluno}`).subscribe(() => this.httpClient.get<Aluno[]>(`${this.urlBase.getUrl()}/aluno-turma/${this.id_turma}`).subscribe(dados => this.alunos = dados));
+  }
 }
