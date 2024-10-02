@@ -21,11 +21,12 @@ export class AdicionarAlunoTurmaComponent implements OnInit {
   ngOnInit(): void {
     this.id_turma = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     console.log("Esse é o id da turma caputado na criação do componente adicionar-aluno-turma: " + this.id_turma);
-    this.httpClient.get<Aluno[]>(`${this.urlBase.getUrl()}/aluno`).subscribe(dados => this.alunosLista = dados);
+    this.httpClient.get<Aluno[]>(`${this.urlBase.getUrl()}/aluno-turma/alunos-sem-turma`).subscribe(dados => this.alunosLista = dados);
   }
 
-  AdicionarAluno(idAluno: number) {
+  AdicionarAluno(idAluno: number, idLista: number) {
     const alunoTurma: AlunoTurma = {id_aluno: idAluno, id_turma: this.id_turma};
     this.httpClient.post<AlunoTurma>(`${this.urlBase.getUrl()}/aluno-turma/cadastrar`, alunoTurma).subscribe(() => console.log(alunoTurma));
+    this.alunosLista.splice(idLista, 1);
   }
 }

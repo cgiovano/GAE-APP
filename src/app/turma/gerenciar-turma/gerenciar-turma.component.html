@@ -3,12 +3,14 @@
 <p>Adicionar alunos para a turma</p>
 
 <table>
+    <th>id</th>
     <th>Nome do Aluno</th>
     <th>Turma</th>
 
-    <tr *ngFor="let alunoTurma of alunosTurma">
-        <td>{{ObterNomeAluno(alunoTurma.id_aluno)}}</td>
-        <td>{{alunoTurma.id_turma}}</td>
+    <tr *ngFor="let aluno of alunos">
+        <td>{{aluno.id}}</td>
+        <td>{{aluno.nome}}</td>
+        <td>{{turma.serie + turma.identificacao}}</td>
     </tr>
 </table>
 

@@ -15,14 +15,14 @@ export class GerenciarTurmaComponent implements OnInit{
 
   turma: Turma;
   alunos: Aluno[] = [];
-  alunosTurma: AlunoTurma[] = [];
+  id_turma : number;
 
   constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) {}
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.httpClient.get<Turma>(`${this.urlBase.getUrl()}/turma/${id}`).subscribe(dados => this.turma = dados);
-    this.httpClient.get<AlunoTurma[]>(`${this.urlBase.getUrl()}/aluno-turma/${id}`).subscribe(dados => this.alunosTurma = dados);
+    this.id_turma = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.httpClient.get<Turma>(`${this.urlBase.getUrl()}/turma/${this.id_turma}`).subscribe(dados => this.turma = dados);
+    this.httpClient.get<Aluno[]>(`${this.urlBase.getUrl()}/aluno-turma/${this.id_turma}`).subscribe(dados => this.alunos = dados);
   }
 
   ObterNomeAluno(id: number) {
