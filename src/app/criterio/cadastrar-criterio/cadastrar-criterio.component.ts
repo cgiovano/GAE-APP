@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './cadastrar-criterio.component.css'
 })
 export class CadastrarCriterioComponent {
+  tipo_criterio: number = 0; 
 
+  alterarTipoCriterio(tipo_criterio: number) {
+    this.tipo_criterio = tipo_criterio;
+  }
 }

@@ -1,1 +1,22 @@
 <p>cadastrar-criterio works!</p>
+
+<div>
+    <p>Descrição</p>
+    <input type="text" />
+
+    <div>
+        <button (click)="alterarTipoCriterio(0)">Valor absoluto</button>
+        <button (click)="alterarTipoCriterio(1)">Escala</button>
+
+    </div>
+
+    <ng-container *ngIf="tipo_criterio === 0">
+        <p>Pontuação</p>
+        <input type="text" />
+    </ng-container>
+
+    <ng-container *ngIf="tipo_criterio === 1">
+        <p>Pontos da escala</p>
+        <input type="text"/>
+    </ng-container>
+</div>

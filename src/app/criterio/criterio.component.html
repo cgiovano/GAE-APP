@@ -1,2 +1,21 @@
 <p>criterio works!</p>
+
+<table>
+    <th>id</th>
+    <th>Descrição</th>
+    <th>Valor</th>
+    <th></th>
+    <th></th>
+
+    <tr *ngFor="let criterio of criterios">
+        <td>{{criterio.id}}</td>
+        <td>{{criterio.descricao}}</td>
+        <td>{{criterio.valor}}</td>
+        <button [routerLink]="['editar', criterio.id]">Alterar</button>
+        <button (click)="ExcluirCriterio(criterio.id)">Excluir</button>
+    </tr>
+</table>
+
+<button [routerLink]="['cadastrar']">Adicionar criterio</button>
+
 <router-outlet></router-outlet>
