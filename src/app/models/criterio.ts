@@ -1,5 +1,6 @@
 export interface criterio {
     id: number;
     descricao: string;
-    valor: number;
+    pontuacao: number;
+    isLikert: boolean;
 }

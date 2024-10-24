@@ -1,4 +1,4 @@
-export interface atividade {
+export interface Atividade {
     id: number;
     descricao: string;
     data_criacao: Date;

@@ -22,4 +22,10 @@ export class CriterioComponent implements OnInit {
   ExcluirCriterio(id: number) {
     this.httpClient.delete(`${this.urlBase.getUrl()}/criterio/${id}`).subscribe(() => this.httpClient.get<criterio[]>(`${this.urlBase.getUrl()}/criterio`).subscribe((dados) => this.criterios = dados));
   }
+
+  ObterTipoDeEscala(isLikert: boolean) {
+    let res = isLikert ? "true" : "false";
+    console.log(isLikert);
+    return(res);
+  }
 }

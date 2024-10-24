@@ -20,6 +20,7 @@ import { CorrecaoComponent } from './correcao/correcao.component';
 import { EditarCorrecaoComponent } from './correcao/editar-correcao/editar-correcao.component';
 import { CadastrarCorrecaoComponent } from './correcao/cadastrar-correcao/cadastrar-correcao.component';
 import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
+import { GerenciarCriterioComponent } from './criterio/gerenciar-criterio/gerenciar-criterio.component';
 
 const routes: Routes = [
   {path: 'aluno', component: AlunoComponent}, 
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'atividade/cadastrar', component: CadastrarAtividadeComponent}, 
   {path: 'criterio', component: CriterioComponent}, 
   {path: 'criterio/editar/:id', component: EditarCriterioComponent}, 
+  {path: 'criterio/gerenciar/:id', component: GerenciarCriterioComponent}, 
   {path: 'criterio/cadastrar', component: CadastrarCriterioComponent}, 
   {path: 'correcao', component: CorrecaoComponent}, 
   {path: 'correcao/editar/:id', component: EditarCorrecaoComponent}, 

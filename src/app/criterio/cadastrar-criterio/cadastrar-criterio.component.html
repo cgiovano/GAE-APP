@@ -2,21 +2,17 @@
 
 <div>
     <p>Descrição</p>
-    <input type="text" />
+    <input type="text" [(ngModel)]="criterio.descricao"/>
 
     <div>
-        <button (click)="alterarTipoCriterio(0)">Valor absoluto</button>
-        <button (click)="alterarTipoCriterio(1)">Escala</button>
-
+        <label>Escala Likert</label>
+        <input type="checkbox" name="isLikert" (change)="alterarValor(!isLikert)"/>
     </div>
 
-    <ng-container *ngIf="tipo_criterio === 0">
-        <p>Pontuação</p>
-        <input type="text" />
-    </ng-container>
+    <ng-content *ngIf="isLikert">
+        <p>Número de pontos da escala</p>
+        <input type="number" min="0" [(ngModel)]="criterio.pontuacao"/>
+    </ng-content>
 
-    <ng-container *ngIf="tipo_criterio === 1">
-        <p>Pontos da escala</p>
-        <input type="text"/>
-    </ng-container>
+    <button (click)="criarCriterio()">Cadastrar criterio</button>
 </div>

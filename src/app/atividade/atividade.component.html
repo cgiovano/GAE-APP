@@ -1,2 +1,21 @@
 <p>atividade works!</p>
+
+<table>
+    <th>id</th>
+    <th>Nome da atividade</th>
+    <th>Data de criação</th>
+    <th>Data de entrega</th>
+    <th>Valor da atividade</th>
+
+    <tr *ngFor="let atividade of atividades">
+        <td>{{atividade.id}}</td>
+        <td>{{atividade.descricao}}</td>
+        <td>{{atividade.data_criacao}}</td>
+        <td>{{atividade.data_entrega}}</td>
+        <td>{{atividade.valor}}</td>
+    </tr>
+</table>
+
+<button routerLink="cadastrar">Cadastrar nova atividade</button>
+
 <router-outlet></router-outlet>
