@@ -1,12 +1,15 @@
 <p>cadastrar-atividade works!</p>
 
 <p>Nome da atividade</p>
-<input type="text" />
+<input type="text" [(ngModel)]="atividade.descricao"/>
 
 <p>Valor da atividade</p>
-<input  type="number"/>
+<input  type="number" [(ngModel)]="atividade.valor"/>
 
 <p>numero de questões</p>
-<input type="number"/>
+<input type="number" [(ngModel)]="atividade.numero_questoes"/>
 
-<button>Adicionar questões</button>
+<p>Data de entrega</p>
+<input type="date" (change)="setDate(inputDate.value)" #inputDate/>
+
+<button (click)="CriarAtividade()">Confirmar</button>
