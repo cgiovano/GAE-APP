@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { CadastroAlunoComponent } from './aluno/cadastro-aluno/cadastro-aluno.component';
 import { EditarAlunoComponent } from './aluno/editar-aluno/editar-aluno.component';
 import { GerenciarAlunoComponent } from './aluno/gerenciar-aluno/gerenciar-aluno.component';
-import { CadastroAtividadeComponent } from './atividade/cadastro-atividade/cadastro-atividade.component';
 import { EditarAtividadeComponent } from './atividade/editar-atividade/editar-atividade.component';
 import { GerenciarAtividadeComponent } from './atividade/gerenciar-atividade/gerenciar-atividade.component';
 import { CadastrarCorrecaoComponent } from './correcao/cadastrar-correcao/cadastrar-correcao.component';
@@ -18,7 +17,7 @@ import { GerenciarTurmaComponent } from './turma/gerenciar-turma/gerenciar-turma
 import { EditarTurmaComponent } from './turma/editar-turma/editar-turma.component';
 import { CadastrarTurmaComponent } from './turma/cadastrar-turma/cadastrar-turma.component';
 import { AlunoComponent } from './aluno/aluno.component';
-import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { AnoLetivoComponent } from './ano-letivo/ano-letivo.component';
 import { CadastrarAnoLetivoComponent } from './ano-letivo/cadastrar-ano-letivo/cadastrar-ano-letivo.component';
@@ -29,6 +28,7 @@ import { CadastrarAtividadeComponent } from './atividade/cadastrar-atividade/cad
 import { CriterioComponent } from './criterio/criterio.component';
 import { CorrecaoComponent } from './correcao/correcao.component';
 import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adic
     CadastroAlunoComponent,
     EditarAlunoComponent,
     GerenciarAlunoComponent,
-    CadastroAtividadeComponent,
     EditarAtividadeComponent,
     GerenciarAtividadeComponent,
     CadastrarCorrecaoComponent,
@@ -63,7 +62,7 @@ import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adic
     AppRoutingModule, 
     FormsModule
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(), DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
