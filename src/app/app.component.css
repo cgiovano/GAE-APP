@@ -1,0 +1,43 @@
+.menu-container {
+    display: block;
+    width: 20%;
+    height: 100%;
+    background: #0d326a;
+    float: left;
+    position: fixed;
+}
+
+.menu-container h3 {
+    text-align: center;
+    color: #FFF;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;;
+}
+
+.menu li {
+    list-style-type: none;
+    margin: auto;
+}
+
+.menu button {
+    margin: 0px;
+    border-color: transparent;
+    background-color: transparent;
+    width: 100%;
+    color: #FFF;
+    font-size: medium;
+    padding: 1em 0;
+}
+
+.menu button:hover {
+    background-color: #FFFFFF25;
+}
+
+.content-container {
+    width: 70%;
+    display: block;
+    float: right;
+}
