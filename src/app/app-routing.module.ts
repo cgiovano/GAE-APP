@@ -21,6 +21,8 @@ import { EditarCorrecaoComponent } from './correcao/editar-correcao/editar-corre
 import { CadastrarCorrecaoComponent } from './correcao/cadastrar-correcao/cadastrar-correcao.component';
 import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
 import { GerenciarCriterioComponent } from './criterio/gerenciar-criterio/gerenciar-criterio.component';
+import { GerenciarAtividadeComponent } from './atividade/gerenciar-atividade/gerenciar-atividade.component';
+import { CadastrarQuestaoComponent } from './questao/cadastrar-questao/cadastrar-questao.component';
 
 const routes: Routes = [
   {path: 'aluno', component: AlunoComponent}, 
@@ -37,13 +39,15 @@ const routes: Routes = [
   {path: 'atividade', component: AtividadeComponent}, 
   {path: 'atividade/editar/:id', component: EditarAtividadeComponent}, 
   {path: 'atividade/cadastrar', component: CadastrarAtividadeComponent}, 
+  {path: 'atividade/gerenciar/:id', component: GerenciarAtividadeComponent},
   {path: 'criterio', component: CriterioComponent}, 
   {path: 'criterio/editar/:id', component: EditarCriterioComponent}, 
   {path: 'criterio/gerenciar/:id', component: GerenciarCriterioComponent}, 
   {path: 'criterio/cadastrar', component: CadastrarCriterioComponent}, 
   {path: 'correcao', component: CorrecaoComponent}, 
   {path: 'correcao/editar/:id', component: EditarCorrecaoComponent}, 
-  {path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent}
+  {path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent}, 
+  {path: 'atividade/gerenciar/:id/questao/cadastrar', component: CadastrarQuestaoComponent}
   ];
     @NgModule({
   imports: [RouterModule.forRoot(routes)],

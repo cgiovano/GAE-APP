@@ -29,6 +29,7 @@ import { CriterioComponent } from './criterio/criterio.component';
 import { CorrecaoComponent } from './correcao/correcao.component';
 import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
 import { DatePipe } from '@angular/common';
+import { CadastrarQuestaoComponent } from './questao/cadastrar-questao/cadastrar-questao.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { DatePipe } from '@angular/common';
     CadastrarAtividadeComponent,
     CriterioComponent,
     CorrecaoComponent,
-    AdicionarAlunoTurmaComponent, 
+    AdicionarAlunoTurmaComponent,
+    CadastrarQuestaoComponent, 
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,16 @@
-<h1>Aplicação</h1>
+<div class="menu-container">
+  <h3>Class Manager</h3>
 
-<router-outlet></router-outlet>
+  <ul class="menu">
+    <li><button routerLink="ano-letivo">Ano Letivo</button></li>
+    <li><button routerLink="turma">Turmas</button></li>
+    <li><button routerLink="aluno">Alunos</button></li>
+    <li> <button routerLink="atividade">Atividades</button></li>
+    <li><button routerLink="criterio">Criterios</button></li>
+    <li><button routerLink="correcao">Correção</button></li>
+  </ul>
+</div>
 
-<div>
-  <button routerLink="ano-letivo">ANO LETIVO</button>
-  <button routerLink="turma">TURMAS</button>
-  <button routerLink="aluno">ALUNOS</button>
-  <button routerLink="atividade">ATIVIDADES</button>
-  <button routerLink="criterio">CRITERIOS</button>
-  <button routerLink="correcao">CORREÇÃO</button>
+<div class="content-container">
+  <router-outlet></router-outlet>
 </div>
