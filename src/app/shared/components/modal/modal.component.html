@@ -1,0 +1,9 @@
+<ng-container *ngIf="mostrar">
+    <div class="modal">
+        <div>
+            <h3>{{titulo}}</h3>
+        </div>
+        <ng-content></ng-content>
+    </div>
+    <div (click)="Open('n')" class="overlay"></div>
+</ng-container>

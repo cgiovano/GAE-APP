@@ -30,6 +30,8 @@ import { CorrecaoComponent } from './correcao/correcao.component';
 import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
 import { DatePipe } from '@angular/common';
 import { CadastrarQuestaoComponent } from './questao/cadastrar-questao/cadastrar-questao.component';
+import { ModalComponent } from './modal/modal.component';
+import { ModalModule } from './modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -57,12 +59,13 @@ import { CadastrarQuestaoComponent } from './questao/cadastrar-questao/cadastrar
     CriterioComponent,
     CorrecaoComponent,
     AdicionarAlunoTurmaComponent,
-    CadastrarQuestaoComponent, 
+    CadastrarQuestaoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    FormsModule
+    FormsModule,
+    ModalModule
   ],
   providers: [provideHttpClient(), DatePipe],
   bootstrap: [AppComponent]

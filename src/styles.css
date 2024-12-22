@@ -1,5 +1,6 @@
 html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12pt;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -11,7 +12,6 @@ body {
     padding: inherit;
     width: inherit;
     height: 100%;
-    display: inline-flex;
 }
 
 app-root {
@@ -22,7 +22,6 @@ app-root {
 
 button {
     margin: 5px;
-    font-size: medium;
     padding: .3em;
     border-color: transparent;
 }
@@ -42,7 +41,6 @@ button.focus:hover {
 }
 
 input {
-    font-size: medium;
     margin: 5px;
     padding: .3em;
     border: #D6D6D6;
@@ -65,7 +63,6 @@ label {
 select {
     margin: 5px;
     padding: .3em;
-    font-size: medium;
     border-color: transparent;
     accent-color: #0D326A;
 }

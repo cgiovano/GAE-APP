@@ -1,0 +1,20 @@
+<div class="content-sub-container">
+    <p>cadastrar-criterio works!</p>
+
+    <div>
+        <p>Descrição</p>
+        <input type="text" [(ngModel)]="criterio.descricao" />
+
+        <div>
+            <label>Escala Likert</label>
+            <input type="checkbox" name="isLikert" (change)="alterarValor(!isLikert)" />
+        </div>
+
+        <ng-content *ngIf="isLikert">
+            <p>Número de pontos da escala</p>
+            <input type="number" min="0" [(ngModel)]="criterio.pontuacao" />
+        </ng-content>
+
+        <button (click)="criarCriterio()">Cadastrar criterio</button>
+    </div>
+</div>

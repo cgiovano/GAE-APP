@@ -1,0 +1,34 @@
+<div class="content-sub-container">
+    <p>cadastrar-atividade works!</p>
+
+    <p>Nome da atividade</p>
+    <input type="text" [(ngModel)]="atividade.descricao" />
+
+    <p>Valor da atividade</p>
+    <input type="number" [(ngModel)]="atividade.valor" />
+
+    <p>numero de questões</p>
+    <input type="number" [(ngModel)]="atividade.numero_questoes" />
+
+    <p>Data de entrega</p>
+    <input type="date" (change)="setDate(inputDate.value)" #inputDate />
+
+    <button (click)="modal.Open('Cadastrando atividade')">Confirmar</button>
+
+    <app-modal #modal>
+        <p>Descrição da questão:</p>
+        <input type="text" />
+    
+        <p>Incluir criterios</p>
+        <table>
+            <th>id</th>
+            <th>Criterio</th>
+            <th></th>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <button (click)="modal.Close()">Fechar</button>
+    </app-modal>
+</div>

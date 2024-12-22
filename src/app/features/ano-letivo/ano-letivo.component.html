@@ -1,0 +1,28 @@
+<div class="content-sub-container">
+    <p>ano-letivo works!</p>
+    <div>
+        <table>
+            <th>id ano</th>
+            <th>Ano</th>
+            <th></th>
+            <th></th>
+
+            <tr *ngFor="let ano of anoLetivoLista">
+                <td>{{ano.id}}</td>
+                <td>{{ano.ano}}</td>
+                <td><button [routerLink]="['editar', ano.id]">Editar</button></td>
+                <td><button (click)="Excluir(ano.id)">Excluir</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <button routerLink="cadastrar">Novo ano letivo</button>
+
+    <app-modal #modalCadastrar>
+
+    </app-modal>
+
+    <app-adicionar-aluno-turma>
+        
+    </app-adicionar-aluno-turma>
+</div>
