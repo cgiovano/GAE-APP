@@ -1,28 +1,31 @@
 <div class="content-sub-container">
-    <p>ano-letivo works!</p>
-    <div>
-        <table>
-            <th>id ano</th>
-            <th>Ano</th>
-            <th></th>
-            <th></th>
+	<p>ano-letivo works!</p>
+	<div>
+		<table>
+			<th>id ano</th>
+			<th>Ano</th>
+			<th></th>
+			<th></th>
 
-            <tr *ngFor="let ano of anoLetivoLista">
-                <td>{{ano.id}}</td>
-                <td>{{ano.ano}}</td>
-                <td><button [routerLink]="['editar', ano.id]">Editar</button></td>
-                <td><button (click)="Excluir(ano.id)">Excluir</button></td>
-            </tr>
-        </table>
-    </div>
+			<tr *ngFor="let ano of anoLetivoLista">
+				<td>{{ ano.id }}</td>
+				<td>{{ ano.ano }}</td>
+				<td><button (click)="iniciarModalEditar(modalEditar, ano)">Editar</button></td>
+				<td><button (click)="excluir(ano.id)">Excluir</button></td>
+			</tr>
+		</table>
+	</div>
 
-    <button routerLink="cadastrar">Novo ano letivo</button>
+	<button (click)="iniciarModalCadastrar(modalCadastrar)">Novo ano letivo</button>
 
-    <app-modal #modalCadastrar>
+	<app-modal #modalCadastrar>
+        <app-cadastrar-ano-letivo></app-cadastrar-ano-letivo>
+        <button (click)="modalCadastrar.Fechar()">Cancelar</button>
+	</app-modal>
 
+    <app-modal #modalEditar>
+        <app-editar-ano-letivo [anoLetivoSelecionado]="anoLetivoSelecionado" (atualizacaoConcluida)="onResolvido(modalEditar)"></app-editar-ano-letivo>
+        <button (click)="modalEditar.Fechar()">Cancelar</button>
     </app-modal>
 
-    <app-adicionar-aluno-turma>
-        
-    </app-adicionar-aluno-turma>
 </div>

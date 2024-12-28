@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Aluno } from '../../models/aluno';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-
-let urlBase: string = "http://localhost:3000";
+import { Aluno } from '../../../shared/models/aluno.model';
+import { AlunoService } from '../../../services/featuresServices/AlunoService';
 
 @Component({
   selector: 'app-editar-aluno',
@@ -12,20 +8,25 @@ let urlBase: string = "http://localhost:3000";
   styleUrl: './editar-aluno.component.css'
 })
 export class EditarAlunoComponent implements OnChanges {
-  @Input() selectedAluno: Aluno;
-  @Output() atualizado = new EventEmitter<void>();
+  @Input() alunoSelecionado: Aluno;
+  @Output() atualizacaoConcluida = new EventEmitter<void>();
+
   aluno: Aluno = { id: 0, nome: '' };
 
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) { }
+  constructor(private alunoService: AlunoService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.selectedAluno);
-
-    this.httpClient.get<Aluno>(`${urlBase}/aluno/${this.selectedAluno.id}`).subscribe(res => this.aluno = res);
+    this.aluno = this.alunoSelecionado;
+    /*this.alunoService.obterItemPorId(this.selectedAluno.id).subscribe({
+      next: (dados) => this.aluno = dados,
+      error: (e) => console.log("Erro no processamento da requisição: " + e)
+    });*/
   }
 
   Atualizar() {
-    console.log(this.aluno);
-    this.httpClient.put(`${urlBase}/aluno/editar/${this.selectedAluno.id}`, this.aluno).subscribe(() => this.atualizado.emit());
+    this.alunoService.atualizar(this.alunoSelecionado.id, this.aluno).subscribe({
+      next: () => this.atualizacaoConcluida.emit(),
+      error: (e) => console.log("Erro no processamento da requisição: " + e)
+    });
   }
 }

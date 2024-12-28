@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -6,16 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
-  mostrar: boolean = false;
-  component: any;
+  visivel: boolean = false;
   titulo: any;
 
-  Open(titulo: string) {
+  Abrir(titulo: string) {
     this.titulo = titulo;
-    this.mostrar = true;
+    this.visivel = true;
   }
 
-  Close() {
-    this.mostrar = false;
+  Fechar() {
+    this.visivel = false;
   }
 }

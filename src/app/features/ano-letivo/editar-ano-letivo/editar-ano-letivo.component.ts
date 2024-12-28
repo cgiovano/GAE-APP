@@ -1,32 +1,28 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AnoLetivo } from '../../models/ano_letivo';
-import { UrlBaseService } from '../../UrlBaseService';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoService';
+import { AnoLetivo } from '../../../shared/models/ano_letivo.model';
 
 @Component({
-  selector: 'app-editar-ano-letivo',
-  templateUrl: './editar-ano-letivo.component.html',
-  styleUrl: './editar-ano-letivo.component.css'
+	selector: 'app-editar-ano-letivo',
+	templateUrl: './editar-ano-letivo.component.html',
+	styleUrl: './editar-ano-letivo.component.css'
 })
-export class EditarAnoLetivoComponent implements OnInit {
-  id: number = 0;
-  anoLetivo: AnoLetivo = {id: 0, ano: ''};
+export class EditarAnoLetivoComponent implements OnChanges {
+	@Input() anoLetivoSelecionado: AnoLetivo;
+	@Output() atualizacaoConcluida = new EventEmitter<void>();
 
-  constructor(private httpClient: HttpClient, private router: Router, private activetedRoute: ActivatedRoute, private urlBase: UrlBaseService) {}
+	anoLetivo: AnoLetivo = { id: 0, ano: '' };
 
-  ngOnInit(): void {
-    this.id = Number(this.activetedRoute.snapshot.paramMap.get('id'));
-    console.log(this.id);
-    this.httpClient.get<AnoLetivo>(`${this.urlBase.getUrl()}/ano-letivo/${this.id}`).subscribe(dados => this.anoLetivo = dados);
-    console.log(this.anoLetivo);
-  }
+	constructor(private anoLetivoService: AnoLetivoService) {}
 
-  Atualizar() {
-    this.httpClient.put(`${this.urlBase.getUrl()}/ano-letivo/editar/${this.id}`, this.anoLetivo).subscribe(() => this.router.navigate(['ano-letivo']));
-  }
+	ngOnChanges(changes: SimpleChanges): void {
+		this.anoLetivo = this.anoLetivoSelecionado;
+	}
 
-  Cancelar() {
-    this.router.navigate(['ano-letivo']);
-  }
+	Atualizar() {
+		this.anoLetivoService.atualizar(this.anoLetivo.id, this.anoLetivo).subscribe({
+			next: () => this.atualizacaoConcluida.emit(),
+			error: (e) => console.log('Falha no processamento da requisição: ' + e)
+		});
+	}
 }

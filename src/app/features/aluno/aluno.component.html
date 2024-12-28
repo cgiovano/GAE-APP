@@ -1,45 +1,32 @@
 <div class="content-sub-container">
-  <h3>Gerenciar alunos</h3>
+	<h3>Gerenciar alunos</h3>
 
-  <table>
-    <th>Id</th>
-    <th>Nome</th>
-    <tr *ngFor="let aluno of alunos">
-      <td>{{ aluno.id }}</td>
-      <td>{{ aluno.nome }}</td>
-      <td><button (click)="ExcluirAluno(aluno)">Excluir</button></td>
-      <td>
-        <button (click)="ModalEditarInit(modalEditar, aluno)">Editar</button>
-      </td>
-    </tr>
-  </table>
+	<table>
+		<th>Id</th>
+		<th>Nome</th>
+		<tr *ngFor="let aluno of alunos">
+			<td>{{ aluno.id }}</td>
+			<td>{{ aluno.nome }}</td>
+			<td><button (click)="excluirAluno(aluno.id)">Excluir</button></td>
+			<td>
+				<button (click)="iniciarModalEditar(modalEditar, aluno)">Editar</button>
+			</td>
+		</tr>
+	</table>
 
-  <button (click)="modalCadastrar.Open('Cadastrando novo aluno')">
-    Novo aluno
-  </button>
+	<button (click)="iniciarModalCadastrar(modalCadastrar)">Novo aluno</button>
 
-  <app-modal #modalCadastrar>
-    <h3>Cadastrando novo aluno</h3>
-    <div><span>Nome:</span><input type="text" [(ngModel)]="nome" /></div>
+	<app-modal #modalCadastrar>
+		<app-cadastrar-aluno (cadastroConcluido)="onResolvido(modalCadastrar)"></app-cadastrar-aluno>
+		<button (click)="modalCadastrar.Fechar()">Cancelar</button>
+	</app-modal>
 
-    <div>
-      <button (click)="modalCadastrar.Close()">Voltar</button>
-      <button (click)="cadastrarAluno(modalCadastrar)">Cadastrar</button>
-    </div>
-  </app-modal>
+	<app-modal #modalEditar>
+		<app-editar-aluno
+			[alunoSelecionado]="alunoSelecionado"
+			(atualizacaoConcluida)="onResolvido(modalEditar)"
+		></app-editar-aluno>
 
-  <!--<h3>Editando aluno {{aluno.nome}} com id: {{aluno.id}}</h3>
-        <div>
-            <span>Nome:</span><input type="text" [(ngModel)]="aluno.nome" />
-            <button (click)="Atualizar(modalEditar)">Atualizar dados</button>
-        </div>-->
-
-  <app-modal #modalEditar>
-    <app-editar-aluno
-      [selectedAluno]="selectedAluno"
-      (atualizado)="OnAlunoAtualizado(modalEditar)"
-    ></app-editar-aluno>
-
-    <button (click)="modalEditar.Close()">Cancelar</button>
-  </app-modal>
+		<button (click)="modalEditar.Fechar()">Cancelar</button>
+	</app-modal>
 </div>

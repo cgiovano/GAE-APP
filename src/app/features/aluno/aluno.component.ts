@@ -1,74 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Aluno } from '../models/aluno';
+import { Aluno } from '../../shared/models/aluno.model';
 import { Router } from '@angular/router';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
+import { AlunoService } from '../../services/featuresServices/AlunoService';
+import { ApiService } from '../../services/ApiService';
 
 let urlBase: string = 'http://localhost:3000';
 
 @Component({
-  selector: 'app-aluno',
-  templateUrl: './aluno.component.html',
-  styleUrl: './aluno.component.css',
+	selector: 'app-aluno',
+	templateUrl: './aluno.component.html',
+	styleUrl: './aluno.component.css'
 })
 export class AlunoComponent implements OnInit {
-  id: number = 0;
-  nome: string = '';
-  selectedAluno: Aluno;
-  aluno: Aluno = { id: this.id, nome: '' };
-  alunos: Aluno[] = [];
+	alunoSelecionado: Aluno;
+	alunos: Aluno[] = [];
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+	constructor(private httpClient: HttpClient, private alunoService: AlunoService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.CarregarDadosAtualizadosAlunos();
-  }
+	ngOnInit(): void {
+		this.carregarListaAlunos();
+	}
 
-  ExcluirAluno(aluno: Aluno) {
-    this.httpClient
-      .delete(`${urlBase}/aluno/${aluno.id}`)
-      .subscribe(() =>
-        this.httpClient
-          .get<Aluno[]>(`${urlBase}/aluno`)
-          .subscribe((dados) => (this.alunos = dados))
-      );
-  }
+	onResolvido(modal: ModalComponent) {
+		modal.Fechar();
+		this.carregarListaAlunos();
+	}
 
-  cadastrarAluno(modal: ModalComponent) {
-    this.aluno.nome = this.nome;
-    this.httpClient
-      .post<Aluno>(`${urlBase}/aluno/cadastrar`, this.aluno)
-      .subscribe(() => {
-        modal.Close();
-        this.CarregarDadosAtualizadosAlunos();
-      });
-  }
+	excluirAluno(id: number) {
+		this.alunoService.excluir(id).subscribe({
+			next: () => console.log('deletado com sucesso'),
+			error: () => console.log('Erro no processamento da requisição.')
+		});
+	}
 
-  Atualizar(modal: ModalComponent) {
-    this.httpClient
-      .put(`${urlBase}/aluno/editar/${this.aluno.id}`, this.aluno)
-      .subscribe(() => {
-        modal.Close();
-        this.CarregarDadosAtualizadosAlunos();
-      });
-  }
+	carregarListaAlunos() {
+		this.alunoService.listarTodos().subscribe({
+			next: (value) => (this.alunos = value),
+			error: (msg) => console.log('erro no processamento da requisição: ' + msg)
+		});
+	}
 
-  ModalEditarInit(modal: ModalComponent, selectedAluno: Aluno) {
-    this.selectedAluno = selectedAluno;
-    modal.Open(
-      `Editando registro de "${selectedAluno.nome}(id: ${selectedAluno.id})"`
-    );
-  }
+	iniciarModalEditar(modal: ModalComponent, alunoSelecionado: Aluno) {
+		this.alunoSelecionado = alunoSelecionado;
+		modal.Abrir(`Editando registro de "${alunoSelecionado.nome}(id: ${alunoSelecionado.id})"`);
+	}
 
-  CarregarDadosAtualizadosAlunos() {
-    this.httpClient
-      .get<Aluno[]>(`${urlBase}/aluno`)
-      .subscribe((dados) => (this.alunos = dados));
-  }
-
-  OnAlunoAtualizado(modal: ModalComponent) {
-    modal.Close();
-    this.CarregarDadosAtualizadosAlunos();
-  }
+	iniciarModalCadastrar(modal: ModalComponent) {
+		modal.Abrir(`Cadastrando novo aluno`);
+	}
 }

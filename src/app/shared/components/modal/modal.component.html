@@ -1,9 +1,11 @@
-<ng-container *ngIf="mostrar">
-    <div class="modal">
-        <div>
-            <h3>{{titulo}}</h3>
-        </div>
-        <ng-content></ng-content>
-    </div>
-    <div (click)="Open('n')" class="overlay"></div>
-</ng-container>
+<div class="modal-overlay">
+	<ng-container *ngIf="visivel">
+		<div class="modal-content">
+			<div>
+				<h3>{{ titulo }}</h3>
+				<button class="fechar-button" (click)="Fechar()">Fechar</button>
+			</div>
+			<ng-content></ng-content>
+		</div>
+	</ng-container>
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GerenciarAlunoComponent } from './gerenciar-aluno.component';
+import { CadastrarAlunoComponent } from './cadastrar-aluno.component';
 
-describe('GerenciarAlunoComponent', () => {
-  let component: GerenciarAlunoComponent;
-  let fixture: ComponentFixture<GerenciarAlunoComponent>;
+describe('CadastrarAlunoComponent', () => {
+  let component: CadastrarAlunoComponent;
+  let fixture: ComponentFixture<CadastrarAlunoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GerenciarAlunoComponent]
+      declarations: [CadastrarAlunoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GerenciarAlunoComponent);
+    fixture = TestBed.createComponent(CadastrarAlunoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

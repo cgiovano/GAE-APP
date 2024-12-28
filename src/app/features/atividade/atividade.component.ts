@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Atividade } from '../models/atividade';
-import { UrlBaseService } from '../UrlBaseService';
+import { Atividade } from '../../shared/models/atividade.model';
+import { UrlBaseService } from '../../services/UrlBaseService';
 
 @Component({
   selector: 'app-atividade',

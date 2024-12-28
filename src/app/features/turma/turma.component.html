@@ -15,13 +15,25 @@
             <td>{{turma.serie}}</td>
             <td>{{turma.identificacao}}</td>
             <td>{{test(turma.ano_id)}}</td>
-            <td><button [routerLink]="['gerenciar', turma.id]">Gerenciar</button></td>
-            <td><button [routerLink]="['editar', turma.id]">Editar</button></td>
-            <td><button (click)="Excluir(turma.id)">Excluir</button></td>
+            <td><button (click)="iniciarModalGerenciar(modalGerenciar, turma)">Gerenciar</button></td>
+            <td><button (click)="iniciarModalEditar(modalEditar, turma)">Editar</button></td>
+            <td><button (click)="excluir(turma.id)">Excluir</button></td>
         </tr>
     </table>
 
-    <button routerLink="cadastrar">Criar nova turma</button>
+    <button (click)="iniciarModalCadastrar(modalCadastrar)">Criar nova turma</button>
+
+    <app-modal #modalCadastrar>
+        <app-cadastrar-turma></app-cadastrar-turma>
+    </app-modal>
+
+    <app-modal #modalEditar>
+
+    </app-modal>
+
+    <app-modal #modalGerenciar>
+
+    </app-modal>
 
     <router-outlet></router-outlet>
 </div>

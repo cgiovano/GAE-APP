@@ -3,42 +3,40 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CadastroAlunoComponent } from './aluno/cadastro-aluno/cadastro-aluno.component';
-import { EditarAlunoComponent } from './aluno/editar-aluno/editar-aluno.component';
-import { GerenciarAlunoComponent } from './aluno/gerenciar-aluno/gerenciar-aluno.component';
-import { EditarAtividadeComponent } from './atividade/editar-atividade/editar-atividade.component';
-import { GerenciarAtividadeComponent } from './atividade/gerenciar-atividade/gerenciar-atividade.component';
-import { CadastrarCorrecaoComponent } from './correcao/cadastrar-correcao/cadastrar-correcao.component';
-import { EditarCorrecaoComponent } from './correcao/editar-correcao/editar-correcao.component';
-import { EditarCriterioComponent } from './criterio/editar-criterio/editar-criterio.component';
-import { CadastrarCriterioComponent } from './criterio/cadastrar-criterio/cadastrar-criterio.component';
-import { GerenciarCriterioComponent } from './criterio/gerenciar-criterio/gerenciar-criterio.component';
-import { GerenciarTurmaComponent } from './turma/gerenciar-turma/gerenciar-turma.component';
-import { EditarTurmaComponent } from './turma/editar-turma/editar-turma.component';
-import { CadastrarTurmaComponent } from './turma/cadastrar-turma/cadastrar-turma.component';
-import { AlunoComponent } from './aluno/aluno.component';
+import { CadastrarAlunoComponent } from './features/aluno/cadastrar-aluno/cadastrar-aluno.component';
+import { EditarAlunoComponent } from './features/aluno/editar-aluno/editar-aluno.component';
+import { EditarAtividadeComponent } from './features/atividade/editar-atividade/editar-atividade.component';
+import { GerenciarAtividadeComponent } from './features/atividade/gerenciar-atividade/gerenciar-atividade.component';
+import { CadastrarCorrecaoComponent } from './features/correcao/cadastrar-correcao/cadastrar-correcao.component';
+import { EditarCorrecaoComponent } from './features/correcao/editar-correcao/editar-correcao.component';
+import { EditarCriterioComponent } from './features/criterio/editar-criterio/editar-criterio.component';
+import { CadastrarCriterioComponent } from './features/criterio/cadastrar-criterio/cadastrar-criterio.component';
+import { GerenciarCriterioComponent } from './features/criterio/gerenciar-criterio/gerenciar-criterio.component';
+import { GerenciarTurmaComponent } from './features/turma/gerenciar-turma/gerenciar-turma.component';
+import { EditarTurmaComponent } from './features/turma/editar-turma/editar-turma.component';
+import { CadastrarTurmaComponent } from './features/turma/cadastrar-turma/cadastrar-turma.component';
+import { AlunoComponent } from './features/aluno/aluno.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
-import { AnoLetivoComponent } from './ano-letivo/ano-letivo.component';
-import { CadastrarAnoLetivoComponent } from './ano-letivo/cadastrar-ano-letivo/cadastrar-ano-letivo.component';
-import { EditarAnoLetivoComponent } from './ano-letivo/editar-ano-letivo/editar-ano-letivo.component';
-import { TurmaComponent } from './turma/turma.component';
-import { AtividadeComponent } from './atividade/atividade.component';
-import { CadastrarAtividadeComponent } from './atividade/cadastrar-atividade/cadastrar-atividade.component';
-import { CriterioComponent } from './criterio/criterio.component';
-import { CorrecaoComponent } from './correcao/correcao.component';
-import { AdicionarAlunoTurmaComponent } from './turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
+import { AnoLetivoComponent } from './features/ano-letivo/ano-letivo.component';
+import { CadastrarAnoLetivoComponent } from './features/ano-letivo/cadastrar-ano-letivo/cadastrar-ano-letivo.component';
+import { EditarAnoLetivoComponent } from './features/ano-letivo/editar-ano-letivo/editar-ano-letivo.component';
+import { TurmaComponent } from './features/turma/turma.component';
+import { AtividadeComponent } from './features/atividade/atividade.component';
+import { CadastrarAtividadeComponent } from './features/atividade/cadastrar-atividade/cadastrar-atividade.component';
+import { CriterioComponent } from './features/criterio/criterio.component';
+import { CorrecaoComponent } from './features/correcao/correcao.component';
+import { AdicionarAlunoTurmaComponent } from './features/turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
 import { DatePipe } from '@angular/common';
-import { CadastrarQuestaoComponent } from './questao/cadastrar-questao/cadastrar-questao.component';
-import { ModalComponent } from './modal/modal.component';
-import { ModalModule } from './modal/modal.module';
+import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
+import { ModalModule } from './shared/components/modal/modal.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CadastroAlunoComponent,
+    CadastrarAlunoComponent,
     EditarAlunoComponent,
-    GerenciarAlunoComponent,
     EditarAtividadeComponent,
     GerenciarAtividadeComponent,
     CadastrarCorrecaoComponent,
