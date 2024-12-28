@@ -53,7 +53,7 @@ export class TurmaService {
 	 * 
 	 * @returns Retorna uma lista com todos os registros das turmas criadas.
 	 */
-	ListarTodos(): Observable<Turma[]> {
+	listarTodos(): Observable<Turma[]> {
 		return this.apiService.listarTodos(this.endpoint);
 	}
 }
