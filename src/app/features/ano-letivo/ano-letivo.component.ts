@@ -9,26 +9,26 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 	styleUrl: './ano-letivo.component.css'
 })
 export class AnoLetivoComponent implements OnInit {
-  anoLetivoSelecionado: AnoLetivo;
+	anoLetivoSelecionado: AnoLetivo;
 	anoLetivoLista: AnoLetivo[] = [];
 
-	constructor(private anoLetivoService: AnoLetivoService) {}
+	constructor(private anoLetivoService: AnoLetivoService) { }
 
 	ngOnInit(): void {
 		this.carregarListaAnoLetivo();
 	}
 
-  onResolvido(modal: ModalComponent) {
-    modal.Fechar();
-    this.carregarListaAnoLetivo();
-  }
+	onResolvido(modal: ModalComponent) {
+		modal.Fechar();
+		this.carregarListaAnoLetivo();
+	}
 
-  carregarListaAnoLetivo() {
-    this.anoLetivoService.listarTodos().subscribe({
+	carregarListaAnoLetivo() {
+		this.anoLetivoService.listarTodos().subscribe({
 			next: (dados) => (this.anoLetivoLista = dados),
 			error: (e) => console.log('Erro no processamento da requisição' + e)
 		});
-  }
+	}
 
 	excluir(id: number) {
 		this.anoLetivoService.excluir(id).subscribe({
@@ -37,12 +37,12 @@ export class AnoLetivoComponent implements OnInit {
 		});
 	}
 
-  iniciarModalEditar(modal: ModalComponent, anoLetivoSelecionado: AnoLetivo) {
+	iniciarModalEditar(modal: ModalComponent, anoLetivoSelecionado: AnoLetivo) {
 		this.anoLetivoSelecionado = anoLetivoSelecionado;
-    modal.Abrir(`Editando registro de "${anoLetivoSelecionado.ano}(id: ${anoLetivoSelecionado.id})`);
+		modal.Abrir(`Editando registro de "${anoLetivoSelecionado.ano}(id: ${anoLetivoSelecionado.id})`);
 	}
 
 	iniciarModalCadastrar(modal: ModalComponent) {
-    modal.Abrir("Cadastrando novo ano letivo");
+		modal.Abrir("Cadastrando novo ano letivo");
 	}
 }

@@ -1,27 +1,29 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UrlBaseService } from '../../UrlBaseService';
-import { Turma } from '../../models/turma';
-import { Aluno } from '../../models/aluno';
-import { AlunoTurma } from '../../models/aluno_turma';
+import { Turma } from '../../../shared/models/turma.model';
+import { Aluno } from '../../../shared/models/aluno.model';
+import { AlunoTurma } from '../../../shared/models/aluno_turma.model';
+import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurmaService';
 
 @Component({
   selector: 'app-adicionar-aluno-turma',
   templateUrl: './adicionar-aluno-turma.component.html',
   styleUrl: './adicionar-aluno-turma.component.css'
 })
-export class AdicionarAlunoTurmaComponent implements OnInit {
+export class AdicionarAlunoTurmaComponent implements OnChanges {
+  @Input() turmaSelecionada: Turma;
+  @Output() associacaoConcluida = new EventEmitter<void>();
+
 
   alunosLista: Aluno[] = [];
-  id_turma: number;
+  idTurma: number;
 
-  constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) { }
+  constructor(private alunoTurmaService: AlunoTurmaService, private activatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) { }
 
-  ngOnInit(): void {
-    this.id_turma = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    console.log("Esse é o id da turma caputado na criação do componente adicionar-aluno-turma: " + this.id_turma);
-    this.httpClient.get<Aluno[]>(`${this.urlBase.getUrl()}/aluno-turma/alunos-sem-turma`).subscribe(dados => this.alunosLista = dados);
+  ngOnChanges(changes: SimpleChanges): void {
+    this.idTurma = this.turmaSelecionada.id;
+    this.alunoTurmaService.listarTodosNaoAssociados().subscribe( (dados) => this.alunosLista = dados );
   }
 
   AdicionarAluno(idAluno: number, idLista: number) {

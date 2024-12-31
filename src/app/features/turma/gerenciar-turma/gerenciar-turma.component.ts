@@ -1,32 +1,34 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UrlBaseService } from '../../UrlBaseService';
-import { Turma } from '../../models/turma';
-import { Aluno } from '../../models/aluno';
-import { AlunoTurma } from '../../models/aluno_turma';
+import { Turma } from '../../../shared/models/turma.model';
+import { Aluno } from '../../../shared/models/aluno.model';
+import { AlunoTurma } from '../../../shared/models/aluno_turma.model';
+import { AlunoService } from '../../../services/featuresServices/AlunoService';
+import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurmaService';
 
 @Component({
   selector: 'app-gerenciar-turma',
   templateUrl: './gerenciar-turma.component.html',
   styleUrl: './gerenciar-turma.component.css'
 })
-export class GerenciarTurmaComponent implements OnChanges{
+export class GerenciarTurmaComponent implements OnInit {
 
   turma: Turma;
   alunos: Aluno[] = [];
-  id_turma : number;
+  idTurma : number;
 
-  constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) {}
+  constructor(private alunoService: AlunoService, private alunoTurmaService: AlunoTurmaService, private activatedRoute: ActivatedRoute) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-
+  ngOnInit(): void {
+    this.idTurma = Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    this.listarAlunosTurma(this.idTurma);
   }
 
-  ObterNomeAluno(id: number) {
+  listarAlunosTurma(idTurma: number) {
+    this.alunoService.listarTodos().subscribe( (dados) => this.alunos = dados );
   }
 
-  ExcluirRegistroDaTurma(idAluno: number) {
-    this.httpClient.delete(`${this.urlBase.getUrl()}/aluno-turma/deletar?id_turma=${this.id_turma}&id_aluno=${idAluno}`).subscribe(() => this.httpClient.get<Aluno[]>(`${this.urlBase.getUrl()}/aluno-turma/${this.id_turma}`).subscribe(dados => this.alunos = dados));
+  excluirRegistroDaTurma(idAluno: number) {
+    this.alunoTurmaService.excluirAssociacao(this.idTurma, idAluno).subscribe(() => this.listarAlunosTurma(this.idTurma));
   }
 }

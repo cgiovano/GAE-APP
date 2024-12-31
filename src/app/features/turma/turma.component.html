@@ -14,8 +14,8 @@
             <td>{{turma.id}}</td>
             <td>{{turma.serie}}</td>
             <td>{{turma.identificacao}}</td>
-            <td>{{test(turma.ano_id)}}</td>
-            <td><button (click)="iniciarModalGerenciar(modalGerenciar, turma)">Gerenciar</button></td>
+            <td>{{descobrirAnoLetivo(turma.ano_id)}}</td>
+            <td><button [routerLink]="['gerenciar-turma-component', turma.id]">Gerenciar</button></td>
             <td><button (click)="iniciarModalEditar(modalEditar, turma)">Editar</button></td>
             <td><button (click)="excluir(turma.id)">Excluir</button></td>
         </tr>
@@ -28,12 +28,6 @@
     </app-modal>
 
     <app-modal #modalEditar>
-
+        <app-editar-turma [turmaSelecionada]="turmaSelecionada" (atualizacaoConcluida)="onResolvido(modalEditar)"></app-editar-turma>
     </app-modal>
-
-    <app-modal #modalGerenciar>
-
-    </app-modal>
-
-    <router-outlet></router-outlet>
 </div>

@@ -44,8 +44,8 @@ export class ApiService {
 		return this.http.delete<void>(`${this.urlBase}/${endpoint}`);
 	}
 
-	excluirAssociacao(endpoint: string, id_a: number, id_b: number): Observable<void> {
-		return this.http.delete<void>(`${this.urlBase}/${endpoint}/deletar?id_turma=${id_a}&id_aluno=${id_b}`);
+	excluirAssociacao(endpoint: string, filtro: string): Observable<void> {
+		return this.http.delete<void>(`${this.urlBase}/${endpoint}/${filtro}`);
 	}
 
 	/**
@@ -65,5 +65,9 @@ export class ApiService {
 	 */
 	listarTodos<T>(endpoint: string): Observable<T[]> {
 		return this.http.get<T[]>(`${this.urlBase}/${endpoint}`);
+	}
+
+	listarAssociacao<T>(endpoint: string, filtro: string): Observable<T[]> {
+		return this.http.get<T[]>(`${this.urlBase}/${endpoint}/${filtro}`);
 	}
 }

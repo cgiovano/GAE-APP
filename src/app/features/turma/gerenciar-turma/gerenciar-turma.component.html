@@ -17,8 +17,9 @@
         </tr>
     </table>
 
-    <button routerLink="adicionar-aluno-turma">Adicionar alunos</button>
+    <button (click)="iniciarModalAdicionarAlunoTurma(adicionarAlunoTurma)">Adicionar alunos</button>
 
-    <router-outlet></router-outlet>
-
+    <app-modal #modalAdicionarAlunoTurma>
+        <app-adicionar-aluno-turma></app-adicionar-aluno-turma>
+    </app-modal>
 </div>

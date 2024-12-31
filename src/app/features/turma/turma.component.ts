@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UrlBaseService } from '../UrlBaseService';
-import { Turma } from '../models/turma';
+import { Turma } from '../../shared/models/turma.model';
 import { Router } from '@angular/router';
-import { AnoLetivo } from '../models/ano_letivo';
+import { AnoLetivo } from '../../shared/models/ano_letivo.model';
+import { TurmaService } from '../../services/featuresServices/TurmaService';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { AnoLetivoService } from '../../services/featuresServices/AnoLetivoService';
 
 @Component({
   selector: 'app-turma',
@@ -13,24 +14,52 @@ import { AnoLetivo } from '../models/ano_letivo';
 export class TurmaComponent implements OnInit {
 
   //https://www.telerik.com/blogs/angular-basics-how-to-get-value-selected-dropdown-menu-item
-
+  turmaSelecionada: Turma;
   turmas: Turma[] = [];
   anosLetivos: AnoLetivo[] = []
 
-  constructor(private httpClient: HttpClient, private urlBase: UrlBaseService, private router: Router) { }
+  constructor(private turmaService: TurmaService, private anoLetivoService: AnoLetivoService) { }
 
   ngOnInit(): void {
-    this.httpClient.get<Turma[]>(`${this.urlBase.getUrl()}/turma`).subscribe((dados) => this.turmas = dados);
-    this.httpClient.get<AnoLetivo[]>(`${this.urlBase.getUrl()}/ano-letivo`).subscribe((dados) => this.anosLetivos = dados);
+    this.carregarListaTurmas();
+    this.carregarListaAnoLetivo();
   }
 
-  Excluir(id: number) {
-    this.httpClient.delete(`${this.urlBase.getUrl()}/turma/${id}`).subscribe(() => this.httpClient.get<Turma[]>(`${this.urlBase.getUrl()}/turma`).subscribe((dados) => this.turmas = dados));
+  excluir(id: number) {
+    this.turmaService.excluir(id).subscribe(() => this.carregarListaTurmas());
   }
 
-  test(id: number) {
+  onResolvido(modal: ModalComponent) {
+    modal.Fechar();
+    this.carregarListaTurmas();
+  }
+
+  descobrirAnoLetivo(id: number) {
     const anoLetivo = this.anosLetivos.find((ano) => ano.id === id);
     console.log(anoLetivo?.ano);
-    return(anoLetivo?.ano);
+    return (anoLetivo?.ano);
+  }
+
+  carregarListaAnoLetivo() {
+    this.anoLetivoService.listarTodos().subscribe({
+      next: (dados) => this.anosLetivos = dados,
+      error: (e) => console.log("Erro no processamento da requisição: " + e)
+    });
+  }
+
+  carregarListaTurmas() {
+    this.turmaService.listarTodos().subscribe({
+      next: (dados) => this.turmas = dados,
+      error: (e) => console.log("Erro no processamento da requisição: " + e)
+    });
+  }
+
+  iniciarModalCadastrar(modal: ModalComponent) {
+    modal.Abrir("Cadastrando nova turma");
+  }
+
+  iniciarModalEditar(modal: ModalComponent, turmaSelecionada: Turma) {
+    this.turmaSelecionada = turmaSelecionada;
+    modal.Abrir("Editando turma");
   }
 }
