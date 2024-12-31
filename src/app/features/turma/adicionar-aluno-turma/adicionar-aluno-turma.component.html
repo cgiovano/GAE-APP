@@ -8,7 +8,7 @@
 
         <tr *ngFor="let aluno of alunosLista; let i = index">
             <td>{{aluno.nome}}</td>
-            <td><button (click)="AdicionarAluno(aluno.id, i)">Adicionar</button></td>
+            <td><button (click)="adicionarAluno(aluno.id, i)">Adicionar</button></td>
         </tr>
     </table>
 </div>

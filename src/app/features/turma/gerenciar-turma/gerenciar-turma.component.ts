@@ -5,6 +5,7 @@ import { Aluno } from '../../../shared/models/aluno.model';
 import { AlunoTurma } from '../../../shared/models/aluno_turma.model';
 import { AlunoService } from '../../../services/featuresServices/AlunoService';
 import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurmaService';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-gerenciar-turma',
@@ -22,6 +23,10 @@ export class GerenciarTurmaComponent implements OnInit {
   ngOnInit(): void {
     this.idTurma = Number(this.activatedRoute.snapshot.paramMap.get("id"));
     this.listarAlunosTurma(this.idTurma);
+  }
+
+  iniciarModalAdicionarAlunoTurma(modal: ModalComponent) {
+    modal.Abrir("Adicionando alunos à turma");
   }
 
   listarAlunosTurma(idTurma: number) {

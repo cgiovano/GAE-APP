@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Turma } from '../../../shared/models/turma.model';
 import { Aluno } from '../../../shared/models/aluno.model';
 import { AlunoTurma } from '../../../shared/models/aluno_turma.model';
@@ -19,16 +17,15 @@ export class AdicionarAlunoTurmaComponent implements OnChanges {
   alunosLista: Aluno[] = [];
   idTurma: number;
 
-  constructor(private alunoTurmaService: AlunoTurmaService, private activatedRoute: ActivatedRoute, private router: Router, private urlBase: UrlBaseService) { }
+  constructor(private alunoTurmaService: AlunoTurmaService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.idTurma = this.turmaSelecionada.id;
     this.alunoTurmaService.listarTodosNaoAssociados().subscribe( (dados) => this.alunosLista = dados );
   }
 
-  AdicionarAluno(idAluno: number, idLista: number) {
-    const alunoTurma: AlunoTurma = {id_aluno: idAluno, id_turma: this.id_turma};
-    this.httpClient.post<AlunoTurma>(`${this.urlBase.getUrl()}/aluno-turma/cadastrar`, alunoTurma).subscribe(() => console.log(alunoTurma));
-    this.alunosLista.splice(idLista, 1);
+  adicionarAluno(idAluno: number, idLista: number) {
+    const alunoTurma: AlunoTurma = {id_aluno: idAluno, id_turma: this.idTurma};
+    this.alunoTurmaService.criarAssociacao(alunoTurma).subscribe( ()=> this.alunosLista.splice(idLista, 1));
   }
 }

@@ -13,11 +13,11 @@
             <td>{{aluno.id}}</td>
             <td>{{aluno.nome}}</td>
             <td>{{turma.serie + turma.identificacao}}</td>
-            <td><button (click)="ExcluirRegistroDaTurma(aluno.id)">Remover</button></td>
+            <td><button (click)="excluirRegistroDaTurma(aluno.id)">Remover</button></td>
         </tr>
     </table>
 
-    <button (click)="iniciarModalAdicionarAlunoTurma(adicionarAlunoTurma)">Adicionar alunos</button>
+    <button (click)="iniciarModalAdicionarAlunoTurma(modalAdicionarAlunoTurma)">Adicionar alunos</button>
 
     <app-modal #modalAdicionarAlunoTurma>
         <app-adicionar-aluno-turma></app-adicionar-aluno-turma>
