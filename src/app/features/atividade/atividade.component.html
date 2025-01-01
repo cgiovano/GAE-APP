@@ -21,7 +21,9 @@
         </tr>
     </table>
 
-    <button routerLink="cadastrar">Cadastrar nova atividade</button>
+    <button (click)="iniciarModalCadastrar(modalCadastrar)">Cadastrar nova atividade</button>
 
-    <router-outlet></router-outlet>
+    <app-modal #modalCadastrar>
+        <app-cadastrar-atividade></app-cadastrar-atividade>
+    </app-modal>
 </div>

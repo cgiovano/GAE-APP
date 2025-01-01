@@ -1,21 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UrlBaseService } from '../../UrlBaseService';
 import { Router } from '@angular/router';
-import { criterio } from '../../models/criterio';
-import { CriterioComponent } from '../criterio.component';
+import { Criterio } from '../../../shared/models/criterio.model';
+import { CriterioService } from '../../../services/featuresServices/CriterioService';
 
 @Component({
   selector: 'app-cadastrar-criterio',
   templateUrl: './cadastrar-criterio.component.html',
   styleUrl: './cadastrar-criterio.component.css'
 })
+
 export class CadastrarCriterioComponent {
   pontuacaoPadrao = 100;
   isLikert: boolean = false;
-  criterio: criterio = {id: 0, descricao: '', pontuacao: 0, isLikert: this.isLikert};
+  criterio: Criterio = {id: 0, descricao: '', pontuacao: 0, isLikert: this.isLikert};
 
-  constructor(private httpClient:HttpClient, private urlBase: UrlBaseService, private router: Router) {}
+  constructor(private criterioService:CriterioService, private router: Router) {}
 
   criarCriterio() {
     if(!this.isLikert) {
@@ -25,8 +24,8 @@ export class CadastrarCriterioComponent {
     }
 
     console.log(this.criterio);
-
-    this.httpClient.post<criterio>(`${this.urlBase.getUrl()}/criterio/cadastrar`, this.criterio).subscribe(() => this.router.navigate(['criterio']));
+    
+    this.criterioService.criar(this.criterio).subscribe( () => this.router.navigate(['gerenciar-criterio', this.criterio]) );
   }
 
   alterarValor(data: boolean) {

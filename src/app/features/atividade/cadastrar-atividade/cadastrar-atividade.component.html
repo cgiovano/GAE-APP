@@ -13,7 +13,7 @@
     <p>Data de entrega</p>
     <input type="date" (change)="setDate(inputDate.value)" #inputDate />
 
-    <button (click)="modal.Open('Cadastrando atividade')">Confirmar</button>
+    <button (click)="modal.Abrir('Cadastrando atividade')">Confirmar</button>
 
     <app-modal #modal>
         <p>Descrição da questão:</p>
@@ -29,6 +29,6 @@
             </tr>
         </table>
 
-        <button (click)="modal.Close()">Fechar</button>
+        <button (click)="modal.Fechar()">Fechar</button>
     </app-modal>
 </div>

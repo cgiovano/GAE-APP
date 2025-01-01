@@ -45,7 +45,7 @@ export class ApiService {
 	}
 
 	excluirAssociacao(endpoint: string, filtro: string): Observable<void> {
-		return this.http.delete<void>(`${this.urlBase}/${endpoint}/${filtro}`);
+		return this.http.delete<void>(`${this.urlBase}/${endpoint}?${filtro}`);
 	}
 
 	/**
@@ -68,6 +68,6 @@ export class ApiService {
 	}
 
 	listarAssociacao<T>(endpoint: string, filtro: string): Observable<T[]> {
-		return this.http.get<T[]>(`${this.urlBase}/${endpoint}/${filtro}`);
+		return this.http.get<T[]>(`${this.urlBase}/${endpoint}?${filtro}`);
 	}
 }

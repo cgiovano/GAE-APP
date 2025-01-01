@@ -19,7 +19,13 @@
         </tr>
     </table>
 
-    <button [routerLink]="['cadastrar']">Adicionar criterio</button>
+    <button (click)="iniciarModalCadastrar(modalCadastrar)">Adicionar criterio</button>
 
-    <router-outlet></router-outlet>
+    <app-modal #modalCadastrar>
+        <app-cadastrar-criterio></app-cadastrar-criterio>
+    </app-modal>
+
+    <app-modal>
+        <app-editar-criterio></app-editar-criterio>
+    </app-modal>
 </div>

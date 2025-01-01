@@ -8,7 +8,7 @@
         <p>Ordem</p>
         <input type="number" min="1" max="{{criterio_atual.pontuacao}}" [(ngModel)]="item_ordem" />
     </div>
-    <button (click)="CriarCriterio()">Adicionar</button>
+    <button (click)="criarCriterio()">Adicionar</button>
 
     <table>
         <th>id</th>
@@ -20,7 +20,7 @@
             <td>{{item.id}}</td>
             <td>{{item.descricao}}</td>
             <td>{{item.ordem}}</td>
-            <td><button (click)="ExcluirItem(item.id)">Excluir</button></td>
+            <td><button (click)="excluirItem(item.id)">Excluir</button></td>
         </tr>
     </table>
 

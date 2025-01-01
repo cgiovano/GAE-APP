@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UrlBaseService } from '../../UrlBaseService';
-import { Atividade } from '../../models/atividade';
+import { Atividade } from '../../../shared/models/atividade.model';
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AtividadeService } from '../../../services/featuresServices/AtividadeService';
 
 @Component({
   selector: 'app-cadastrar-atividade',
@@ -15,7 +14,7 @@ export class CadastrarAtividadeComponent implements OnInit{
   atividade: Atividade = {id: 0, descricao: '', data_inicio: '', data_fim: '', valor: 0, numero_questoes: 0};
 
 
-  constructor(private httpClient: HttpClient, private urlBase: UrlBaseService, private datePipe: DatePipe, private router: Router) {}
+  constructor(private atividadeService: AtividadeService, private datePipe: DatePipe, private router: Router) {}
 
   ngOnInit(): void {
     this.atividade.data_inicio = String(this.datePipe.transform(Date.now(), 'yyyy-MM-dd'));
@@ -23,7 +22,7 @@ export class CadastrarAtividadeComponent implements OnInit{
 
   CriarAtividade() {
     console.log(this.atividade);
-    this.httpClient.post<Atividade>(`${this.urlBase.getUrl()}/atividade/`, this.atividade).subscribe(dados => this.router.navigate(['gerenciar', dados.id]));
+    this.atividadeService.criar(this.atividade).subscribe(dados => this.router.navigate(['gerenciar', dados.id]));
   }
 
   setDate(value: string) {

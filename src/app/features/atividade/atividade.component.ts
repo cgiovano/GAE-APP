@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Atividade } from '../../shared/models/atividade.model';
 import { UrlBaseService } from '../../services/UrlBaseService';
+import { AtividadeService } from '../../services/featuresServices/AtividadeService';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-atividade',
@@ -11,14 +13,22 @@ import { UrlBaseService } from '../../services/UrlBaseService';
 export class AtividadeComponent implements OnInit {
   atividades: Atividade[] = [];
 
-  constructor(private httpClient: HttpClient, private urlBase: UrlBaseService) { }
+  constructor(private atividadeService: AtividadeService) { }
 
   ngOnInit(): void {
-    this.httpClient.get<Atividade[]>(`${this.urlBase.getUrl()}/atividade`).subscribe((dados) => this.atividades = dados);
+    this.listarAtividades();
+  }
+
+  iniciarModalCadastrar(modal: ModalComponent) {
+    modal.Abrir("Cadastrando nova atividade");
+  }
+
+  listarAtividades() {
+    this.atividadeService.listarTodos().subscribe(dados => this.atividades = dados);
   }
 
   Excluir(id: number) {
     console.log(id);
-    this.httpClient.delete(`${this.urlBase.getUrl()}/atividade/${id}`).subscribe(() => this.httpClient.get<Atividade[]>(`${this.urlBase.getUrl()}/atividade`).subscribe((dados) => this.atividades = dados));
+    this.atividadeService.excluir(id).subscribe(()=>this.listarAtividades());
   }
 }
