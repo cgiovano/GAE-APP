@@ -5,21 +5,23 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { ApiService } from '../../services/ApiService';
 import { map, Observable } from 'rxjs';
 import { response } from 'express';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'app-ano-letivo',
 	templateUrl: './ano-letivo.component.html',
-	styleUrl: './ano-letivo.component.css',
-	changeDetection: ChangeDetectionStrategy.Default
+	styleUrl: './ano-letivo.component.css', 
 })
 export class AnoLetivoComponent implements OnInit {
 	anoLetivoSelecionado: AnoLetivo;
 	anoLetivoLista: AnoLetivo[] = [];
 
-	constructor(private anoLetivoService: AnoLetivoService, private changeDetection: ChangeDetectorRef) {}
+	constructor(private anoLetivoService: AnoLetivoService, private changeDetection: ChangeDetectorRef, private http: HttpClient) {}
 	
 	ngOnInit(): void {
-		this.carregarListaAnoLetivo();
+		//this.carregarListaAnoLetivo();
+		this.http.get<AnoLetivo[]>(`http://localhost:3000/ano-letivo`).subscribe((dados) => this.anoLetivoLista = dados);
 	}
 
 	onResolvido(modal: ModalComponent) {

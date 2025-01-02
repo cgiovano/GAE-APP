@@ -27,7 +27,7 @@ import { CadastrarAtividadeComponent } from './features/atividade/cadastrar-ativ
 import { CriterioComponent } from './features/criterio/criterio.component';
 import { CorrecaoComponent } from './features/correcao/correcao.component';
 import { AdicionarAlunoTurmaComponent } from './features/turma/adicionar-aluno-turma/adicionar-aluno-turma.component';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
 import { ModalModule } from './shared/components/modal/modal.module';
 
@@ -62,7 +62,8 @@ import { ModalModule } from './shared/components/modal/modal.module';
     BrowserModule,
     AppRoutingModule, 
     FormsModule,
-    ModalModule
+    ModalModule, 
+    CommonModule
   ],
   providers: [provideHttpClient(), DatePipe],
   bootstrap: [AppComponent]
