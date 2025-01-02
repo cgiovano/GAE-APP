@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../ApiService';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AnoLetivo } from '../../shared/models/ano_letivo.model';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { AnoLetivo } from '../../shared/models/ano_letivo.model';
 })
 export class AnoLetivoService {
 	readonly endpoint: string = 'ano-letivo';
+
+	response: any;
 
 	constructor(private apiService: ApiService) {}
 
@@ -54,5 +56,6 @@ export class AnoLetivoService {
 	 */
 	listarTodos(): Observable<AnoLetivo[]> {
 		return this.apiService.listarTodos(this.endpoint);
+		//return this.apiService.listarTodos(this.endpoint);
 	}
 }

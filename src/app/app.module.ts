@@ -56,7 +56,7 @@ import { ModalModule } from './shared/components/modal/modal.module';
     CriterioComponent,
     CorrecaoComponent,
     AdicionarAlunoTurmaComponent,
-    CadastrarQuestaoComponent,
+    CadastrarQuestaoComponent
   ],
   imports: [
     BrowserModule,

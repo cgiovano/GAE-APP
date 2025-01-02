@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgZone, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { AnoLetivo } from '../../shared/models/ano_letivo.model';
 import { AnoLetivoService } from '../../services/featuresServices/AnoLetivoService';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { ApiService } from '../../services/ApiService';
+import { map, Observable } from 'rxjs';
+import { response } from 'express';
 
 @Component({
 	selector: 'app-ano-letivo',
 	templateUrl: './ano-letivo.component.html',
-	styleUrl: './ano-letivo.component.css'
+	styleUrl: './ano-letivo.component.css',
+	changeDetection: ChangeDetectionStrategy.Default
 })
 export class AnoLetivoComponent implements OnInit {
 	anoLetivoSelecionado: AnoLetivo;
 	anoLetivoLista: AnoLetivo[] = [];
 
-	constructor(private anoLetivoService: AnoLetivoService) { }
-
+	constructor(private anoLetivoService: AnoLetivoService, private changeDetection: ChangeDetectorRef) {}
+	
 	ngOnInit(): void {
 		this.carregarListaAnoLetivo();
 	}
@@ -24,17 +28,12 @@ export class AnoLetivoComponent implements OnInit {
 	}
 
 	carregarListaAnoLetivo() {
-		this.anoLetivoService.listarTodos().subscribe({
-			next: (dados) => (this.anoLetivoLista = dados),
-			error: (e) => console.log('Erro no processamento da requisição' + e)
-		});
+		console.log("carregar ano letivo chamado!");
+		this.anoLetivoService.listarTodos().subscribe(dados=>this.anoLetivoLista = dados);
 	}
 
 	excluir(id: number) {
-		this.anoLetivoService.excluir(id).subscribe({
-			next: () => console.log('Registro deletado com sucesso!'),
-			error: (e) => console.log('Erro no processamento da requisição: ' + e)
-		});
+		this.anoLetivoService.excluir(id).subscribe(() => this.carregarListaAnoLetivo());
 	}
 
 	iniciarModalEditar(modal: ModalComponent, anoLetivoSelecionado: AnoLetivo) {

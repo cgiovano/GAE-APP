@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { UrlBaseService } from './UrlBaseService';
 import { HttpClient } from '@angular/common/http';
-import { ObjectUnsubscribedError, Observable, ObservableLike } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { response } from 'express';
 
 @Injectable({
 	providedIn: 'root'
@@ -41,7 +42,7 @@ export class ApiService {
 	 * @returns Retorna <void>.
 	 */
 	excluir(endpoint: string, id: number): Observable<void> {
-		return this.http.delete<void>(`${this.urlBase}/${endpoint}`);
+		return this.http.delete<void>(`${this.urlBase}/${endpoint}/${id}`);
 	}
 
 	excluirAssociacao(endpoint: string, filtro: string): Observable<void> {
@@ -63,7 +64,7 @@ export class ApiService {
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
 	 * @returns Retorna uma lista de itens de tipo generico <T>.
 	 */
-	listarTodos<T>(endpoint: string): Observable<T[]> {
+	listarTodos<T>(endpoint: string): Observable<T[]>{
 		return this.http.get<T[]>(`${this.urlBase}/${endpoint}`);
 	}
 

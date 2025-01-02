@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AnoLetivo } from '../../../shared/models/ano_letivo.model';
 import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoService';
 
@@ -7,15 +7,15 @@ import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoSe
 	templateUrl: './cadastrar-ano-letivo.component.html',
 	styleUrl: './cadastrar-ano-letivo.component.css'
 })
+
 export class CadastrarAnoLetivoComponent {
+	@Output() cadastroConcluido = new EventEmitter<void>();
+
 	anoLetivo: AnoLetivo = { id: 0, ano: '' };
 
 	constructor(private anoLetivoService: AnoLetivoService) {}
 
 	Cadastrar() {
-		this.anoLetivoService.criar(this.anoLetivo).subscribe({
-			next: (dados) => console.log(`O item ${dados} foi cadastrado com sucesso!`),
-			error: (e) => console.log('Erro no processamento da requisição: ' + e)
-		});
+		this.anoLetivoService.criar(this.anoLetivo).subscribe(() => this.cadastroConcluido.emit());
 	}
 }

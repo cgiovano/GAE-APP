@@ -23,6 +23,7 @@ import { AdicionarAlunoTurmaComponent } from './features/turma/adicionar-aluno-t
 import { GerenciarCriterioComponent } from './features/criterio/gerenciar-criterio/gerenciar-criterio.component';
 import { GerenciarAtividadeComponent } from './features/atividade/gerenciar-atividade/gerenciar-atividade.component';
 import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
+import { Resolver } from './services/ResolveService';
 
 const routes: Routes = [
   {path: 'aluno', component: AlunoComponent}, 

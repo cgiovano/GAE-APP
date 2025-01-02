@@ -19,7 +19,7 @@
 	<button (click)="iniciarModalCadastrar(modalCadastrar)">Novo ano letivo</button>
 
 	<app-modal #modalCadastrar>
-        <app-cadastrar-ano-letivo></app-cadastrar-ano-letivo>
+        <app-cadastrar-ano-letivo (cadastroConcluido)="onResolvido(modalCadastrar)"></app-cadastrar-ano-letivo>
         <button (click)="modalCadastrar.Fechar()">Cancelar</button>
 	</app-modal>
 

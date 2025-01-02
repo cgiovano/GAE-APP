@@ -1,11 +1,9 @@
-<div class="modal-overlay">
-	<ng-container *ngIf="visivel">
-		<div class="modal-content">
-			<div>
-				<h3>{{ titulo }}</h3>
-				<button class="fechar-button" (click)="Fechar()">Fechar</button>
-			</div>
+<div class="modal-overlay" *ngIf="visivel">
+	<div class="modal-content">
+		<div>
+			<h3>{{ titulo }}</h3>
+			<button class="fechar-button" (click)="Fechar()"> x </button>
 			<ng-content></ng-content>
 		</div>
-	</ng-container>
+	</div>
 </div>
