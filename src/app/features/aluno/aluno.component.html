@@ -18,15 +18,12 @@
 
 	<app-modal #modalCadastrar>
 		<app-cadastrar-aluno (cadastroConcluido)="onResolvido(modalCadastrar)"></app-cadastrar-aluno>
-		<button (click)="modalCadastrar.Fechar()">Cancelar</button>
 	</app-modal>
 
 	<app-modal #modalEditar>
 		<app-editar-aluno
-			[alunoSelecionado]="alunoSelecionado"
+			[aluno]="alunoSelecionado"
 			(atualizacaoConcluida)="onResolvido(modalEditar)"
 		></app-editar-aluno>
-
-		<button (click)="modalEditar.Fechar()">Cancelar</button>
 	</app-modal>
 </div>

@@ -7,9 +7,7 @@ import { AnoLetivo } from '../../shared/models/ano_letivo.model';
 	providedIn: 'root'
 })
 export class AnoLetivoService {
-	readonly endpoint: string = 'ano-letivo';
-
-	response: any;
+    endpoint: string = 'ano-letivo';
 
 	constructor(private apiService: ApiService) {}
 

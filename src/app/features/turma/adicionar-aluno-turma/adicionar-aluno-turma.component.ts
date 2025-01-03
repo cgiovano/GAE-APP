@@ -10,22 +10,19 @@ import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurma
   styleUrl: './adicionar-aluno-turma.component.css'
 })
 export class AdicionarAlunoTurmaComponent implements OnChanges {
-  @Input() turmaSelecionada: Turma;
+  @Input() idTurma: number;
   @Output() associacaoConcluida = new EventEmitter<void>();
 
-
   alunosLista: Aluno[] = [];
-  idTurma: number;
 
   constructor(private alunoTurmaService: AlunoTurmaService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.idTurma = this.turmaSelecionada.id;
     this.alunoTurmaService.listarTodosNaoAssociados().subscribe( (dados) => this.alunosLista = dados );
   }
 
   adicionarAluno(idAluno: number, idLista: number) {
     const alunoTurma: AlunoTurma = {id_aluno: idAluno, id_turma: this.idTurma};
-    this.alunoTurmaService.criarAssociacao(alunoTurma).subscribe( ()=> this.alunosLista.splice(idLista, 1));
+    this.alunoTurmaService.criarAssociacao(alunoTurma).subscribe( ()=> {this.alunosLista.splice(idLista, 1); this.associacaoConcluida.emit()});
   }
 }

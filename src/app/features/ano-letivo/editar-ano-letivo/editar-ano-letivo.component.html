@@ -1,4 +1,4 @@
-<div class="content-sub-container">
+<div class="content-sub-container" *ngIf="anoLetivo != undefined">
     <p>Editando o ano {{anoLetivo.ano}} com o id {{anoLetivo.id}}</p>
     <div>
         <input type="text" [(ngModel)]="anoLetivo.ano" />

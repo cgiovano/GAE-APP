@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, OnChanges, Output, SimpleChanges} from '@angular/core';
 import { Aluno } from '../../../shared/models/aluno.model';
 import { AlunoService } from '../../../services/featuresServices/AlunoService';
 
@@ -15,9 +15,6 @@ export class CadastrarAlunoComponent {
   constructor(private alunoService: AlunoService) {}
 
   cadastrarAluno() {
-    this.alunoService.criar(this.aluno).subscribe({
-      next: () => this.cadastroConcluido.emit(),
-      error: (e) => console.log('Erro no processamento da requisção: ' + e)
-    });
+    this.alunoService.criar(this.aluno).subscribe(() => this.cadastroConcluido.emit());
   }
 }

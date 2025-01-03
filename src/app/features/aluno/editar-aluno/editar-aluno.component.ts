@@ -7,26 +7,13 @@ import { AlunoService } from '../../../services/featuresServices/AlunoService';
   templateUrl: './editar-aluno.component.html',
   styleUrl: './editar-aluno.component.css'
 })
-export class EditarAlunoComponent implements OnChanges {
-  @Input() alunoSelecionado: Aluno;
+export class EditarAlunoComponent {
+  @Input() aluno: Aluno;
   @Output() atualizacaoConcluida = new EventEmitter<void>();
-
-  aluno: Aluno = { id: 0, nome: '' };
 
   constructor(private alunoService: AlunoService) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.aluno = this.alunoSelecionado;
-    /*this.alunoService.obterItemPorId(this.selectedAluno.id).subscribe({
-      next: (dados) => this.aluno = dados,
-      error: (e) => console.log("Erro no processamento da requisição: " + e)
-    });*/
-  }
-
   Atualizar() {
-    this.alunoService.atualizar(this.alunoSelecionado.id, this.aluno).subscribe({
-      next: () => this.atualizacaoConcluida.emit(),
-      error: (e) => console.log("Erro no processamento da requisição: " + e)
-    });
+    this.alunoService.atualizar(this.aluno.id, this.aluno).subscribe(()=>this.atualizacaoConcluida.emit());
   }
 }

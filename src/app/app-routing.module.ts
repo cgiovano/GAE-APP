@@ -26,31 +26,29 @@ import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/
 import { Resolver } from './services/ResolveService';
 
 const routes: Routes = [
-  {path: 'aluno', component: AlunoComponent}, 
-  {path: 'aluno/editar/:id', component: EditarAlunoComponent}, 
-  {path: 'aluno/cadastrar', component: CadastrarAlunoComponent},
-  {path: 'turma', component: TurmaComponent}, 
-  {path: 'turma/editar/:id', component: EditarTurmaComponent}, 
-  {path: 'turma/cadastrar', component: CadastrarTurmaComponent}, 
-  {path: 'turma/gerenciar/:id', component: GerenciarTurmaComponent},
-  {path: 'turma/gerenciar/:id/adicionar-aluno-turma', component: AdicionarAlunoTurmaComponent}, 
-  {path: 'ano-letivo', component: AnoLetivoComponent}, 
-  {path: 'ano-letivo/editar/:id', component: EditarAnoLetivoComponent}, 
-  {path: 'ano-letivo/cadastrar', component: CadastrarAnoLetivoComponent}, 
-  {path: 'atividade', component: AtividadeComponent}, 
-  {path: 'atividade/editar/:id', component: EditarAtividadeComponent}, 
-  {path: 'atividade/cadastrar', component: CadastrarAtividadeComponent}, 
-  {path: 'atividade/gerenciar/:id', component: GerenciarAtividadeComponent},
-  {path: 'criterio', component: CriterioComponent}, 
-  {path: 'criterio/editar/:id', component: EditarCriterioComponent}, 
-  {path: 'criterio/gerenciar/:id', component: GerenciarCriterioComponent}, 
-  {path: 'criterio/cadastrar', component: CadastrarCriterioComponent}, 
-  {path: 'correcao', component: CorrecaoComponent}, 
-  {path: 'correcao/editar/:id', component: EditarCorrecaoComponent}, 
-  {path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent}, 
-  {path: 'atividade/gerenciar/:id/questao/cadastrar', component: CadastrarQuestaoComponent}
-  ];
-    @NgModule({
+  { path: 'aluno', component: AlunoComponent },
+  { path: 'aluno/editar/:id', component: EditarAlunoComponent },
+  { path: 'aluno/cadastrar', component: CadastrarAlunoComponent },
+  { path: 'turma', component: TurmaComponent },
+  { path: 'turma/gerenciar/:id', component: GerenciarTurmaComponent },
+  { path: 'turma/gerenciar/:id/adicionar-aluno-turma', component: AdicionarAlunoTurmaComponent },
+  { path: 'ano-letivo', component: AnoLetivoComponent },
+  { path: 'ano-letivo/editar/:id', component: EditarAnoLetivoComponent },
+  { path: 'ano-letivo/cadastrarGerenciarTurmaComponent', component: CadastrarAnoLetivoComponent },
+  { path: 'atividade', component: AtividadeComponent },
+  { path: 'atividade/editar/:id', component: EditarAtividadeComponent },
+  { path: 'atividade/cadastrar', component: CadastrarAtividadeComponent },
+  { path: 'atividade/gerenciar/:id', component: GerenciarAtividadeComponent },
+  { path: 'criterio', component: CriterioComponent },
+  { path: 'criterio/editar/:id', component: EditarCriterioComponent },
+  { path: 'criterio/gerenciar/:id', component: GerenciarCriterioComponent },
+  { path: 'criterio/cadastrar', component: CadastrarCriterioComponent },
+  { path: 'correcao', component: CorrecaoComponent },
+  { path: 'correcao/editar/:id', component: EditarCorrecaoComponent },
+  { path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent },
+  { path: 'atividade/gerenciar/:id/questao/cadastrar', component: CadastrarQuestaoComponent }
+];
+@NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

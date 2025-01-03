@@ -1,7 +1,7 @@
 <div class="content-sub-container">
     <p>gerenciar-turma works!</p>
 
-    <p>Adicionar alunos para a turma</p>
+    <p>Adicionar alunos para a turma {{turma.serie}} {{turma.identificacao}}</p>
 
     <table>
         <th>id</th>
@@ -20,6 +20,6 @@
     <button (click)="iniciarModalAdicionarAlunoTurma(modalAdicionarAlunoTurma)">Adicionar alunos</button>
 
     <app-modal #modalAdicionarAlunoTurma>
-        <app-adicionar-aluno-turma></app-adicionar-aluno-turma>
+        <app-adicionar-aluno-turma [idTurma]="idTurma" (associacaoConcluida)="onResolvido(modalAdicionarAlunoTurma)"></app-adicionar-aluno-turma>
     </app-modal>
 </div>

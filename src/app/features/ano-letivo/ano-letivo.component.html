@@ -24,7 +24,7 @@
 	</app-modal>
 
     <app-modal #modalEditar>
-        <app-editar-ano-letivo [anoLetivoSelecionado]="anoLetivoSelecionado" (atualizacaoConcluida)="onResolvido(modalEditar)"></app-editar-ano-letivo>
+        <app-editar-ano-letivo [anoLetivo]="anoLetivoSelecionado" (atualizacaoConcluida)="onResolvido(modalEditar)"></app-editar-ano-letivo>
         <button (click)="modalEditar.Fechar()">Cancelar</button>
     </app-modal>
 

@@ -18,7 +18,7 @@ export class AlunoComponent implements OnInit {
 	alunoSelecionado: Aluno;
 	alunos: Aluno[] = [];
 
-	constructor(private httpClient: HttpClient, private alunoService: AlunoService, private router: Router) {}
+	constructor(private alunoService: AlunoService) {}
 
 	ngOnInit(): void {
 		this.carregarListaAlunos();
@@ -30,17 +30,11 @@ export class AlunoComponent implements OnInit {
 	}
 
 	excluirAluno(id: number) {
-		this.alunoService.excluir(id).subscribe({
-			next: () => console.log('deletado com sucesso'),
-			error: () => console.log('Erro no processamento da requisição.')
-		});
+		this.alunoService.excluir(id).subscribe(()=>this.carregarListaAlunos());
 	}
 
 	carregarListaAlunos() {
-		this.alunoService.listarTodos().subscribe({
-			next: (value) => (this.alunos = value),
-			error: (msg) => console.log('erro no processamento da requisição: ' + msg)
-		});
+		this.alunoService.listarTodos().subscribe((dados)=>this.alunos=dados);
 	}
 
 	iniciarModalEditar(modal: ModalComponent, alunoSelecionado: Aluno) {

@@ -15,7 +15,7 @@
             <td>{{turma.serie}}</td>
             <td>{{turma.identificacao}}</td>
             <td>{{descobrirAnoLetivo(turma.ano_id)}}</td>
-            <td><button [routerLink]="['gerenciar-turma-component', turma.id]">Gerenciar</button></td>
+            <td><button [routerLink]="['gerenciar', turma.id]">Gerenciar</button></td>
             <td><button (click)="iniciarModalEditar(modalEditar, turma)">Editar</button></td>
             <td><button (click)="excluir(turma.id)">Excluir</button></td>
         </tr>
@@ -23,11 +23,12 @@
 
     <button (click)="iniciarModalCadastrar(modalCadastrar)">Criar nova turma</button>
 
+    
     <app-modal #modalCadastrar>
-        <app-cadastrar-turma></app-cadastrar-turma>
+        <app-cadastrar-turma [anosLetivos]="anosLetivos" (cadastroConcluido)="onResolvido(modalCadastrar)"></app-cadastrar-turma>
     </app-modal>
 
     <app-modal #modalEditar>
-        <app-editar-turma [turmaSelecionada]="turmaSelecionada" (atualizacaoConcluida)="onResolvido(modalEditar)"></app-editar-turma>
+        <app-editar-turma [turma]="turmaSelecionada" [anosLetivos]="anosLetivos" (atualizacaoConcluida)="onResolvido(modalEditar)"></app-editar-turma>
     </app-modal>
 </div>

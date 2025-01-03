@@ -25,6 +25,7 @@ export class GerenciarAtividadeComponent implements OnInit {
 
   ngOnInit(): void {
     this.idAtividade = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    console.log(this.idAtividade);
     this.criterioService.listarTodos().subscribe(dados => this.criterios = dados);
     this.criterioQuestaoService.listarTodos().subscribe((dados) => this.criteriosQuestao = dados);
   }

@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, output, Output, SimpleChanges } from '@angular/core';
 import { AnoLetivo } from '../../../shared/models/ano_letivo.model';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Turma } from '../../../shared/models/turma.model';
 import { TurmaService } from '../../../services/featuresServices/TurmaService';
 import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoService';
@@ -12,23 +10,25 @@ import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoSe
   styleUrl: './editar-turma.component.css'
 })
 
-export class EditarTurmaComponent implements OnChanges {
-  @Input() turmaSelecionada: Turma;
+export class EditarTurmaComponent {
+  @Input() turma: Turma;
+  @Input() anosLetivos: AnoLetivo[];
   @Output() atualizacaoConcluida = new EventEmitter<void>();
 
-  turma: Turma = { id: 0, identificacao: '', serie: '', ano_id: 0 };
-  anosLetivos: AnoLetivo[] = [];
-
-  constructor(private turmaService: TurmaService, private anoLetivoService: AnoLetivoService) { }
+  /*
+  turma: Turma;
+  anosLetivos: AnoLetivo[];
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.turma = this.turmaSelecionada;
-
-    this.anoLetivoService.listarTodos().subscribe((dados) => this.anosLetivos = dados);
-  }
+      this.turma = this.turmaSelecionada;
+      this.anosLetivos = this.anosLetivosLista;
+      console.log("teste");
+  }*/
+  
+  constructor(private turmaService: TurmaService, private anoLetivoService: AnoLetivoService) {}
 
   listarAnos() {
-    const a: AnoLetivo | undefined = this.anosLetivos.find((i) => i.id === this.turma.ano_id);
+    const a: AnoLetivo | undefined = this.anosLetivos?.find((i) => i.id === this.turma?.ano_id);
     return(a?.ano);
   }
 

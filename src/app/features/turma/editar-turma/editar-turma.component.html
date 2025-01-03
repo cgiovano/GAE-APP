@@ -1,4 +1,4 @@
-<div class="content-sub-container">
+<div class="content-sub-container" *ngIf="turma != undefined && anosLetivos != undefined">
     <p>Editaando {{turma.serie}} "{{turma.identificacao}}"</p>
 
     <div><span>serie</span><input type="text" [(ngModel)]="turma.serie" /></div>

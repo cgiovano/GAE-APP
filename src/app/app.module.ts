@@ -16,7 +16,7 @@ import { GerenciarTurmaComponent } from './features/turma/gerenciar-turma/gerenc
 import { EditarTurmaComponent } from './features/turma/editar-turma/editar-turma.component';
 import { CadastrarTurmaComponent } from './features/turma/cadastrar-turma/cadastrar-turma.component';
 import { AlunoComponent } from './features/aluno/aluno.component';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { AnoLetivoComponent } from './features/ano-letivo/ano-letivo.component';
 import { CadastrarAnoLetivoComponent } from './features/ano-letivo/cadastrar-ano-letivo/cadastrar-ano-letivo.component';

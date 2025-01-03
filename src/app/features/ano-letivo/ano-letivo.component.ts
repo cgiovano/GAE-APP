@@ -17,11 +17,10 @@ export class AnoLetivoComponent implements OnInit {
 	anoLetivoSelecionado: AnoLetivo;
 	anoLetivoLista: AnoLetivo[] = [];
 
-	constructor(private anoLetivoService: AnoLetivoService, private changeDetection: ChangeDetectorRef, private http: HttpClient) {}
+	constructor(private anoLetivoService: AnoLetivoService) {}
 	
 	ngOnInit(): void {
-		//this.carregarListaAnoLetivo();
-		this.http.get<AnoLetivo[]>(`http://localhost:3000/ano-letivo`).subscribe((dados) => this.anoLetivoLista = dados);
+		this.carregarListaAnoLetivo();
 	}
 
 	onResolvido(modal: ModalComponent) {

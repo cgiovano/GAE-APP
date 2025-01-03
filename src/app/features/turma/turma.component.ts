@@ -12,8 +12,6 @@ import { AnoLetivoService } from '../../services/featuresServices/AnoLetivoServi
   styleUrl: './turma.component.css'
 })
 export class TurmaComponent implements OnInit {
-
-  //https://www.telerik.com/blogs/angular-basics-how-to-get-value-selected-dropdown-menu-item
   turmaSelecionada: Turma;
   turmas: Turma[] = [];
   anosLetivos: AnoLetivo[] = []
@@ -36,30 +34,23 @@ export class TurmaComponent implements OnInit {
 
   descobrirAnoLetivo(id: number) {
     const anoLetivo = this.anosLetivos.find((ano) => ano.id === id);
-    console.log(anoLetivo?.ano);
     return (anoLetivo?.ano);
   }
 
   carregarListaAnoLetivo() {
-    this.anoLetivoService.listarTodos().subscribe({
-      next: (dados) => this.anosLetivos = dados,
-      error: (e) => console.log("Erro no processamento da requisição: " + e)
-    });
+    this.anoLetivoService.listarTodos().subscribe((dados) => {this.anosLetivos = dados; console.log(dados)});
   }
 
   carregarListaTurmas() {
-    this.turmaService.listarTodos().subscribe({
-      next: (dados) => this.turmas = dados,
-      error: (e) => console.log("Erro no processamento da requisição: " + e)
-    });
+    this.turmaService.listarTodos().subscribe((dados) => {this.turmas = dados; console.log(dados)});
   }
 
   iniciarModalCadastrar(modal: ModalComponent) {
     modal.Abrir("Cadastrando nova turma");
   }
 
-  iniciarModalEditar(modal: ModalComponent, turmaSelecionada: Turma) {
-    this.turmaSelecionada = turmaSelecionada;
+  iniciarModalEditar(modal: ModalComponent, turma: Turma) {
+    this.turmaSelecionada = turma;
     modal.Abrir("Editando turma");
   }
 }
