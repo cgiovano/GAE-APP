@@ -15,15 +15,15 @@ import { TurmaService } from '../../../services/featuresServices/TurmaService';
 })
 export class GerenciarTurmaComponent implements OnInit {
 
-  turma: Turma;
+  turma: Turma = {id: 0, serie: "", identificacao: "", ano_id: 0};
   alunos: Aluno[] = [];
-  idTurma : number;
+  idTurma : number = 0;
 
   constructor(private alunoService: AlunoService, private alunoTurmaService: AlunoTurmaService, private turmaService: TurmaService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.idTurma = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    this.turmaService.obterItemPorId(this.idTurma).subscribe((dados)=>this.turma=dados);
+    this.turmaService.obterItemPorId(this.idTurma).subscribe((dados)=>{this.turma=dados; console.log(this.turma)});
     console.log(this.idTurma);
     this.listarAlunosTurma(this.idTurma);
   }
@@ -39,7 +39,8 @@ export class GerenciarTurmaComponent implements OnInit {
   }
 
   listarAlunosTurma(idTurma: number) {
-    this.alunoService.listarTodos().subscribe( (dados) => this.alunos = dados);
+    //this.alunoService.listarTodos().subscribe( (dados) => this.alunos = dados);
+    this.alunoTurmaService.listarTodosAssociados(idTurma).subscribe( (dados) => {this.alunos = dados; console.log(dados)});
   }
 
   excluirRegistroDaTurma(idAluno: number) {

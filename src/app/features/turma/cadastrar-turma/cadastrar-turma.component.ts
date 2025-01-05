@@ -18,7 +18,7 @@ export class CadastrarTurmaComponent {
 	constructor(private turmaService: TurmaService, private anoLetivoService: AnoLetivoService) {}
 
 	Cadastrar() {
-		this.turmaService.criar(this.turma).subscribe(()=>this.cadastroConcluido.emit());
+		this.turmaService.criar(this.turma).subscribe(()=>{this.cadastroConcluido.emit(); this.turma={ id: 0, identificacao: '', serie: '', ano_id: 0 };});
 	}
 
 	anoLetivoSelecionado(event: any) {

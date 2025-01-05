@@ -18,7 +18,7 @@ export class CriterioQuestaoService{
     }
 
     excluirAssociacao(id_questao: number, id_atividade: number, id_criterio: number): Observable<void> {
-        return this.apiService.excluirAssociacao(this.endpoint, `id_questao=${id_questao}&id_atividade=${id_atividade}&id_criterio=${id_criterio}`);
+        return this.apiService.excluirAssociacao(this.endpoint, `?id_questao=${id_questao}&id_atividade=${id_atividade}&id_criterio=${id_criterio}`);
     }
 
     listarTodos(): Observable<CriterioQuestao[]> {
@@ -26,7 +26,7 @@ export class CriterioQuestaoService{
     }
 
     listarTodosAssociados(id_turma: string): Observable<CriterioQuestao[]> {
-        return this.apiService.listarAssociacao(this.endpoint, `id_turma=${id_turma}`);
+        return this.apiService.listarAssociacao(this.endpoint, `?id_turma=${id_turma}`);
     }
 
     listarTodosNaoAssociados(): Observable<CriterioQuestao[]> {

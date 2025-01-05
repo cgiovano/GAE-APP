@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Criterio } from '../../../shared/models/criterio.model';
 import { CriterioService } from '../../../services/featuresServices/CriterioService';
+import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-cadastrar-criterio',
@@ -11,25 +12,18 @@ import { CriterioService } from '../../../services/featuresServices/CriterioServ
 
 export class CadastrarCriterioComponent {
   pontuacaoPadrao = 100;
-  isLikert: boolean = false;
-  criterio: Criterio = {id: 0, descricao: '', pontuacao: 0, isLikert: this.isLikert};
+  criterio: Criterio = {id: 0, descricao: '', pontuacao: 0, isLikert: false};
 
   constructor(private criterioService:CriterioService, private router: Router) {}
 
   criarCriterio() {
-    if(!this.isLikert) {
-      this.criterio.pontuacao = this.pontuacaoPadrao;
-    } else {
-      this.criterio.pontuacao = 10 / this.criterio.pontuacao;
-    }
-
     console.log(this.criterio);
     
-    this.criterioService.criar(this.criterio).subscribe( () => this.router.navigate(['gerenciar-criterio', this.criterio]) );
+    this.criterioService.criar(this.criterio).subscribe((dados) => {console.log(dados); this.router.navigate(['gerenciar-criterio', this.criterio.id])});
   }
 
-  alterarValor(data: boolean) {
-    this.isLikert = data;
-    this.criterio.isLikert = this.isLikert;
+  alterarValor(event: Event) {
+    this.criterio.isLikert = !this.criterio.isLikert;
+    console.log(this.criterio.isLikert);
   }
 }

@@ -57,6 +57,6 @@ export class ItemCriterioService {
 	}
 
     listarAssociacao(idCriterio: number): Observable<ItemCriterio[]> {
-        return this.apiService.listarAssociacao(this.endpoint, `id_criterio=${idCriterio}`);
+        return this.apiService.listarAssociacao(this.endpoint, `?id_criterio=${idCriterio}`);
     }
 }

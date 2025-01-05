@@ -15,6 +15,6 @@ export class CadastrarAlunoComponent {
   constructor(private alunoService: AlunoService) {}
 
   cadastrarAluno() {
-    this.alunoService.criar(this.aluno).subscribe(() => this.cadastroConcluido.emit());
+    this.alunoService.criar(this.aluno).subscribe(() => {this.cadastroConcluido.emit(); this.aluno={ id: 0, nome: '' };});
   }
 }

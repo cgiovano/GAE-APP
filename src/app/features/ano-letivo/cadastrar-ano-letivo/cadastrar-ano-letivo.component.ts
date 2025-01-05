@@ -16,6 +16,6 @@ export class CadastrarAnoLetivoComponent {
 	constructor(private anoLetivoService: AnoLetivoService) {}
 
 	Cadastrar() {
-		this.anoLetivoService.criar(this.anoLetivo).subscribe(() => this.cadastroConcluido.emit());
+		this.anoLetivoService.criar(this.anoLetivo).subscribe(() => {this.cadastroConcluido.emit(); this.anoLetivo={ id: 0, ano: '' };});
 	}
 }

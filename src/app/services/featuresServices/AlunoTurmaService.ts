@@ -18,11 +18,11 @@ export class AlunoTurmaService{
     }
 
     excluirAssociacao(id_turma: number, id_aluno: number): Observable<void> {
-        return this.apiService.excluirAssociacao(this.endpoint, `id_turma=${id_turma}&id_aluno=${id_aluno}`);
+        return this.apiService.excluirAssociacao(this.endpoint, `?id_turma=${id_turma}&id_aluno=${id_aluno}`);
     }
 
-    listarTodosAssociados(id_turma: string): Observable<Aluno[]> {
-        return this.apiService.listarAssociacao(this.endpoint, `id_turma=${id_turma}`);
+    listarTodosAssociados(id_turma: number): Observable<Aluno[]> {
+        return this.apiService.listarAssociacao(this.endpoint, `?id_turma=${id_turma}`);
     }
 
     listarTodosNaoAssociados(): Observable<Aluno[]> {

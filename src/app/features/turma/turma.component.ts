@@ -12,7 +12,7 @@ import { AnoLetivoService } from '../../services/featuresServices/AnoLetivoServi
   styleUrl: './turma.component.css'
 })
 export class TurmaComponent implements OnInit {
-  turmaSelecionada: Turma;
+  turmaSelecionada: Turma = {id: 0, serie: "", identificacao: "", ano_id: 0};
   turmas: Turma[] = [];
   anosLetivos: AnoLetivo[] = []
 

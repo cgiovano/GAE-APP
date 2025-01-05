@@ -7,12 +7,26 @@
 
         <div>
             <label>Escala Likert</label>
-            <input type="checkbox" name="isLikert" (change)="alterarValor(!isLikert)" />
+            <input type="checkbox" name="isLikert" (change)="alterarValor($event)" />
         </div>
 
-        <ng-content *ngIf="isLikert">
+        <!--padrão-->
+        <ng-content>
             <p>Número de pontos da escala</p>
             <input type="number" min="0" [(ngModel)]="criterio.pontuacao" />
+        </ng-content>
+
+        <!--Criterios com valor automático-->
+        <ng-content>
+            <!--Aqui deve conter um seção que permtita ao usuário adicionar os itens do criterio
+            bem como sua ordem(multiplicador) de prioridade (uma vez que o valor do critério será calculado com base na quantidade de itens cadastrados)-->
+
+        </ng-content>
+
+        <!--CRiterios com valor customizado-->
+        <ng-content>
+            <!--Aqui deve conter uma seção que permita oa usuário aidiconar os intens do critério
+            bem como seu valor específico, deve conter uma lógica que faça o gerenciamento do valor, uma vez que será em porcentgem.-->
         </ng-content>
 
         <button (click)="criarCriterio()">Cadastrar criterio</button>
