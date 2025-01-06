@@ -31,7 +31,7 @@ export class GerenciarCriterioComponent implements OnInit {
   }
 
   criarCriterio() {
-    const item_criterio: ItemCriterio = { id: 0, id_criterio: this.id_criterio, descricao: this.item_descricao, ordem: this.item_ordem };
+    const item_criterio: ItemCriterio = { id: 0, id_criterio: this.id_criterio, descricao: this.item_descricao, valor : this.item_ordem };
     console.log(item_criterio);
 
     if (!this.ordem_usados.find((numero_usado) => this.item_ordem === numero_usado)) {
