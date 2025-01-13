@@ -1,5 +1,5 @@
 <div class="content-sub-container">
-    <p>{{idAtividade}}</p>
+    <p>Editando a atividade: {{atividade.descricao}}</p>
 
     <div>
         <h3>Adicionar questão</h3>
@@ -11,12 +11,14 @@
             <th></th>
 
             <tr *ngFor="let questao of questoes">
-                <td></td>
-                <td></td>
-                <td><button>Gerenciar Criterios</button></td>
+                <td colspan="2"><div><label>Comando da questão: </label><input type="text"/><p>Valor: {{questao.valor}}pts</p></div></td>
+                <td><div></div></td>
+                <td><button (click)="abrirModal(modalAssociarCriterioQuestao)">Adicioanar Criterios</button></td>
             </tr>
         </table>
-
-        <button [routerLink]="['questao/cadastrar']">Adicionar Questão</button>
     </div>
+
+    <app-modal #modalAssociarCriterioQuestao>
+        <app-associar-criterio-questao></app-associar-criterio-questao>
+    </app-modal>
 </div>

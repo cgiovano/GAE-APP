@@ -30,6 +30,7 @@ import { AdicionarAlunoTurmaComponent } from './features/turma/adicionar-aluno-t
 import { CommonModule, DatePipe } from '@angular/common';
 import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
 import { ModalModule } from './shared/components/modal/modal.module';
+import { AssociarCriterioQuestaoComponent } from './features/atividade/associar-criterio-questao/associar-criterio-questao.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ModalModule } from './shared/components/modal/modal.module';
     CriterioComponent,
     CorrecaoComponent,
     AdicionarAlunoTurmaComponent,
-    CadastrarQuestaoComponent
+    CadastrarQuestaoComponent,
+    AssociarCriterioQuestaoComponent
   ],
   imports: [
     BrowserModule,

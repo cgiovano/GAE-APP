@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Criterio } from '../../shared/models/criterio.model';
 import { CriterioService } from '../../services/featuresServices/CriterioService';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { ItemCriterioService } from '../../services/featuresServices/ItemCriterioService';
+import { ItemCriterio } from '../../shared/models/item_criterio.model';
 
 @Component({
   selector: 'app-criterio',
@@ -12,15 +14,25 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 export class CriterioComponent implements OnInit {
   criterioSelecionado: Criterio;
   criterios: Criterio[] = [];
+  listaItemCriterio: ItemCriterio[] = [];
 
-  constructor(private criterioService: CriterioService) { }
+  constructor(private criterioService: CriterioService, private itemCriterioService: ItemCriterioService) { }
 
   ngOnInit(): void {
     this.carregarListaCriterios();
   }
 
   carregarListaCriterios() {
-    this.criterioService.listarTodos().subscribe( (dados) => this.criterios = dados );
+    this.criterioService.listarTodos().subscribe( (dados) => {
+      this.criterios = dados; this.itemCriterioService.listarTodos().subscribe((itens) => {
+        this.listaItemCriterio = itens;
+      });
+    });
+  }
+
+  listarItensCriterios(id: number): ItemCriterio[] {
+    console.log(this.listaItemCriterio.filter((item) => item.id_criterio === id));
+    return this.listaItemCriterio.filter((item) => item.id_criterio === id);
   }
 
   onResolvido(modal: ModalComponent) {

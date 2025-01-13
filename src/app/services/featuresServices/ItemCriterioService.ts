@@ -16,8 +16,8 @@ export class ItemCriterioService {
      * @param itemCriterio Objeto/registro da itemCriterio a ser criada.
      * @returns Retorna o registro da itemCriterio criado.
      */
-	criar(itemCriterio: ItemCriterio): Observable<ItemCriterio> {
-		return this.apiService.criar(this.endpoint, itemCriterio);
+	criar(itemCriterio: ItemCriterio | ItemCriterio[]): Observable<ItemCriterio | ItemCriterio[]> {
+		return this.apiService.criarSequencia(this.endpoint, itemCriterio);
 	}
 
     /**

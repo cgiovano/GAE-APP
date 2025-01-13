@@ -21,9 +21,13 @@
         </tr>
     </table>
 
-    <button (click)="iniciarModalCadastrar(modalCadastrar)">Cadastrar nova atividade</button>
+    <button (click)="abrirModal(modalCadastrar)">Cadastrar nova atividade</button>
 
     <app-modal #modalCadastrar>
-        <app-cadastrar-atividade></app-cadastrar-atividade>
+        <app-cadastrar-atividade (cadastroConcluido)="fecharModal(modalCadastrar)"></app-cadastrar-atividade>
+    </app-modal>
+
+    <app-modal #modalCadastrarQuestao>
+        <app-cadastrar-questao></app-cadastrar-questao>
     </app-modal>
 </div>

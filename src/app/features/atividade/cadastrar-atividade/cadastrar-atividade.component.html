@@ -1,34 +1,25 @@
 <div class="content-sub-container">
-    <p>cadastrar-atividade works!</p>
+    <div class="grid-container">
+        <div id="item1">
+            <p>Nome da atividade</p>
+            <input type="text" [(ngModel)]="atividade.descricao" />
+        </div>
 
-    <p>Nome da atividade</p>
-    <input type="text" [(ngModel)]="atividade.descricao" />
+        <div id="item2">
+            <p>Valor da atividade</p>
+            <input type="number" [(ngModel)]="atividade.valor" />
+        </div>
 
-    <p>Valor da atividade</p>
-    <input type="number" [(ngModel)]="atividade.valor" />
+        <div id="item3">
+            <p>numero de questões</p>
+            <input type="number" [(ngModel)]="atividade.numero_questoes" />
+        </div>
 
-    <p>numero de questões</p>
-    <input type="number" [(ngModel)]="atividade.numero_questoes" />
+        <div id="item4">
+            <p>Data de entrega</p>
+            <input type="date" (change)="setDate(inputDate.value)" #inputDate />
+        </div>
+    </div>
 
-    <p>Data de entrega</p>
-    <input type="date" (change)="setDate(inputDate.value)" #inputDate />
-
-    <button (click)="modal.Abrir('Cadastrando atividade')">Confirmar</button>
-
-    <app-modal #modal>
-        <p>Descrição da questão:</p>
-        <input type="text" />
-    
-        <p>Incluir criterios</p>
-        <table>
-            <th>id</th>
-            <th>Criterio</th>
-            <th></th>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
-
-        <button (click)="modal.Fechar()">Fechar</button>
-    </app-modal>
+    <button (click)="criarAtividade()">Cofirmar e adicionar questões</button>
 </div>

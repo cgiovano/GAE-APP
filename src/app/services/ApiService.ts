@@ -19,9 +19,14 @@ export class ApiService {
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
 	 * @param obj O objeto/dados a serem postados na requisição.
 	 * @returns Retorna um item de tipo generico <T>.
+	 *
 	 */
 	criar<T>(endpoint: string, obj: T): Observable<T> {
 		return this.http.post<T>(`${this.urlBase}/${endpoint}`, obj);
+	}
+
+	criarSequencia<T>(endpoint: string, obj: T | T[]) : Observable<T | T[]> {
+		return this.http.post<T | T[]>(`${this.urlBase}/${endpoint}`, obj);
 	}
 
 	/**

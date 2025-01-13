@@ -12,9 +12,13 @@
         <tr *ngFor="let criterio of criterios">
             <td>{{criterio.id}}</td>
             <td>{{criterio.descricao}}</td>
-            <td>{{criterio.pontuacao}}</td>
+            <td>
+                <div *ngFor="let itemCriterio of listarItensCriterios(criterio.id)">
+                    <span>{{itemCriterio.descricao}} - {{itemCriterio.valor*100}}%</span>
+                </div>
+            </td>
             <td>{{ObterTipoDeEscala(criterio.isLikert)}}</td>
-            <button [routerLink]="['gerenciar', criterio.id]">Gerenciar</button>
+            <button>Editar</button>
             <button (click)="ExcluirCriterio(criterio.id)">Excluir</button>
         </tr>
     </table>
@@ -22,7 +26,7 @@
     <button (click)="iniciarModalCadastrar(modalCadastrar)">Adicionar criterio</button>
 
     <app-modal #modalCadastrar>
-        <app-cadastrar-criterio></app-cadastrar-criterio>
+        <app-cadastrar-criterio (cadastroConcluido)="onResolvido(modalCadastrar)"></app-cadastrar-criterio>
     </app-modal>
 
     <app-modal>

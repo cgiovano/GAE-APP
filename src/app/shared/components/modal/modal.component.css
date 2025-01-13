@@ -14,7 +14,7 @@
     background: #00000067;
     height: 100vh;
     left: 0;
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100vw;
     z-index: 10;

@@ -1,5 +1,5 @@
 export interface Questao {
-    id: number;
+    id?: number;
     id_atividade: number;
     descricao: string;
     valor: number;

@@ -17,7 +17,7 @@ export class QuestaoService {
      * @param questao Objeto/registro da questão a ser criada.
      * @returns Retorna o registro da questão criado.
      */
-    criar(questao: Questao): Observable<Questao> {
+    criar(questao: Questao | Questao[]): Observable<Questao | Questao[]> {
         return(this.apiService.criar(this.endpoint, questao));
     }
 
@@ -55,5 +55,9 @@ export class QuestaoService {
      */
     listarTodos(): Observable<Questao[]> {
         return(this.apiService.listarTodos(this.endpoint));
+    }
+
+    listarAssociacao(idAtividade: number): Observable<Questao[]> {
+        return(this.apiService.listarAssociacao(this.endpoint, `?id_atividade=${idAtividade}`))
     }
 }
