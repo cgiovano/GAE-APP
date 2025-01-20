@@ -22,6 +22,7 @@ export class GerenciarAtividadeComponent implements OnInit {
   idAtividade: number;
   criterios: Criterio[];
   criteriosQuestao: CriterioQuestao[];
+  questaoSelecionada: number = 0;
   questoes: Questao[] = [];
   atividade: Atividade = { id: 0, descricao: '', valor: 0, data_inicio: '', data_fim: '', numero_questoes: 0 };
 
@@ -44,7 +45,8 @@ export class GerenciarAtividadeComponent implements OnInit {
     }
   }
 
-  abrirModal(modal: ModalComponent) {
+  abrirModal(modal: ModalComponent, questaoSelecionada: number | undefined) {
+    this.questaoSelecionada = questaoSelecionada as number;
     modal.Abrir('Associando critérios à questão.');
   }
 

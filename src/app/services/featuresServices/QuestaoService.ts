@@ -18,7 +18,7 @@ export class QuestaoService {
      * @returns Retorna o registro da questão criado.
      */
     criar(questao: Questao | Questao[]): Observable<Questao | Questao[]> {
-        return(this.apiService.criar(this.endpoint, questao));
+        return(this.apiService.criarSequencia(this.endpoint, questao));
     }
 
     /**

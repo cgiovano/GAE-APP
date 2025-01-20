@@ -13,12 +13,12 @@
             <tr *ngFor="let questao of questoes">
                 <td colspan="2"><div><label>Comando da questão: </label><input type="text"/><p>Valor: {{questao.valor}}pts</p></div></td>
                 <td><div></div></td>
-                <td><button (click)="abrirModal(modalAssociarCriterioQuestao)">Adicioanar Criterios</button></td>
+                <td><button (click)="abrirModal(modalAssociarCriterioQuestao, questao.id)">Adicioanar Criterios</button></td>
             </tr>
         </table>
     </div>
 
     <app-modal #modalAssociarCriterioQuestao>
-        <app-associar-criterio-questao></app-associar-criterio-questao>
+        <app-associar-criterio-questao [idQuestao]="questaoSelecionada" [criterios]="criterios" (associacaoConcluida)="modalAssociarCriterioQuestao.Fechar()"></app-associar-criterio-questao>
     </app-modal>
 </div>

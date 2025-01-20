@@ -18,18 +18,18 @@ export class CriterioQuestaoService{
     }
 
     excluirAssociacao(id_questao: number, id_atividade: number, id_criterio: number): Observable<void> {
-        return this.apiService.excluirAssociacao(this.endpoint, `?id_questao=${id_questao}&id_atividade=${id_atividade}&id_criterio=${id_criterio}`);
+        return this.apiService.excluirAssociacao(this.endpoint, `?id_questao=${id_questao}&id_criterio=${id_criterio}`);
     }
 
     listarTodos(): Observable<CriterioQuestao[]> {
         return this.apiService.listarTodos(this.endpoint);
     }
 
-    listarTodosAssociados(id_turma: string): Observable<CriterioQuestao[]> {
-        return this.apiService.listarAssociacao(this.endpoint, `?id_turma=${id_turma}`);
+    listarTodosAssociados(id_questao: string): Observable<CriterioQuestao[]> {
+        return this.apiService.listarAssociacao(this.endpoint, `?id_questao=${id_questao}`);
     }
 
-    listarTodosNaoAssociados(): Observable<CriterioQuestao[]> {
-        return this.apiService.listarAssociacao(this.endpoint, "/alunos-sem-turma");
+    obterItem(id_questao: number, id_criterio: number): Observable<CriterioQuestao[]> {
+        return this.apiService.listarAssociacao(this.endpoint, `?id_questao=${id_questao}&id_criterio=${id_criterio}`);
     }
 }

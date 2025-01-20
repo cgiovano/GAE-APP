@@ -13,10 +13,9 @@ import { QuestaoService } from '../../../services/featuresServices/QuestaoServic
 })
 
 export class CadastrarAtividadeComponent implements OnInit {
-  @Output() cadastroConcluido = new EventEmitter<void>();
+  @Output() cadastroConcluido = new EventEmitter<any>();
 
   atividade: Atividade = { id: 0, descricao: '', data_inicio: '', data_fim: '', valor: 0, numero_questoes: 0 };
-  questoes: Questao[] = [];
 
 
   constructor(private atividadeService: AtividadeService, private questaoService: QuestaoService, private datePipe: DatePipe, private router: Router) { }
@@ -28,13 +27,16 @@ export class CadastrarAtividadeComponent implements OnInit {
   criarAtividade() {
     console.log(this.atividade);
     this.atividadeService.criar(this.atividade).subscribe((dados) => {
+      let questoes: Questao[] = [];
       let valorQuestao = 10 / this.atividade.numero_questoes as number;
 
       for (let i = 0; i < this.atividade.numero_questoes; i++) {
-        this.questoes.push({ descricao: '', id_atividade: dados.id, valor: valorQuestao });
+        questoes.push({ descricao: '', id_atividade: dados.id, valor: valorQuestao });
       }
 
-      this.questaoService.criar(this.questoes).subscribe(() => this.router.navigate(['gerenciar', dados.id]));
+      const id = dados.id;
+
+      this.questaoService.criar(questoes).subscribe(() => this.router.navigate(['atividade/gerenciar', id]));
     });
   }
 
