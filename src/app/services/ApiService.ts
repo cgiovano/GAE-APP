@@ -54,6 +54,10 @@ export class ApiService {
 		return this.http.delete<void>(`${this.urlBase}/${endpoint}${filtro}`);
 	}
 
+	excluirSequencia<T>(endpoint: string, obj: T[]): Observable<void> {
+		return this.http.delete<void>(`${this.urlBase}/${endpoint}`, {body: obj});
+	}
+
 	/**
 	 *
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.

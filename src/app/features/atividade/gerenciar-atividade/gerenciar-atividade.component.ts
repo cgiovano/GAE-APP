@@ -21,6 +21,7 @@ type CriterioSelecionado = { selecionado: boolean } & Criterio;
 export class GerenciarAtividadeComponent implements OnInit {
   idAtividade: number;
   criterios: Criterio[];
+  criteriosQuestaoLista: CriterioQuestao[];
   criteriosQuestao: CriterioQuestao[];
   questaoSelecionada: number = 0;
   questoes: Questao[] = [];
@@ -33,16 +34,27 @@ export class GerenciarAtividadeComponent implements OnInit {
     this.atividadeService.obterItemPorId(this.idAtividade).subscribe((dados) => {this.atividade = dados});
     this.criterioService.listarTodos().subscribe(dados => this.criterios = dados);
     this.questaoService.listarAssociacao(this.idAtividade).subscribe((dados) => this.questoes = dados);
-    //this.criterioQuestaoService.listarTodos().subscribe((dados) => this.criteriosQuestao = dados);
+    this.criterioQuestaoService.listarTodosPorAtividade(this.idAtividade).subscribe((dados) => this.criteriosQuestaoLista = dados);
   }
 
-  AdicionarCriterioQuestao(id: number) {
-    if (this.criteriosQuestao.some((criteriosQuestao) => criteriosQuestao.id_criterio === id)) {
-      console.log("O item já está associado");
-    } else {
-      let cq: CriterioQuestao = { id_questao: 0, id_atividade: this.idAtividade, id_criterio: id }
-      //this.criterioQuestaoService.criarAssociacao(cq).subscribe();
+  confirmarMudancas() {
+    for(let i=0; i < this.questoes.length; i++) {
+      this.questaoService.atualizar(this.questoes[i].id as number, this.questoes[i]).subscribe((dados) => console.log("inserido: " + dados));
     }
+  }
+
+  obterCriteriosQuestao(idQuestao: number | undefined): Criterio[] {
+    let criteriosQuestao: Criterio[] = [];
+    //TODO: aqui precisa de uma lógica que retorne uma lista de objetos do tipo Criterio, com base nos criterios de cada questão.
+    let cq = this.criteriosQuestaoLista.filter((criterioquestao) => {
+      criterioquestao.id_questao === idQuestao && criterioquestao.id_atividade === this.idAtividade
+    });
+
+    cq.forEach(criterioQuestao => {
+      criteriosQuestao.push(this.criterios.find((criterios) => criterios.id === criterioQuestao.id_criterio) as Criterio);
+    });
+
+    return criteriosQuestao;
   }
 
   abrirModal(modal: ModalComponent, questaoSelecionada: number | undefined) {
