@@ -34,7 +34,6 @@ export class GerenciarAtividadeComponent implements OnInit {
     this.atividadeService.obterItemPorId(this.idAtividade).subscribe((dados) => {this.atividade = dados});
     this.criterioService.listarTodos().subscribe(dados => this.criterios = dados);
     this.questaoService.listarAssociacao(this.idAtividade).subscribe((dados) => this.questoes = dados);
-    this.criterioQuestaoService.listarTodosPorAtividade(this.idAtividade).subscribe((dados) => this.criteriosQuestaoLista = dados);
   }
 
   confirmarMudancas() {
@@ -44,17 +43,13 @@ export class GerenciarAtividadeComponent implements OnInit {
   }
 
   obterCriteriosQuestao(idQuestao: number | undefined): Criterio[] {
-    let criteriosQuestao: Criterio[] = [];
-    //TODO: aqui precisa de uma lógica que retorne uma lista de objetos do tipo Criterio, com base nos criterios de cada questão.
-    let cq = this.criteriosQuestaoLista.filter((criterioquestao) => {
-      criterioquestao.id_questao === idQuestao && criterioquestao.id_atividade === this.idAtividade
-    });
 
-    cq.forEach(criterioQuestao => {
-      criteriosQuestao.push(this.criterios.find((criterios) => criterios.id === criterioQuestao.id_criterio) as Criterio);
-    });
+    //filtrar todos os ids dos critérios conforme o id da questão
+    //em seguida 
+    let criterios: Criterio[] = []
+    this.criterioQuestaoService.listarCriteriosPorQuestao(idQuestao as number).subscribe(dados => criterios=dados);
 
-    return criteriosQuestao;
+    return criterios;
   }
 
   abrirModal(modal: ModalComponent, questaoSelecionada: number | undefined) {

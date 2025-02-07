@@ -12,9 +12,10 @@
 
             <tr *ngFor="let questao of questoes">
                 <td colspan="2"><div><label>Comando da questão: </label><input type="textarea" [(ngModel)]="questao.descricao"/><p>Valor: {{questao.valor}}pts</p></div></td>
-                <td><div *ngFor="let criterio of obterCriteriosQuestao(questao.id)">
-                    {{criterio.descricao}}
-                </div></td>
+                <td>
+                    <div *ngFor="let criterio of obterCriteriosQuestao(questao.id)">teste
+                    {{criterio.descricao}}</div>
+                </td>
                 <td><button (click)="abrirModal(modalAssociarCriterioQuestao, questao.id)">Adicioanar Criterios</button></td>
             </tr>
         </table>

@@ -71,6 +71,16 @@ export class ApiService {
 	/**
 	 *
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
+	 * @param id Id do objeto a ser obtido.
+	 * @returns Retorna um item de tipo generico <T>.
+	 */
+	ListarItensPorIds<T>(endpoint: string, ids: number[]): Observable<T> {
+		return this.http.get<T>(`${this.urlBase}/${endpoint}/${ids}`);
+	}
+
+	/**
+	 *
+	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
 	 * @returns Retorna uma lista de itens de tipo generico <T>.
 	 */
 	listarTodos<T>(endpoint: string): Observable<T[]>{

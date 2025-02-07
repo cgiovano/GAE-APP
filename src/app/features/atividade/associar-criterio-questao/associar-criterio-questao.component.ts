@@ -59,7 +59,7 @@ export class AssociarCriterioQuestaoComponent implements OnChanges {
 			if (criterioEmListaIndex > 0) {
 				this.criteriosParaRemover.splice(criterioEmListaIndex);
 			}
-			this.criteriosParaAdicionar.push({ id_questao: this.idQuestao, id_criterio: target.value, id_atividade: this.idAtividade });
+			this.criteriosParaAdicionar.push({ id_questao: this.idQuestao, id_criterio: target.value});
 		} else {
 			if (target.checked === false && this.verificarItemLista(target.value, this.idQuestao) == true) {
 				let criterioEmListaIndex = this.criteriosParaAdicionar.findIndex(
@@ -72,7 +72,7 @@ export class AssociarCriterioQuestaoComponent implements OnChanges {
 
 			console.log(`Valor: ${target.checked} e id: ${target.value}`);
 
-			this.criteriosParaRemover.push({ id_questao: this.idQuestao, id_criterio: target.value, id_atividade: this.idAtividade });
+			this.criteriosParaRemover.push({ id_questao: this.idQuestao, id_criterio: target.value});
 		}
 	}
 

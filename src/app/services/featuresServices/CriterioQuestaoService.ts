@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { ApiService } from "../ApiService";
 import { Aluno } from "../../shared/models/aluno.model";
 import { CriterioQuestao } from "../../shared/models/criterio_questao.model";
+import { Criterio } from "../../shared/models/criterio.model";
 
 @Injectable({
     providedIn: 'root'
@@ -21,8 +22,8 @@ export class CriterioQuestaoService{
         return this.apiService.excluirSequencia(this.endpoint, listaExclusao);
     }
 
-    listarTodosPorAtividade(id_atividade: number): Observable<CriterioQuestao[]> {
-        return this.apiService.listarAssociacao(this.endpoint, `?id_atividade=${id_atividade}`);
+    listarCriteriosPorQuestao(id_questao: number): Observable<Criterio[]> {
+        return this.apiService.obterItemPorId(this.endpoint, id_questao);
     }
 
     listarTodosAssociados(id_questao: number): Observable<CriterioQuestao[]> {
