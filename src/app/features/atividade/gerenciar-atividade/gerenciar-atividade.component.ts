@@ -21,8 +21,10 @@ type CriterioSelecionado = { selecionado: boolean } & Criterio;
 export class GerenciarAtividadeComponent implements OnInit {
   idAtividade: number;
   criterios: Criterio[];
+  criteriosQuestaoLista: CriterioQuestao[];
   criteriosQuestao: CriterioQuestao[];
   questaoSelecionada: number = 0;
+  criteriosAtividade: CriterioQuestao[];
   questoes: Questao[] = [];
   atividade: Atividade = { id: 0, descricao: '', valor: 0, data_inicio: '', data_fim: '', numero_questoes: 0 };
 
@@ -33,16 +35,22 @@ export class GerenciarAtividadeComponent implements OnInit {
     this.atividadeService.obterItemPorId(this.idAtividade).subscribe((dados) => {this.atividade = dados});
     this.criterioService.listarTodos().subscribe(dados => this.criterios = dados);
     this.questaoService.listarAssociacao(this.idAtividade).subscribe((dados) => this.questoes = dados);
-    //this.criterioQuestaoService.listarTodos().subscribe((dados) => this.criteriosQuestao = dados);
+    this.criterioQuestaoService.listarTodosAssociadosPorAtividade(this.idAtividade).subscribe((dados) => this.criteriosAtividade = dados);
   }
 
-  AdicionarCriterioQuestao(id: number) {
-    if (this.criteriosQuestao.some((criteriosQuestao) => criteriosQuestao.id_criterio === id)) {
-      console.log("O item já está associado");
-    } else {
-      let cq: CriterioQuestao = { id_questao: 0, id_atividade: this.idAtividade, id_criterio: id }
-      //this.criterioQuestaoService.criarAssociacao(cq).subscribe();
+  confirmarMudancas() {
+    for(let i=0; i < this.questoes.length; i++) {
+      this.questaoService.atualizar(this.questoes[i].id as number, this.questoes[i]).subscribe((dados) => console.log("inserido: " + dados));
     }
+  }
+
+  obterCriteriosQuestao(idQuestao: number | undefined): CriterioQuestao[] {
+
+    //filtrar todos os ids dos critérios conforme o id da questão
+    let listaCriteriosPorAtividade = this.criteriosAtividade.filter((dados) => {dados.id_questao === idQuestao});
+    //console.log(listaCriteriosPorAtividade);
+
+    return listaCriteriosPorAtividade;
   }
 
   abrirModal(modal: ModalComponent, questaoSelecionada: number | undefined) {

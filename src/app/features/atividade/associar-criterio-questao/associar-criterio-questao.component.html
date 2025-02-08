@@ -1,6 +1,6 @@
-<div class="content-sub-container">
+<div class="content-sub-container" *ngIf="criteriosQuestao != undefined">
     <div *ngFor="let criterio of criterios">
-        <input type="checkbox" value="{{criterio.id}}" (change)="associarCriterioQuestao($event.target)"/><label>{{criterio.descricao}}</label>
+        <input type="checkbox" value="{{criterio.id}}" [checked]="estaSelecionado(criterio.id)" (change)="associarCriterioQuestao($event.target)"/><label>{{criterio.descricao}}</label>
     </div>
 
     <button (click)="confirmarAssociacao()">Confirmar associação</button>

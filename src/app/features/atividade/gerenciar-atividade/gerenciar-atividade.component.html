@@ -11,14 +11,20 @@
             <th></th>
 
             <tr *ngFor="let questao of questoes">
-                <td colspan="2"><div><label>Comando da questão: </label><input type="text"/><p>Valor: {{questao.valor}}pts</p></div></td>
-                <td><div></div></td>
+                <td colspan="2"><div><label>Comando da questão: </label><input type="textarea" [(ngModel)]="questao.descricao"/><p>Valor: {{questao.valor}}pts</p></div></td>
+                <td>Teste {{questao.id}}</td>
+                <!--<td *ngIf="criteriosAtividade != undefined">
+                    <div *ngFor="let criterio of obterCriteriosQuestao(questao.id)">teste
+                    {{criterio.id_atividade}}, questao: {{criterio.id_questao}}, criterio: {{criterio.id_criterio}}</div>
+                </td>-->
                 <td><button (click)="abrirModal(modalAssociarCriterioQuestao, questao.id)">Adicioanar Criterios</button></td>
             </tr>
         </table>
     </div>
 
+    <button (click)="confirmarMudancas()">Confirmar</button>
+
     <app-modal #modalAssociarCriterioQuestao>
-        <app-associar-criterio-questao [idQuestao]="questaoSelecionada" [criterios]="criterios" (associacaoConcluida)="modalAssociarCriterioQuestao.Fechar()"></app-associar-criterio-questao>
+        <app-associar-criterio-questao [idQuestao]="questaoSelecionada" [criterios]="criterios" [idAtividade]="idAtividade" (associacaoConcluida)="modalAssociarCriterioQuestao.Fechar()"></app-associar-criterio-questao>
     </app-modal>
 </div>

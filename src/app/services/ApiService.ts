@@ -54,6 +54,10 @@ export class ApiService {
 		return this.http.delete<void>(`${this.urlBase}/${endpoint}${filtro}`);
 	}
 
+	excluirSequencia<T>(endpoint: string, obj: T[]): Observable<void> {
+		return this.http.delete<void>(`${this.urlBase}/${endpoint}`, {body: obj});
+	}
+
 	/**
 	 *
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
@@ -62,6 +66,16 @@ export class ApiService {
 	 */
 	obterItemPorId<T>(endpoint: string, id: number): Observable<T> {
 		return this.http.get<T>(`${this.urlBase}/${endpoint}/${id}`);
+	}
+
+	/**
+	 *
+	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
+	 * @param id Id do objeto a ser obtido.
+	 * @returns Retorna um item de tipo generico <T>.
+	 */
+	ListarItensPorIds<T>(endpoint: string, ids: number[]): Observable<T> {
+		return this.http.get<T>(`${this.urlBase}/${endpoint}/${ids}`);
 	}
 
 	/**

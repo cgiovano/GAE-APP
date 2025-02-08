@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { ApiService } from "../ApiService";
 import { Aluno } from "../../shared/models/aluno.model";
 import { CriterioQuestao } from "../../shared/models/criterio_questao.model";
+import { Criterio } from "../../shared/models/criterio.model";
 
 @Injectable({
     providedIn: 'root'
@@ -13,19 +14,19 @@ export class CriterioQuestaoService{
 
     constructor(private apiService: ApiService) {}
 
-    criarAssociacao(criterioQuestao: CriterioQuestao): Observable<CriterioQuestao> {
-        return this.apiService.criar(this.endpoint, criterioQuestao);
+    criarAssociacao(criterioQuestao: CriterioQuestao | CriterioQuestao[]): Observable<CriterioQuestao | CriterioQuestao[]> {
+        return this.apiService.criarSequencia(this.endpoint, criterioQuestao);
     }
 
-    excluirAssociacao(id_questao: number, id_atividade: number, id_criterio: number): Observable<void> {
-        return this.apiService.excluirAssociacao(this.endpoint, `?id_questao=${id_questao}&id_criterio=${id_criterio}`);
+    excluirAssociacao(listaExclusao: CriterioQuestao[]): Observable<void> {
+        return this.apiService.excluirSequencia(this.endpoint, listaExclusao);
     }
 
-    listarTodos(): Observable<CriterioQuestao[]> {
-        return this.apiService.listarTodos(this.endpoint);
+    listarTodosAssociadosPorAtividade(id_atividade: number): Observable<CriterioQuestao[]> {
+        return this.apiService.listarAssociacao(this.endpoint, `?id_atividade=${id_atividade}`);
     }
 
-    listarTodosAssociados(id_questao: string): Observable<CriterioQuestao[]> {
+    listarTodosAssociados(id_questao: number): Observable<CriterioQuestao[]> {
         return this.apiService.listarAssociacao(this.endpoint, `?id_questao=${id_questao}`);
     }
 
