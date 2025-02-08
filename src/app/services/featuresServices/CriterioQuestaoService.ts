@@ -22,8 +22,8 @@ export class CriterioQuestaoService{
         return this.apiService.excluirSequencia(this.endpoint, listaExclusao);
     }
 
-    listarCriteriosPorQuestao(id_questao: number): Observable<Criterio[]> {
-        return this.apiService.obterItemPorId(this.endpoint, id_questao);
+    listarTodosAssociadosPorAtividade(id_atividade: number): Observable<CriterioQuestao[]> {
+        return this.apiService.listarAssociacao(this.endpoint, `?id_atividade=${id_atividade}`);
     }
 
     listarTodosAssociados(id_questao: number): Observable<CriterioQuestao[]> {

@@ -11,7 +11,7 @@ import { CriterioQuestaoService } from '../../../services/featuresServices/Crite
 export class AssociarCriterioQuestaoComponent implements OnChanges {
 	@Input() criterios: Criterio[] = [];
 	@Input() idQuestao: number = 0;
-  @Input() idAtividade: number = 0;
+    @Input() idAtividade: number = 0;
 	@Output() associacaoConcluida = new EventEmitter<void>();
 
 	criteriosQuestao: CriterioQuestao[] = [];
@@ -59,7 +59,7 @@ export class AssociarCriterioQuestaoComponent implements OnChanges {
 			if (criterioEmListaIndex > 0) {
 				this.criteriosParaRemover.splice(criterioEmListaIndex);
 			}
-			this.criteriosParaAdicionar.push({ id_questao: this.idQuestao, id_criterio: target.value});
+			this.criteriosParaAdicionar.push({ id_questao: this.idQuestao, id_criterio: target.value, id_atividade: this.idAtividade});
 		} else {
 			if (target.checked === false && this.verificarItemLista(target.value, this.idQuestao) == true) {
 				let criterioEmListaIndex = this.criteriosParaAdicionar.findIndex(
@@ -72,7 +72,7 @@ export class AssociarCriterioQuestaoComponent implements OnChanges {
 
 			console.log(`Valor: ${target.checked} e id: ${target.value}`);
 
-			this.criteriosParaRemover.push({ id_questao: this.idQuestao, id_criterio: target.value});
+			this.criteriosParaRemover.push({ id_questao: this.idQuestao, id_criterio: target.value, id_atividade: this.idAtividade});
 		}
 	}
 
