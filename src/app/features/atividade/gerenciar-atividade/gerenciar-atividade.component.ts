@@ -44,13 +44,16 @@ export class GerenciarAtividadeComponent implements OnInit {
     }
   }
 
-  obterCriteriosQuestao(idQuestao: number | undefined): CriterioQuestao[] {
+  obterCriteriosQuestao(idQuestao: number | undefined): Criterio[] {
 
     //filtrar todos os ids dos critérios conforme o id da questão
-    let listaCriteriosPorAtividade = this.criteriosAtividade.filter((dados) => {dados.id_questao === idQuestao});
-    //console.log(listaCriteriosPorAtividade);
+    //console.log(this.criteriosAtividade);
+    let listaCriteriosPorAtividade = this.criteriosAtividade.filter(dados => dados.id_questao == idQuestao);
+    let criteriosQuestao = new Set(listaCriteriosPorAtividade.map(dados => dados.id_criterio));
+    let res = this.criterios.filter(valor => criteriosQuestao.has(valor.id));
+    //console.log(res);
 
-    return listaCriteriosPorAtividade;
+    return res;
   }
 
   abrirModal(modal: ModalComponent, questaoSelecionada: number | undefined) {

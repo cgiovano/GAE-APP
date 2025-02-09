@@ -1,0 +1,7 @@
+<div class="content-sub-container">
+    <div *ngIf="turmas != undefined">
+        <div *ngFor="let turma of turmas">
+            <input type="checkbox" /><label>{{turma.serie}}º {{turma.identificacao}} </label>
+        </div>
+    </div>
+</div>

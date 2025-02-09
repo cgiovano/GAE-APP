@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CadastrarAlunoComponent } from './features/aluno/cadastrar-aluno/cadastrar-aluno.component';
 import { EditarAlunoComponent } from './features/aluno/editar-aluno/editar-aluno.component';
-import { EditarAtividadeComponent } from './features/atividade/editar-atividade/editar-atividade.component';
+import { AtribuirAtividadeComponent } from './features/atividade/atribuir-atividade/atribuir-atividade.component';
 import { GerenciarAtividadeComponent } from './features/atividade/gerenciar-atividade/gerenciar-atividade.component';
 import { CadastrarCorrecaoComponent } from './features/correcao/cadastrar-correcao/cadastrar-correcao.component';
 import { EditarCorrecaoComponent } from './features/correcao/editar-correcao/editar-correcao.component';
@@ -37,7 +37,7 @@ import { AssociarCriterioQuestaoComponent } from './features/atividade/associar-
     AppComponent,
     CadastrarAlunoComponent,
     EditarAlunoComponent,
-    EditarAtividadeComponent,
+    AtribuirAtividadeComponent,
     GerenciarAtividadeComponent,
     CadastrarCorrecaoComponent,
     EditarCorrecaoComponent,

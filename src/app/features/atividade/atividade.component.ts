@@ -19,8 +19,8 @@ export class AtividadeComponent implements OnInit {
     this.listarAtividades();
   }
 
-  abrirModal(modal: ModalComponent) {
-    modal.Abrir("Cadastrando nova atividade");
+  abrirModal(modal: ModalComponent, titulo: string) {
+    modal.Abrir(titulo);
   }
 
   fecharModal(modal: ModalComponent) {

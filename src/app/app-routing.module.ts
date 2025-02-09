@@ -4,14 +4,11 @@ import { EditarAlunoComponent } from './features/aluno/editar-aluno/editar-aluno
 import { CadastrarAlunoComponent } from './features/aluno/cadastrar-aluno/cadastrar-aluno.component';
 import { AlunoComponent } from './features/aluno/aluno.component';
 import { TurmaComponent } from './features/turma/turma.component';
-import { EditarTurmaComponent } from './features/turma/editar-turma/editar-turma.component';
-import { CadastrarTurmaComponent } from './features/turma/cadastrar-turma/cadastrar-turma.component';
 import { GerenciarTurmaComponent } from './features/turma/gerenciar-turma/gerenciar-turma.component';
 import { AnoLetivoComponent } from './features/ano-letivo/ano-letivo.component';
 import { EditarAnoLetivoComponent } from './features/ano-letivo/editar-ano-letivo/editar-ano-letivo.component';
 import { CadastrarAnoLetivoComponent } from './features/ano-letivo/cadastrar-ano-letivo/cadastrar-ano-letivo.component';
 import { AtividadeComponent } from './features/atividade/atividade.component';
-import { EditarAtividadeComponent } from './features/atividade/editar-atividade/editar-atividade.component';
 import { CadastrarAtividadeComponent } from './features/atividade/cadastrar-atividade/cadastrar-atividade.component';
 import { CriterioComponent } from './features/criterio/criterio.component';
 import { EditarCriterioComponent } from './features/criterio/editar-criterio/editar-criterio.component';
@@ -23,7 +20,6 @@ import { AdicionarAlunoTurmaComponent } from './features/turma/adicionar-aluno-t
 import { GerenciarCriterioComponent } from './features/criterio/gerenciar-criterio/gerenciar-criterio.component';
 import { GerenciarAtividadeComponent } from './features/atividade/gerenciar-atividade/gerenciar-atividade.component';
 import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
-import { Resolver } from './services/ResolveService';
 
 const routes: Routes = [
   { path: 'aluno', component: AlunoComponent },
@@ -36,7 +32,6 @@ const routes: Routes = [
   { path: 'ano-letivo/editar/:id', component: EditarAnoLetivoComponent },
   { path: 'ano-letivo/cadastrarGerenciarTurmaComponent', component: CadastrarAnoLetivoComponent },
   { path: 'atividade', component: AtividadeComponent },
-  { path: 'atividade/editar/:id', component: EditarAtividadeComponent },
   { path: 'atividade/cadastrar', component: CadastrarAtividadeComponent },
   { path: 'atividade/gerenciar/:id', component: GerenciarAtividadeComponent },
   { path: 'criterio', component: CriterioComponent },
