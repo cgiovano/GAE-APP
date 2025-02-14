@@ -18,18 +18,18 @@
             <td>{{atividade.data_fim}}</td>
             <td>{{atividade.valor}}</td>
             <td><button [routerLink]="['gerenciar', atividade.id]">Gerenciar</button></td>
-            <td><button (click)="abrirModal(modalAtribuirAtividade, 'Atribuindo atividade às turmas')">Atribuir atividade</button></td>
+            <td><button (click)="abrirModal(modalAtribuirAtividade, 'Atribuindo atividade às turmas', atividade.id)">Atribuir atividade</button></td>
             <td><button (click)="Excluir(atividade.id)">Excluir</button></td>
         </tr>
     </table>
 
-    <button (click)="abrirModal(modalCadastrar, 'cadastrando nova atividade')">Cadastrar nova atividade</button>
+    <button (click)="abrirModal(modalCadastrar, 'cadastrando nova atividade', idAtividadeSelecionada)">Cadastrar nova atividade</button>
 
     <app-modal #modalCadastrar>
         <app-cadastrar-atividade (cadastroConcluido)="fecharModal(modalCadastrar)"></app-cadastrar-atividade>
     </app-modal>
 
     <app-modal #modalAtribuirAtividade>
-        <app-atribuir-atividade ></app-atribuir-atividade>
+        <app-atribuir-atividade [idAtividadeSelecionada]="idAtividadeSelecionada"></app-atribuir-atividade>
     </app-modal>
 </div>

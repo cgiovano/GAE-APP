@@ -12,6 +12,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 })
 export class AtividadeComponent implements OnInit {
   atividades: Atividade[] = [];
+  idAtividadeSelecionada: number = 0;
 
   constructor(private atividadeService: AtividadeService) { }
 
@@ -19,7 +20,8 @@ export class AtividadeComponent implements OnInit {
     this.listarAtividades();
   }
 
-  abrirModal(modal: ModalComponent, titulo: string) {
+  abrirModal(modal: ModalComponent, titulo: string, idAtividadeSelecionada: number) {
+    this.idAtividadeSelecionada = idAtividadeSelecionada;
     modal.Abrir(titulo);
   }
 
