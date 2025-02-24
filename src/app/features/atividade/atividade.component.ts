@@ -20,8 +20,9 @@ export class AtividadeComponent implements OnInit {
     this.listarAtividades();
   }
 
-  abrirModal(modal: ModalComponent, titulo: string, idAtividadeSelecionada: number) {
-    this.idAtividadeSelecionada = idAtividadeSelecionada;
+  abrirModal(modal: ModalComponent, titulo: string, id: number) {
+    console.log("o id da atividade é: " + id);
+    this.idAtividadeSelecionada = id;
     modal.Abrir(titulo);
   }
 

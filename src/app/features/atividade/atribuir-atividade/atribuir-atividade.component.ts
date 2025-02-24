@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Turma } from '../../../shared/models/turma.model';
 import { TurmaService } from '../../../services/featuresServices/TurmaService';
 import { Aluno } from '../../../shared/models/aluno.model';
@@ -7,17 +7,23 @@ import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurma
 import { AtividadeAluno } from '../../../shared/models/atividade_aluno.model';
 import { AtividadeAlunoService } from '../../../services/featuresServices/AtividadeAlunoService';
 
+interface AlunoSelecionado {
+	id: number;
+	nome: string;
+	selecionado: boolean;
+}
+
 @Component({
 	selector: 'app-atribuir-atividade',
 	templateUrl: './atribuir-atividade.component.html',
 	styleUrl: './atribuir-atividade.component.css'
 })
-export class AtribuirAtividadeComponent implements OnInit {
-	@Input() associacaoConcluida = new EventEmitter<void>();
-	@Input() idAtividadeSelecionada: number = 0;
-	
+export class AtribuirAtividadeComponent implements OnChanges {
+	@Output() associacaoConcluida = new EventEmitter<void>();
+	@Input() idAtividadeSelecionada: number;
+
 	turmas: Turma[] = [];
-	alunos: Aluno[] = [];
+	alunos: AlunoSelecionado[] = [];
 	atividadesAlunos: AtividadeAluno[] = [];
 
 	alunosParaAtribuirAtividade: AtividadeAluno[] = [];
@@ -30,87 +36,101 @@ export class AtribuirAtividadeComponent implements OnInit {
 		private atividadeAlunoService: AtividadeAlunoService
 	) {}
 
-	ngOnInit(): void {
+	carregarDados() {
 		this.turmaService.listarTodos().subscribe((dados) => (this.turmas = dados));
-		this.alunoService.listarTodos().subscribe((dados) => (this.alunos = dados));
-	}
+		//this.alunoService.listarTodos().subscribe((dados) => (this.alunos = dados.map()));
 
-	turmaSelecionada(target: any) {
-		console.log(target.value);
-		if (target.value == 0) this.alunoService.listarTodos().subscribe((dados) => (this.alunos = dados));
-		else
-			this.alunoTurmaService
-				.listarTodosAssociados(target.value as number)
-				.subscribe((dados) => (this.alunos = dados));
-	}
-
-	associarAtividadeAlunoQuestao(target: any) {
-		if (
-			target.checked === true &&
-			this.verificarAtividadeAtribuida(target.value, this.idAtividadeSelecionada) == false
-		) {
-			let atividadeAlunoEmListaIndex = this.alunosParaRemoverAtividade.findIndex(
-				(atividadeAluno) =>
-					atividadeAluno.id_aluno === target.value &&
-					atividadeAluno.id_atividade === this.idAtividadeSelecionada
-			);
-			if (atividadeAlunoEmListaIndex > 0) {
-				this.alunosParaRemoverAtividade.splice(atividadeAlunoEmListaIndex);
-			}
-			this.alunosParaAtribuirAtividade.push({
-				id_aluno: target.value,
-				id_atividade: this.idAtividadeSelecionada
-			});
-		} else {
-			if (
-				target.checked === false &&
-				this.verificarAtividadeAtribuida(target.value, this.idAtividadeSelecionada) == true
-			) {
-				let atividadeAlunoEmListaIndex = this.alunosParaRemoverAtividade.findIndex(
-					(atividadeAluno) =>
-						atividadeAluno.id_aluno === target.value &&
-						atividadeAluno.id_atividade == this.idAtividadeSelecionada
-				);
-				if (atividadeAlunoEmListaIndex > 0) {
-					this.alunosParaRemoverAtividade.splice(atividadeAlunoEmListaIndex);
-				}
-			}
-
-			console.log(`Valor: ${target.checked} e id: ${target.value}`);
-
-			this.alunosParaRemoverAtividade.push({ id_aluno: target.value, id_atividade: this.idAtividadeSelecionada });
+		if (this.idAtividadeSelecionada != 0) {
+			this.atividadeAlunoService
+				.listarTodosAssociados(this.idAtividadeSelecionada)
+				.subscribe((atividadeAluno) => {
+					this.atividadesAlunos = atividadeAluno;
+					this.alunoService
+						.listarTodos()
+						.subscribe((dados) => (this.alunos = this.transformarListaDeAlunos(dados)));
+				});
 		}
 	}
 
-	verificarAtividadeAtribuida(idAlunoBusca: number, idAtividadeBusca: number): boolean {
-		if (
+	ngOnChanges(changes: SimpleChanges): void {
+		this.carregarDados();
+	}
+
+	transformarListaDeAlunos(alunos: Aluno[]): AlunoSelecionado[] {
+		return alunos.map((aluno) =>
 			this.atividadesAlunos.find(
-				(atividade) => atividade.id_aluno == idAlunoBusca && atividade.id_atividade == idAtividadeBusca
+				(atividadeAluno) =>
+					aluno.id == atividadeAluno.id_aluno && atividadeAluno.id_atividade == this.idAtividadeSelecionada
 			)
+				? { ...aluno, selecionado: true }
+				: { ...aluno, selecionado: false }
+		);
+	}
+
+	turmaSelecionada(target: any) {
+		if (target.value == 0)
+			this.alunoService.listarTodos().subscribe((dados) => (this.alunos = this.transformarListaDeAlunos(dados)));
+		else
+			this.alunoTurmaService
+				.listarTodosAssociados(target.value as number)
+				.subscribe((dados) => (this.alunos = this.transformarListaDeAlunos(dados)));
+	}
+
+	associarAtividadeAluno() {
+		this.alunos.forEach((aluno) => {
+			if (
+				aluno.selecionado === true &&
+				this.verificarAtividadeAtribuida(aluno.id, this.idAtividadeSelecionada) === false
+			) {
+				this.alunosParaAtribuirAtividade.push({
+					id_aluno: aluno.id,
+					id_atividade: this.idAtividadeSelecionada
+				});
+			} else {
+				if (
+					aluno.selecionado === false &&
+					this.verificarAtividadeAtribuida(aluno.id, this.idAtividadeSelecionada) === true
+				) {
+					this.alunosParaRemoverAtividade.push({
+						id_aluno: aluno.id,
+						id_atividade: this.idAtividadeSelecionada
+					});
+				}
+			}
+		});
+	}
+
+	verificarAtividadeAtribuida(idAlunoBusca: number, idAtividadeBusca: number): boolean {
+		return this.atividadesAlunos.find(
+			(atividade) => atividade.id_aluno == idAlunoBusca && atividade.id_atividade == idAtividadeBusca
 		)
-			return true;
-		else return false;
+			? true
+			: false;
 	}
 
 	estaSelecionado(idAluno: number): boolean {
-		if (
-			this.atividadesAlunos.find((atividadeAluno) => {
-				atividadeAluno.id_aluno == idAluno;
-			}) != undefined
+		return this.atividadesAlunos.find(
+			(atividadeAluno) =>
+				atividadeAluno.id_aluno == idAluno && atividadeAluno.id_atividade == this.idAtividadeSelecionada
 		)
-			return true;
-		else return false;
+			? true
+			: false;
 	}
 
+	selecionarTudo() {}
+
 	confirmarAlteracoes() {
+		this.associarAtividadeAluno();
 		this.atividadeAlunoService
-		.criarAssociacao(this.alunosParaAtribuirAtividade)
-		.subscribe((dados) => console.log(dados));
-	this.atividadeAlunoService.excluirAssociacao(this.alunosParaRemoverAtividade).subscribe();
-	this.turmas = [];
-	this.alunos = [];
-	this.alunosParaAtribuirAtividade = [];
-	this.alunosParaRemoverAtividade = [];
-	this.associacaoConcluida.emit();
+			.criarAssociacao(this.alunosParaAtribuirAtividade)
+			.subscribe((dados) => console.log(dados));
+		this.atividadeAlunoService.excluirAssociacao(this.alunosParaRemoverAtividade).subscribe();
+		console.log(this.alunos);
+		this.turmas = [];
+		this.alunos = [];
+		this.alunosParaAtribuirAtividade = [];
+		this.alunosParaRemoverAtividade = [];
+		this.carregarDados();
+		this.associacaoConcluida.emit();
 	}
 }

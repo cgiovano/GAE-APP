@@ -1,15 +1,15 @@
 <div class="content-sub-container">
-    <span>turma</span>
+    <span>turma {{idAtividadeSelecionada}}</span>
     <select (change)="turmaSelecionada($event.target)">
         <option *ngFor="let turma of turmas" [value]="turma.id">{{turma.serie}}{{turma.identificacao}}</option>
         <option [value]="0">Todas as turmas</option>
     </select>
 
-    <div *ngIf="turmas != undefined">
-        <input type="checkbox" /><label>Marcar todos</label>
+    <div *ngIf="atividadesAlunos != undefined">
+        <input type="checkbox" [checked]="selecionarTudo()"/><label>Marcar todos</label>
 
         <div *ngFor="let aluno of alunos">
-            <input type="checkbox" [value]="aluno.id" [checked]="estaSelecionado(aluno.id)" (change)="associarAtividadeAlunoQuestao($event.target)"/><label>{{aluno.nome}}</label>
+            <input type="checkbox" [checked]="aluno.selecionado" (change)="aluno.selecionado = !aluno.selecionado"/><label>{{aluno.nome}} selecionado? {{aluno.selecionado}}</label>
         </div>
     </div>
 

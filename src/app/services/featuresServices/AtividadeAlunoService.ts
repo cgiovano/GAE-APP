@@ -5,9 +5,13 @@ import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class AtividadeAlunoService{
-    readonly endpoint: string = 'atividade_aluno';
+    readonly endpoint: string = 'atividade-aluno';
 
     constructor(private apiService: ApiService) {}
+
+    listarTodosAssociados(idAtividade: number): Observable<AtividadeAluno[]> {
+        return this.apiService.listarAssociacao(this.endpoint, `?id_atividade=${idAtividade}`);
+    }
 
     criarAssociacao(atividadeAluno: AtividadeAluno[]): Observable<AtividadeAluno | AtividadeAluno[]> {
         return this.apiService.criarSequencia(this.endpoint, atividadeAluno);

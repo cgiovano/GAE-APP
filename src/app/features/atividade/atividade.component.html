@@ -30,6 +30,6 @@
     </app-modal>
 
     <app-modal #modalAtribuirAtividade>
-        <app-atribuir-atividade [idAtividadeSelecionada]="idAtividadeSelecionada"></app-atribuir-atividade>
+        <app-atribuir-atividade [idAtividadeSelecionada]="idAtividadeSelecionada" (associacaoConcluida)="fecharModal(modalAtribuirAtividade)"></app-atribuir-atividade>
     </app-modal>
 </div>
