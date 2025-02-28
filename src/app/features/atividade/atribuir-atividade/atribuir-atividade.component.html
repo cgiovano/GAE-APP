@@ -6,7 +6,7 @@
     </select>
 
     <div *ngIf="atividadesAlunos != undefined">
-        <input type="checkbox" [checked]="selecionarTudo()"/><label>Marcar todos</label>
+        <input type="checkbox" [checked]="selecionarTodosEstado" (click)="selecionarTodos($event)"/><label>Marcar todos</label>
 
         <div *ngFor="let aluno of alunos">
             <input type="checkbox" [checked]="aluno.selecionado" (change)="aluno.selecionado = !aluno.selecionado"/><label>{{aluno.nome}} selecionado? {{aluno.selecionado}}</label>

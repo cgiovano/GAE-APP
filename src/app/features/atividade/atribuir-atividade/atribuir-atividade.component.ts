@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Turma } from '../../../shared/models/turma.model';
 import { TurmaService } from '../../../services/featuresServices/TurmaService';
 import { Aluno } from '../../../shared/models/aluno.model';
@@ -6,6 +6,7 @@ import { AlunoService } from '../../../services/featuresServices/AlunoService';
 import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurmaService';
 import { AtividadeAluno } from '../../../shared/models/atividade_aluno.model';
 import { AtividadeAlunoService } from '../../../services/featuresServices/AtividadeAlunoService';
+import { Observable } from 'rxjs';
 
 interface AlunoSelecionado {
 	id: number;
@@ -20,7 +21,12 @@ interface AlunoSelecionado {
 })
 export class AtribuirAtividadeComponent implements OnChanges {
 	@Output() associacaoConcluida = new EventEmitter<void>();
+	@Input() eventoFechar: EventEmitter<void>;
 	@Input() idAtividadeSelecionada: number;
+
+	selecionarTodosEstado: boolean = false;
+
+	sub: any;
 
 	turmas: Turma[] = [];
 	alunos: AlunoSelecionado[] = [];
@@ -52,7 +58,8 @@ export class AtribuirAtividadeComponent implements OnChanges {
 		}
 	}
 
-	ngOnChanges(changes: SimpleChanges): void {
+	ngOnChanges(): void {
+		this.eventoFechar.subscribe(() => {this.carregarDados(); this.selecionarTodosEstado = false});
 		this.carregarDados();
 	}
 
@@ -100,6 +107,23 @@ export class AtribuirAtividadeComponent implements OnChanges {
 		});
 	}
 
+	selecionarTodos(event: any) {
+		if(event.target.checked === true) {
+			this.alunos.forEach(aluno => {
+				if(!aluno.selecionado)
+					aluno.selecionado = true;
+			});
+		} else {
+			this.alunos.forEach(aluno => {
+				if(aluno.selecionado)
+					aluno.selecionado = false;
+			});
+		}
+
+
+		this.selecionarTodosEstado = !this.selecionarTodosEstado;
+	}
+
 	verificarAtividadeAtribuida(idAlunoBusca: number, idAtividadeBusca: number): boolean {
 		return this.atividadesAlunos.find(
 			(atividade) => atividade.id_aluno == idAlunoBusca && atividade.id_atividade == idAtividadeBusca
@@ -117,8 +141,6 @@ export class AtribuirAtividadeComponent implements OnChanges {
 			: false;
 	}
 
-	selecionarTudo() {}
-
 	confirmarAlteracoes() {
 		this.associarAtividadeAluno();
 		this.atividadeAlunoService
@@ -126,8 +148,6 @@ export class AtribuirAtividadeComponent implements OnChanges {
 			.subscribe((dados) => console.log(dados));
 		this.atividadeAlunoService.excluirAssociacao(this.alunosParaRemoverAtividade).subscribe();
 		console.log(this.alunos);
-		this.turmas = [];
-		this.alunos = [];
 		this.alunosParaAtribuirAtividade = [];
 		this.alunosParaRemoverAtividade = [];
 		this.carregarDados();

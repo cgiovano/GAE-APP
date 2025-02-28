@@ -29,7 +29,7 @@
         <app-cadastrar-atividade (cadastroConcluido)="fecharModal(modalCadastrar)"></app-cadastrar-atividade>
     </app-modal>
 
-    <app-modal #modalAtribuirAtividade>
-        <app-atribuir-atividade [idAtividadeSelecionada]="idAtividadeSelecionada" (associacaoConcluida)="fecharModal(modalAtribuirAtividade)"></app-atribuir-atividade>
+    <app-modal #modalAtribuirAtividade (eventoFechar)="fecharModal(undefined)">
+        <app-atribuir-atividade [idAtividadeSelecionada]="idAtividadeSelecionada" [eventoFechar]="eventoFechar" (associacaoConcluida)="fecharModal(modalAtribuirAtividade)"></app-atribuir-atividade>
     </app-modal>
 </div>

@@ -4,6 +4,8 @@ import { Atividade } from '../../shared/models/atividade.model';
 import { UrlBaseService } from '../../services/UrlBaseService';
 import { AtividadeService } from '../../services/featuresServices/AtividadeService';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-atividade',
@@ -13,6 +15,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 export class AtividadeComponent implements OnInit {
   atividades: Atividade[] = [];
   idAtividadeSelecionada: number = 0;
+  eventoFechar: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private atividadeService: AtividadeService) { }
 
@@ -26,8 +29,11 @@ export class AtividadeComponent implements OnInit {
     modal.Abrir(titulo);
   }
 
-  fecharModal(modal: ModalComponent) {
-    modal.Fechar();
+  fecharModal(modal: ModalComponent | undefined) {
+    if(modal != undefined)
+      modal.Fechar();
+    else
+      this.eventoFechar.emit();
   }
 
   listarAtividades() {
