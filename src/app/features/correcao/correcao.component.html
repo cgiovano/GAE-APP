@@ -1,2 +1,8 @@
-<p>correcao works!</p>
+<div class="content-sub-container">
+    <div *ngIf="atividades.length > 0">
+        <div *ngFor="let atividade of atividades">
+            <button [routerLink]="['atividade', atividade.id]">id: {{atividade.id}} descricao: {{atividade.descricao}}</button>
+        </div>
+    </div>
+</div>
 <router-outlet></router-outlet>

@@ -12,7 +12,7 @@
 
             <tr *ngFor="let questao of questoes">
                 <td colspan="2"><div><label>Comando da questão: </label><input type="textarea" [(ngModel)]="questao.descricao"/><p>Valor: {{questao.valor}}pts</p></div></td>
-                <td *ngIf="criteriosAtividade.length > 0">
+                <td *ngIf="criteriosAtividade != undefined && criteriosAtividade.length > 0">
                     <div *ngFor="let criterio of obterCriteriosQuestao(questao.id)">
                     {{criterio.descricao}}</div>
                 </td>

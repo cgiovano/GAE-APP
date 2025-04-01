@@ -48,6 +48,10 @@ export class TurmaService {
 		return this.apiService.obterItemPorId(this.endpoint, id);
 	}
 
+	listarTurmasPorAnoLetivo(idAnoLetivo: number) : Observable<Turma[]> {
+		return this.apiService.listarAssociacao(this.endpoint, `?id_ano=${idAnoLetivo}`);
+	}
+
 	/**
 	 *
 	 * 

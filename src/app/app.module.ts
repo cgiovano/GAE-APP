@@ -31,6 +31,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
 import { ModalModule } from './shared/components/modal/modal.module';
 import { AssociarCriterioQuestaoComponent } from './features/atividade/associar-criterio-questao/associar-criterio-questao.component';
+import { ListarAlunosAtividadesComponent } from './features/correcao/listar-alunos-atividades/listar-alunos-atividades.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AssociarCriterioQuestaoComponent } from './features/atividade/associar-
     CorrecaoComponent,
     AdicionarAlunoTurmaComponent,
     CadastrarQuestaoComponent,
-    AssociarCriterioQuestaoComponent
+    AssociarCriterioQuestaoComponent,
+    ListarAlunosAtividadesComponent
   ],
   imports: [
     BrowserModule,

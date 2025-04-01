@@ -20,6 +20,7 @@ import { AdicionarAlunoTurmaComponent } from './features/turma/adicionar-aluno-t
 import { GerenciarCriterioComponent } from './features/criterio/gerenciar-criterio/gerenciar-criterio.component';
 import { GerenciarAtividadeComponent } from './features/atividade/gerenciar-atividade/gerenciar-atividade.component';
 import { CadastrarQuestaoComponent } from './features/questao/cadastrar-questao/cadastrar-questao.component';
+import { ListarAlunosAtividadesComponent } from './features/correcao/listar-alunos-atividades/listar-alunos-atividades.component';
 
 const routes: Routes = [
   { path: 'aluno', component: AlunoComponent },
@@ -39,7 +40,7 @@ const routes: Routes = [
   { path: 'criterio/gerenciar/:id', component: GerenciarCriterioComponent },
   { path: 'criterio/cadastrar', component: CadastrarCriterioComponent },
   { path: 'correcao', component: CorrecaoComponent },
-  { path: 'correcao/editar/:id', component: EditarCorrecaoComponent },
+  { path: 'correcao/atividade/:id', component: ListarAlunosAtividadesComponent },
   { path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent },
   { path: 'atividade/gerenciar/:id/questao/cadastrar', component: CadastrarQuestaoComponent }
 ];
