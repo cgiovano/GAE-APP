@@ -4,6 +4,7 @@ import { AtividadeAluno } from '../../../shared/models/atividade_aluno.model';
 import { AlunoService } from '../../../services/featuresServices/AlunoService';
 import { Atividade } from '../../../shared/models/atividade.model';
 import { AtividadeAlunoService } from '../../../services/featuresServices/AtividadeAlunoService';
+import { Aluno } from '../../../shared/models/aluno.model';
 
 @Component({
   selector: 'app-listar-alunos-atividades',
@@ -12,6 +13,7 @@ import { AtividadeAlunoService } from '../../../services/featuresServices/Ativid
 })
 export class ListarAlunosAtividadesComponent implements OnInit{
   idAtividadeSelecionada: number;
+  alunos: Aluno[]
   atividadesAlunos: AtividadeAluno[];
 
   constructor(private alunoService: AlunoService, private atividadeAlunoService: AtividadeAlunoService, private activatedRoute: ActivatedRoute) {
@@ -21,5 +23,6 @@ export class ListarAlunosAtividadesComponent implements OnInit{
 
   ngOnInit(): void {
     this.atividadeAlunoService.listarTodosAssociados(this.idAtividadeSelecionada).subscribe((dados) => this.atividadesAlunos = dados);
+    this.alunoService.
   }
 }
