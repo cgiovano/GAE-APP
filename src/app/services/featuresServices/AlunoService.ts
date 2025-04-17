@@ -55,4 +55,8 @@ export class AlunoService {
 	listarTodos(): Observable<Aluno[]> {
 		return this.apiService.listarTodos<Aluno>(this.endpoint);
 	}
+
+	listarAlunosPorAtividade(idAtividade: number): Observable<Aluno[]> {
+		return this.apiService.ListarItensPorId(`${this.endpoint}/atividade`, idAtividade);
+	}
 }

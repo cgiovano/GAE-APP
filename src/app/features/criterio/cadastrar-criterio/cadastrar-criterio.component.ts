@@ -16,7 +16,7 @@ export class CadastrarCriterioComponent {
   @Output() cadastroConcluido = new EventEmitter<void>();
 
   pontuacaoPadrao = 100;
-  criterio: Criterio = { id: 0, descricao: '', numero_criterios: 0, isLikert: false };
+  criterio: Criterio = { id: 0, descricao: '', numero_criterios: 0, likert_scale: false };
   listaItensCriterio: ItemCriterio[] = [ ];
   idCriterio: number = 0;
 
@@ -36,9 +36,9 @@ export class CadastrarCriterioComponent {
   }
 
   alterarValor(event: Event) {
-    this.criterio.isLikert = !this.criterio.isLikert;
+    this.criterio.likert_scale = !this.criterio.likert_scale;
     
-    if(this.criterio.isLikert==true) {
+    if(this.criterio.likert_scale==true) {
       this.carregaItensCriterioUI(2, true);
     } else {
       this.listaItensCriterio = [];

@@ -7,11 +7,11 @@
 
         <div>
             <label>Escala Likert</label>
-            <input type="checkbox" name="isLikert" (change)="alterarValor($event)" />
+            <input type="checkbox" name="likert_scale" (change)="alterarValor($event)" />
         </div>
 
         <!--Criterios com valor automático-->
-        <ng-content *ngIf="criterio.isLikert">
+        <ng-content *ngIf="criterio.likert_scale">
             <label>Quantidade de itens</label><input type="number" min="2" value="2" (change)="calculaItensCriterio($event)"/>
 
             <div *ngFor="let itemCriterio of listaItensCriterio">

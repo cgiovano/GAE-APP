@@ -78,6 +78,10 @@ export class ApiService {
 		return this.http.get<T>(`${this.urlBase}/${endpoint}/${ids}`);
 	}
 
+	ListarItensPorId<T>(endpoint: string, id: number): Observable<T[]> {
+		return this.http.get<T[]>(`${this.urlBase}/${endpoint}/${id}`);
+	}
+
 	/**
 	 *
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.

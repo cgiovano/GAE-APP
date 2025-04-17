@@ -1,13 +1,20 @@
 <p>listar-alunos-atividades works! id atividade selecionada {{idAtividadeSelecionada}}</p>
 
 
-<table>
+<table *ngIf="alunos != undefined">
     <th>id</th>
     <th>nome</th>
     <th>turma</th>
     <th></th>
 
-    <tr *ngFor="let atividadeAluno of atividadesAlunos">
-        <td><button>Corrigir</button></td>
+    <tr *ngFor="let aluno of alunos">
+        <td>{{aluno.id}}</td>
+        <td>{{aluno.nome}}</td>
+        <td>{{obterTurma(aluno.id)}}</td>
+        <td><button (click)="abrirModalCadastrarCorrecao(cadastrarCorrecao, idAlunoSelecionado)">Corrigir</button></td>
     </tr>
 </table>
+
+<app-modal #cadastrarCorrecao>
+    <app-cadastrar-correcao [correcao]="correcaoCriada"></app-cadastrar-correcao>
+</app-modal>

@@ -1,1 +1,22 @@
-<p>cadastrar-correcao works!</p>
+<div class="content-sub-container">
+    <div *ngFor="let questao of questoes">
+        <div>{{questao.descricao}}</div>
+        <div>pontuacao: {{questao.valor}}</div>
+
+        <div *ngFor="let criterio of obterCriteriosQuestao(questao.id)">
+            <div>
+                <div>{{criterio.descricao}}</div>
+                <div>{{criterio.likert_scale}}</div>
+                <div *ngIf="!criterio.likert_scale">
+                    <input type="number" />
+                </div>
+                <div *ngFor="let itemCriterio of obterItensCriterio(criterio.id)">
+                    <input type="radio" name="{{itemCriterio}}" value={{itemCriterio.valor}}/>
+                    <label >{{itemCriterio.descricao}}</label><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button (click)="cadastrarCorrecao()">Cadastrar Correção</button>
+</div>

@@ -17,7 +17,7 @@
                     <span>{{itemCriterio.descricao}} - {{itemCriterio.valor*100}}%</span>
                 </div>
             </td>
-            <td>{{ObterTipoDeEscala(criterio.isLikert)}}</td>
+            <td>{{ObterTipoDeEscala(criterio.likert_scale)}}</td>
             <button>Editar</button>
             <button (click)="ExcluirCriterio(criterio.id)">Excluir</button>
         </tr>
