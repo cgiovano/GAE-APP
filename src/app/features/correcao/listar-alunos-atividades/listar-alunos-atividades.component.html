@@ -11,10 +11,10 @@
         <td>{{aluno.id}}</td>
         <td>{{aluno.nome}}</td>
         <td>{{obterTurma(aluno.id)}}</td>
-        <td><button (click)="abrirModalCadastrarCorrecao(cadastrarCorrecao, aluno.id)">Corrigir</button></td>
+        <td><button (click)="abrirModalCadastrarCorrecao(cadastrarCorrecao, aluno.id)">{{verificaAcaoBotaoCorrecao(aluno.id)}}</button></td>
     </tr>
 </table>
 
 <app-modal #cadastrarCorrecao>
-    <app-cadastrar-correcao [correcao]="correcaoCriada"></app-cadastrar-correcao>
+    <app-cadastrar-correcao [correcao]="correcaoAtivada"></app-cadastrar-correcao>
 </app-modal>

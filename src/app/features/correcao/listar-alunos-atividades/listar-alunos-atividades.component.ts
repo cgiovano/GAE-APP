@@ -22,16 +22,18 @@ export class ListarAlunosAtividadesComponent implements OnInit {
   alunos: Aluno[];
   atividadesAlunos: AtividadeAluno[];
   idAlunoSelecionado: number;
-  correcaoCriada: Correcao;
+  correcaoAtivada: Correcao;
+  correcoes: Correcao[];
 
   constructor(private alunoService: AlunoService, private atividadeAlunoService: AtividadeAlunoService, turmaService: TurmaService, private correcaoService: CorrecaoService, private activatedRoute: ActivatedRoute) {
     this.idAtividadeSelecionada = activatedRoute.snapshot.params['id'];
     console.log(this.idAtividadeSelecionada);
-    this.correcaoCriada = {id: 0, id_aluno: 10, id_atividade: this.idAtividadeSelecionada, nota: 0};
+    this.correcaoAtivada = { id: 0, id_aluno: 10, id_atividade: this.idAtividadeSelecionada, nota: 0 };
   }
 
   ngOnInit(): void {
     this.alunoService.listarAlunosPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.alunos = dados);
+    this.correcaoService.listarCorrecoesPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.correcoes = dados);
   }
 
   obterTurma(idAluno: number) {
@@ -40,13 +42,36 @@ export class ListarAlunosAtividadesComponent implements OnInit {
 
   abrirModalCadastrarCorrecao(modal: ModalComponent, idAluno: number) {
     modal.Abrir('corrigindo atividade');
-    //modal.Abrir('corrigindo atividade, id: ' + this.correcaoCriada + 'idAluno: ' + idAluno);
+    //modal.Abrir('corrigindo atividade, id: ' + this.correcaoAtivada + 'idAluno: ' + idAluno);
     this.idAlunoSelecionado = idAluno;
     console.log(this.idAlunoSelecionado);
-    this.correcaoService.criar({id: 0, id_aluno: this.idAlunoSelecionado, id_atividade: this.idAtividadeSelecionada, nota: 0}).subscribe((dados) => {
-      this.correcaoCriada = dados;
-      modal.Abrir('corrigindo atividade, id: ' + this.correcaoCriada.id);
-      this.idAlunoSelecionado = idAluno;
-    });
+
+    const correcaoCadastrada = this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada);
+
+    if (correcaoCadastrada != undefined) {
+      this.correcaoAtivada = correcaoCadastrada;
+    } else {
+      this.correcaoService.criar({ id: 0, id_aluno: this.idAlunoSelecionado, id_atividade: this.idAtividadeSelecionada, nota: 0 }).subscribe((dados) => {
+        this.correcaoAtivada = dados;
+        modal.Abrir('corrigindo atividade, id: ' + this.correcaoAtivada.id);
+        this.idAlunoSelecionado = idAluno;
+      });
+    }
+  }
+
+  ObterCorrecaoCadastrada(idAluno: number, idAtividade: number): Correcao | undefined {
+    const CorrecaoCadastrada = this.correcoes.find((correcao) => correcao.id_aluno == idAluno && correcao.id_atividade == idAtividade)
+
+    if (CorrecaoCadastrada)
+      return CorrecaoCadastrada;
+    else
+      return undefined;
+  }
+
+  verificaAcaoBotaoCorrecao(idAluno: number) : string {
+    if(this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada) != undefined)
+      return "Corrigir";
+    else 
+      return "Nova correcao";
   }
 }
