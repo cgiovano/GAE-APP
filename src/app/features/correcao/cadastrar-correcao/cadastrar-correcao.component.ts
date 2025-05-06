@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { Questao } from '../../../shared/models/questao.model';
 import { ItemCriterio } from '../../../shared/models/item_criterio.model';
 import { Criterio } from '../../../shared/models/criterio.model';
@@ -10,6 +10,7 @@ import { CriterioQuestaoService } from '../../../services/featuresServices/Crite
 import { CriterioQuestao } from '../../../shared/models/criterio_questao.model';
 import { CorrecaoQuestao } from '../../../shared/models/correcao_questao.model';
 import { CorrecaoCriterio } from '../../../shared/models/correcao_criterio.model';
+import { CorrecaoQuestaoService } from '../../../services/featuresServices/CorrecaoQuestaoService';
 
 @Component({
   selector: 'app-cadastrar-correcao',
@@ -17,7 +18,7 @@ import { CorrecaoCriterio } from '../../../shared/models/correcao_criterio.model
   styleUrl: './cadastrar-correcao.component.css'
 })
 
-export class CadastrarCorrecaoComponent implements OnInit {
+export class CadastrarCorrecaoComponent implements OnChanges {
   @Input() correcao: Correcao;
   questoes: Questao[];
   criterios: Criterio[];
@@ -26,19 +27,23 @@ export class CadastrarCorrecaoComponent implements OnInit {
   correcaoQuestoes: CorrecaoQuestao[];
   correcaoCriterios: CorrecaoCriterio[];
 
-  constructor(private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) {}
+  constructor(private correcaoQuestaoService: CorrecaoQuestaoService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Estou funcionando!" + this.correcao.id);
     this.questaoService.listarAssociacao(this.correcao.id_atividade).subscribe((dados) => this.questoes = dados);
     this.criterioService.listarTodos().subscribe((dados) => this.criterios = dados);
     this.itemCriterioService.listarTodos().subscribe((dados) => this.itensCriterios = dados);
     this.criterioQuestaoService.listarTodosAssociadosPorAtividade(this.correcao.id_atividade).subscribe((dados) => this.criteriosAtividade = dados);
+    this.correcaoQuestaoService.ListarQuestoesCorrecao(this.correcao.id).subscribe((dados) => this.correcaoQuestoes = dados);
   }
 
-  criarCorrecaoQuestao(questoes: Questao[]) {
-    questoes.forEach((questao) => {
-      //criar a lista de correções para as questões;
-    });
+  criarCorrecaoQuestao() {
+    
+  }
+
+  obterDescricaoQuestao(idQuestao: number) {
+    return this.questoes.find(dados => dados.id == idQuestao)?.descricao;
   }
 
   obterCriteriosQuestao(idQuestao: number | undefined): Criterio[] {

@@ -1,9 +1,9 @@
 <div class="content-sub-container">
-    <div *ngFor="let questao of questoes">
-        <div>{{questao.descricao}}</div>
-        <div>pontuacao: {{questao.valor}}</div>
+    <div *ngFor="let correcaoQuestao of correcaoQuestoes">
+        <div>{{obterDescricaoQuestao(correcaoQuestao.id_questao)}}</div>
+        <div>pontuacao: {{correcaoQuestao.pontuacao}}</div>
 
-        <div *ngFor="let criterio of obterCriteriosQuestao(questao.id)">
+        <div *ngFor="let criterio of obterCriteriosQuestao(correcaoQuestao.id_questao)">
             <div>
                 <div>{{criterio.descricao}}</div>
                 <div>{{criterio.likert_scale}}</div>
@@ -15,6 +15,11 @@
                     <label >{{itemCriterio.descricao}}</label><br>
                 </div>
             </div>
+        </div>
+
+        <div>
+            <div>Feedback</div>
+            <input type="text" [(ngModel)]="correcaoQuestao.descricao_correcao"/>
         </div>
     </div>
 

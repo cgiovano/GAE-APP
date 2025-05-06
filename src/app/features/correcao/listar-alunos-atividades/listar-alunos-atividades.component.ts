@@ -40,19 +40,13 @@ export class ListarAlunosAtividadesComponent implements OnInit {
 
   abrirModalCadastrarCorrecao(modal: ModalComponent, idAluno: number) {
     modal.Abrir('corrigindo atividade');
-    modal.Abrir('corrigindo atividade, id: ' + this.correcaoCriada);
-    /*this.correcaoService.criar({id: 0, id_aluno: idAluno, id_atividade: this.idAtividadeSelecionada, nota: 0}).subscribe((dados) => {
+    //modal.Abrir('corrigindo atividade, id: ' + this.correcaoCriada + 'idAluno: ' + idAluno);
+    this.idAlunoSelecionado = idAluno;
+    console.log(this.idAlunoSelecionado);
+    this.correcaoService.criar({id: 0, id_aluno: this.idAlunoSelecionado, id_atividade: this.idAtividadeSelecionada, nota: 0}).subscribe((dados) => {
       this.correcaoCriada = dados;
       modal.Abrir('corrigindo atividade, id: ' + this.correcaoCriada.id);
       this.idAlunoSelecionado = idAluno;
-    });*/
-  }
-
-  criarCorrecaoQuestao() {
-
-  }
-
-  criarCorrecaoItemCriterio() {
-    
+    });
   }
 }
