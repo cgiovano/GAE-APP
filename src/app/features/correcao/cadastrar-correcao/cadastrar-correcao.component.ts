@@ -11,6 +11,7 @@ import { CriterioQuestao } from '../../../shared/models/criterio_questao.model';
 import { CorrecaoQuestao } from '../../../shared/models/correcao_questao.model';
 import { CorrecaoCriterio } from '../../../shared/models/correcao_criterio.model';
 import { CorrecaoQuestaoService } from '../../../services/featuresServices/CorrecaoQuestaoService';
+import { CorrecaoCriterioService } from '../../../services/featuresServices/CorrecaoCriterioService';
 
 @Component({
   selector: 'app-cadastrar-correcao',
@@ -27,7 +28,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
   correcaoQuestoes: CorrecaoQuestao[];
   correcaoCriterios: CorrecaoCriterio[];
 
-  constructor(private correcaoQuestaoService: CorrecaoQuestaoService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) {}
+  constructor(private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Estou funcionando!" + this.correcao.id);
