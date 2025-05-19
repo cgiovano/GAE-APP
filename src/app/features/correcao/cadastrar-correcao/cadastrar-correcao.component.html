@@ -1,17 +1,24 @@
 <div class="content-sub-container">
-    <div *ngFor="let correcaoQuestao of correcaoQuestoes">
+    <div *ngFor="let correcaoQuestao of correcaoQuestoes; let i = index">
         <div>{{obterDescricaoQuestao(correcaoQuestao.id_questao)}}</div>
         <div>pontuacao: {{correcaoQuestao.pontuacao}}</div>
 
-        <div *ngFor="let criterio of obterCriteriosQuestao(correcaoQuestao.id_questao)">
+        <div *ngFor="let correcaoCriterio of obterCriteriosCorrecaoQuestao(correcaoQuestao.id); let j = index">
             <div>
-                <div>{{criterio.descricao}}</div>
-                <div>{{criterio.likert_scale}}</div>
-                <div *ngIf="!criterio.likert_scale">
-                    <input type="number" />
+                <div>{{obterCriterio(correcaoCriterio.id_criterio)?.descricao}}</div>
+                <div>{{obterCriterio(correcaoCriterio.id_criterio)?.likert_scale==true?"verdadeiro":"falso   "}}</div>
+                <div *ngIf="obterCriterio(correcaoCriterio.id)?.likert_scale == false">
+                    <input type="number" [(ngModel)]="correcaoCriterio.valor" (change)="valor(correcaoCriterio.valor)"/>
                 </div>
-                <div *ngFor="let itemCriterio of obterItensCriterio(criterio.id)">
-                    <input type="radio" name="{{itemCriterio}}" value={{itemCriterio.valor}}/>
+                <div *ngFor="let itemCriterio of obterItensCriterio(correcaoCriterio.id_criterio)">
+                    <!--um observação: no name para o radio button estou utilizando uma combinação dos ids da questao e critérios para impedir que quando o 
+                    usuário marque um item critério que é compartilhado com outras questões, os critérios de determinada questão não sejam desmarcados
+                    note que quando a questão 1 e 2 utilizam os mesmos critérios, o name definido, caso seja apenas o da correcao ou do próprio item critério
+                    será o mesmo (ex. questão 1 e 2 podem ter o critério de id 0). Se eles possuírem os mesmo critérios, ao marcar um radio da questão 1 e em seguida da
+                    questão 2, ao clicar no radio da questão 2 (que tem o mesmo name dos radio buttons da questão 1) os radios da questão 1 serão desmarcados
+                    Assim, fazendo a combinação do id questão e correcao é posssível garantir que os name dos itens critérios pertençam a uma questão em específico, mesmo que
+                    tenham critérios compartilhados-->
+                    <input type="radio" [name]="'q'+i+'c'+j" value={{itemCriterio.valor}} (click)="selecionarItemCriterio(correcaoCriterio.id, itemCriterio.id, itemCriterio.valor)"/>
                     <label >{{itemCriterio.descricao}}</label><br>
                 </div>
             </div>
@@ -23,5 +30,7 @@
         </div>
     </div>
 
-    <button (click)="cadastrarCorrecao()">Cadastrar Correção</button>
+    <div>
+        <button (click)="imprimirDados()">Imprimir dados</button>
+    </div>
 </div>

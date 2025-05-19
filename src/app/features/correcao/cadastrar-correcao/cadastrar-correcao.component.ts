@@ -28,7 +28,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
   correcaoQuestoes: CorrecaoQuestao[];
   correcaoCriterios: CorrecaoCriterio[];
 
-  constructor(private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) {}
+  constructor(private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Estou funcionando!" + this.correcao.id);
@@ -37,33 +37,49 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     this.itemCriterioService.listarTodos().subscribe((dados) => this.itensCriterios = dados);
     this.criterioQuestaoService.listarTodosAssociadosPorAtividade(this.correcao.id_atividade).subscribe((dados) => this.criteriosAtividade = dados);
     this.correcaoQuestaoService.ListarQuestoesCorrecao(this.correcao.id).subscribe((dados) => this.correcaoQuestoes = dados);
-  }
-
-  criarCorrecaoQuestao() {
-    
+    this.correcaoCriterioService.ListarCorrecaoCriterioPorCorrecao(this.correcao.id).subscribe((dados) => this.correcaoCriterios = dados);
   }
 
   obterDescricaoQuestao(idQuestao: number) {
     return this.questoes.find(dados => dados.id == idQuestao)?.descricao;
   }
 
-  obterCriteriosQuestao(idQuestao: number | undefined): Criterio[] {
+  obterCriteriosCorrecaoQuestao(idCorrecaoQuestao: number | undefined): CorrecaoCriterio[] {
+    let criteriosQuestao = this.correcaoCriterios.filter(dados => dados.id_correcao_questao == idCorrecaoQuestao);
 
-    let listaCriteriosPorAtividade = this.criteriosAtividade.filter(dados => dados.id_questao == idQuestao);
-    let criteriosQuestao = new Set(listaCriteriosPorAtividade.map(dados => dados.id_criterio));
-    let res = this.criterios.filter(valor => criteriosQuestao.has(valor.id));
-
-    res.forEach((criterio) => console.log(criterio.likert_scale));
-
-    return res;
+    return criteriosQuestao;
   }
+
+
+  obterCriterio(idCriterio: number | undefined): Criterio | undefined {
+
+    let criterioQuestao = this.criterios.find(criterio => criterio.id == idCriterio);
+
+    return criterioQuestao;
+  }
+
 
   obterItensCriterio(idCriterio: number | undefined): ItemCriterio[] {
     let listaItensCriteriosPorCriterio = this.itensCriterios.filter(dados => dados.id_criterio == idCriterio);
     return listaItensCriteriosPorCriterio;
   }
 
-  cadastrarCorrecao() {
+  selecionarItemCriterio(idCorrecaoCriterio: number, idItemCriterio: number, valor: number) {
+    let correcaoCriterio = this.correcaoCriterios.find(item => item.id == idCorrecaoCriterio);
 
+    if (correcaoCriterio) {
+      correcaoCriterio.id_item_criterio = idItemCriterio;
+      correcaoCriterio.valor = valor;
+    }
+
+    console.log(correcaoCriterio);
+  }
+
+  imprimirDados() {
+    console.log(this.correcaoCriterios);
+  }
+
+  valor(valor: number) {
+    console.log(valor);
   }
 }

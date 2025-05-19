@@ -12,11 +12,15 @@ export class CorrecaoService {
 
     constructor(private apiService: ApiService) {}
 
-    criar(correcao: Correcao) {
+    criar(correcao: Correcao): Observable<Correcao> {
         return this.apiService.criar(this.endpoint, correcao);
     }
 
     listarCorrecoesPorAtividade(idAtividade: number) : Observable<Correcao[]> {
         return this.apiService.ListarItensPorId(`${this.endpoint}/atividade`, idAtividade);
+    }
+
+    excluir(idCorrecao: number): Observable<void> {
+        return this.apiService.excluir(this.endpoint, idCorrecao);
     }
 }

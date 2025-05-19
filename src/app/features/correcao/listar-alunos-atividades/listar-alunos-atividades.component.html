@@ -12,6 +12,7 @@
         <td>{{aluno.nome}}</td>
         <td>{{obterTurma(aluno.id)}}</td>
         <td><button (click)="abrirModalCadastrarCorrecao(cadastrarCorrecao, aluno.id)">{{verificaAcaoBotaoCorrecao(aluno.id)}}</button></td>
+        <td *ngIf="verificaAcaoBotaoCorrecao(aluno.id)=='Alterar'"><button (click)="excluirCorrecao(aluno.id)">Excluir</button></td>
     </tr>
 </table>
 

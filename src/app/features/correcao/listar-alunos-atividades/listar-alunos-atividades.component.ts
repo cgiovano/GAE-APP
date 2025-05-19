@@ -70,8 +70,15 @@ export class ListarAlunosAtividadesComponent implements OnInit {
 
   verificaAcaoBotaoCorrecao(idAluno: number) : string {
     if(this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada) != undefined)
-      return "Corrigir";
+      return "Alterar";
     else 
-      return "Nova correcao";
+      return "Corrigir";
+  }
+
+  excluirCorrecao(idAluno: number) {
+    let idCorrecao = this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada)?.id;
+    
+    if(idCorrecao)
+      this.correcaoService.excluir(idCorrecao).subscribe();
   }
 }

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "../ApiService";
+import { Observable } from "rxjs";
+import { CorrecaoCriterio } from "../../shared/models/correcao_criterio.model";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,7 @@ export class CorrecaoCriterioService {
 
     constructor(private apiService: ApiService) {}
     
-    ListarCorrecaoCriterioPorCorrecaoQuestao(idQuestao: number) {
-        return this.apiService.ListarItensPorId(`${this.endpoint}/correcao-questao`, idQuestao);
+    ListarCorrecaoCriterioPorCorrecao(idCorrecao: number): Observable<CorrecaoCriterio[]> {
+        return this.apiService.ListarItensPorId(`${this.endpoint}/correcao`, idCorrecao);
     }
 }
