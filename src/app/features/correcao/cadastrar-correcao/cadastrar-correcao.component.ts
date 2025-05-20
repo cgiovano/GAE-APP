@@ -50,6 +50,10 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     return criteriosQuestao;
   }
 
+  questaoComCriterio(idQuestao: number): boolean {
+    let quantidadeCriterios = this.criteriosAtividade.filter(criterio => criterio.id_questao == idQuestao);
+    return quantidadeCriterios ? true : false;
+  }
 
   obterCriterio(idCriterio: number | undefined): Criterio | undefined {
 
@@ -75,11 +79,26 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     console.log(correcaoCriterio);
   }
 
-  imprimirDados() {
-    console.log(this.correcaoCriterios);
+  corrigir() {
+    let valorQuestao: number;
+    let mediaDaPontuacaoCriterios: number;
   }
 
-  valor(valor: number) {
-    console.log(valor);
+  corrigirQuestao(correcaoQuestao: CorrecaoQuestao) {
+    let criteriosQuestao = this.correcaoCriterios.filter(correcaoCriterio => correcaoCriterio.id_correcao_questao == correcaoQuestao.id);
+    let somaValorCriterio: number = 0;
+
+    criteriosQuestao.forEach(correcaoCriterio => {
+      somaValorCriterio += correcaoCriterio.valor;
+    });
+
+    if(criteriosQuestao.length > 0)
+      correcaoQuestao.pontuacao = somaValorCriterio / criteriosQuestao.length;
+    else
+      console.log("não existem criterios para esta questão!");
+  }
+
+  corrigirAtividade(correcao: Correcao) {
+
   }
 }

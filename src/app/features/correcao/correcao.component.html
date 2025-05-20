@@ -1,7 +1,10 @@
 <div class="content-sub-container">
-    <div *ngIf="atividades.length != undefined">
-        <div *ngFor="let atividade of atividades">
-            <button [routerLink]="['atividade', atividade.id]">id: {{atividade.id}} descricao: {{atividade.descricao}}</button>
+    <div *ngIf="atividades != undefined">
+        <div *ngIf="atividades.length != undefined">
+            <div *ngFor="let atividade of atividades">
+                <button [routerLink]="['atividade', atividade.id]">id: {{atividade.id}} descricao:
+                    {{atividade.descricao}}</button>
+            </div>
         </div>
     </div>
 </div>
