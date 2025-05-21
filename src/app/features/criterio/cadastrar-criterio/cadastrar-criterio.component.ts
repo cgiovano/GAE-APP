@@ -7,9 +7,10 @@ import { ItemCriterio } from '../../../shared/models/item_criterio.model';
 import { ItemCriterioService } from '../../../services/featuresServices/ItemCriterioService';
 
 @Component({
-  selector: 'app-cadastrar-criterio',
-  templateUrl: './cadastrar-criterio.component.html',
-  styleUrl: './cadastrar-criterio.component.css'
+    selector: 'app-cadastrar-criterio',
+    templateUrl: './cadastrar-criterio.component.html',
+    styleUrl: './cadastrar-criterio.component.css',
+    standalone: false
 })
 
 export class CadastrarCriterioComponent {

@@ -3,9 +3,10 @@ import { Aluno } from '../../../shared/models/aluno.model';
 import { AlunoService } from '../../../services/featuresServices/AlunoService';
 
 @Component({
-  selector: 'app-cadastrar-aluno',
-  templateUrl: './cadastrar-aluno.component.html',
-  styleUrl: './cadastrar-aluno.component.css',
+    selector: 'app-cadastrar-aluno',
+    templateUrl: './cadastrar-aluno.component.html',
+    styleUrl: './cadastrar-aluno.component.css',
+    standalone: false
 })
 export class CadastrarAlunoComponent {
   @Output() cadastroConcluido = new EventEmitter<void>();

@@ -7,9 +7,10 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { AnoLetivoService } from '../../services/featuresServices/AnoLetivoService';
 
 @Component({
-  selector: 'app-turma',
-  templateUrl: './turma.component.html',
-  styleUrl: './turma.component.css'
+    selector: 'app-turma',
+    templateUrl: './turma.component.html',
+    styleUrl: './turma.component.css',
+    standalone: false
 })
 export class TurmaComponent implements OnInit {
   turmaSelecionada: Turma = {id: 0, serie: "", identificacao: "", ano_id: 0};

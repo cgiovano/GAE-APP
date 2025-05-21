@@ -15,9 +15,10 @@ interface AlunoSelecionado {
 }
 
 @Component({
-	selector: 'app-atribuir-atividade',
-	templateUrl: './atribuir-atividade.component.html',
-	styleUrl: './atribuir-atividade.component.css'
+    selector: 'app-atribuir-atividade',
+    templateUrl: './atribuir-atividade.component.html',
+    styleUrl: './atribuir-atividade.component.css',
+    standalone: false
 })
 export class AtribuirAtividadeComponent implements OnChanges {
 	@Output() associacaoConcluida = new EventEmitter<void>();

@@ -6,9 +6,10 @@ import { ItemCriterioService } from '../../../services/featuresServices/ItemCrit
 import { CriterioService } from '../../../services/featuresServices/CriterioService';
 
 @Component({
-  selector: 'app-gerenciar-criterio',
-  templateUrl: './gerenciar-criterio.component.html',
-  styleUrl: './gerenciar-criterio.component.css'
+    selector: 'app-gerenciar-criterio',
+    templateUrl: './gerenciar-criterio.component.html',
+    styleUrl: './gerenciar-criterio.component.css',
+    standalone: false
 })
 export class GerenciarCriterioComponent implements OnInit {
   item_descricao: string;

@@ -9,9 +9,10 @@ import { ModalComponent } from '../../../shared/components/modal/modal.component
 import { TurmaService } from '../../../services/featuresServices/TurmaService';
 
 @Component({
-  selector: 'app-gerenciar-turma',
-  templateUrl: './gerenciar-turma.component.html',
-  styleUrl: './gerenciar-turma.component.css'
+    selector: 'app-gerenciar-turma',
+    templateUrl: './gerenciar-turma.component.html',
+    styleUrl: './gerenciar-turma.component.css',
+    standalone: false
 })
 export class GerenciarTurmaComponent implements OnInit {
 

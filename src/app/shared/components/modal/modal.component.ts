@@ -2,9 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrl: './modal.component.css'
+    selector: 'app-modal',
+    templateUrl: './modal.component.html',
+    styleUrl: './modal.component.css',
+    standalone: false
 })
 export class ModalComponent {
   visivel: boolean = false;

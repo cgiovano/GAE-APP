@@ -15,4 +15,8 @@ export class CorrecaoQuestaoService {
     ListarQuestoesCorrecao(idCorrecao: number): Observable<CorrecaoQuestao[]> {
         return this.apiService.ListarItensPorId(`${this.endpoint}/correcao`, idCorrecao);
     }
+
+    atualizar(correcoesQuestoes: CorrecaoQuestao[]): Observable<CorrecaoQuestao[]> {
+        return this.apiService.atualizarEmLista(this.endpoint, correcoesQuestoes);
+    }
 }

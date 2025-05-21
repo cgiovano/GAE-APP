@@ -16,6 +16,10 @@ export class CorrecaoService {
         return this.apiService.criar(this.endpoint, correcao);
     }
 
+    atualizar(idCorrecao: number, correcao: Correcao): Observable<Correcao> {
+        return this.apiService.atualizar(this.endpoint, idCorrecao, correcao);
+    }
+
     listarCorrecoesPorAtividade(idAtividade: number) : Observable<Correcao[]> {
         return this.apiService.ListarItensPorId(`${this.endpoint}/atividade`, idAtividade);
     }

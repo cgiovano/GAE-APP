@@ -3,9 +3,10 @@ import { AnoLetivo } from '../../../shared/models/ano_letivo.model';
 import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoService';
 
 @Component({
-	selector: 'app-cadastrar-ano-letivo',
-	templateUrl: './cadastrar-ano-letivo.component.html',
-	styleUrl: './cadastrar-ano-letivo.component.css'
+    selector: 'app-cadastrar-ano-letivo',
+    templateUrl: './cadastrar-ano-letivo.component.html',
+    styleUrl: './cadastrar-ano-letivo.component.css',
+    standalone: false
 })
 
 export class CadastrarAnoLetivoComponent {

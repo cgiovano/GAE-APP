@@ -5,9 +5,10 @@ import { AnoLetivo } from '../../../shared/models/ano_letivo.model';
 import { Turma } from '../../../shared/models/turma.model';
 
 @Component({
-	selector: 'app-cadastrar-turma',
-	templateUrl: './cadastrar-turma.component.html',
-	styleUrl: './cadastrar-turma.component.css'
+    selector: 'app-cadastrar-turma',
+    templateUrl: './cadastrar-turma.component.html',
+    styleUrl: './cadastrar-turma.component.css',
+    standalone: false
 })
 export class CadastrarTurmaComponent {
 	@Input() anosLetivos: AnoLetivo[];

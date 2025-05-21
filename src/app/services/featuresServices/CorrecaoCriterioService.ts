@@ -15,4 +15,8 @@ export class CorrecaoCriterioService {
     ListarCorrecaoCriterioPorCorrecao(idCorrecao: number): Observable<CorrecaoCriterio[]> {
         return this.apiService.ListarItensPorId(`${this.endpoint}/correcao`, idCorrecao);
     }
+
+    atualizar(correcoesCriterios: CorrecaoCriterio[]): Observable<CorrecaoCriterio[]> {
+        return this.apiService.atualizarEmLista(this.endpoint, correcoesCriterios);
+    }
 }

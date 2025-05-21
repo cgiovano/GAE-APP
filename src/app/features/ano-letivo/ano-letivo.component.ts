@@ -9,9 +9,10 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
-	selector: 'app-ano-letivo',
-	templateUrl: './ano-letivo.component.html',
-	styleUrl: './ano-letivo.component.css', 
+    selector: 'app-ano-letivo',
+    templateUrl: './ano-letivo.component.html',
+    styleUrl: './ano-letivo.component.css',
+    standalone: false
 })
 export class AnoLetivoComponent implements OnInit {
 	anoLetivoSelecionado: AnoLetivo;

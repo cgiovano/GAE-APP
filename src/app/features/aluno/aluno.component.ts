@@ -10,9 +10,10 @@ import { ApiService } from '../../services/ApiService';
 let urlBase: string = 'http://localhost:3000';
 
 @Component({
-	selector: 'app-aluno',
-	templateUrl: './aluno.component.html',
-	styleUrl: './aluno.component.css'
+    selector: 'app-aluno',
+    templateUrl: './aluno.component.html',
+    styleUrl: './aluno.component.css',
+    standalone: false
 })
 export class AlunoComponent implements OnInit {
 	alunoSelecionado: Aluno;

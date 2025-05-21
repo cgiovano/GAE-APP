@@ -5,9 +5,10 @@ import { TurmaService } from '../../../services/featuresServices/TurmaService';
 import { AnoLetivoService } from '../../../services/featuresServices/AnoLetivoService';
 
 @Component({
-  selector: 'app-editar-turma',
-  templateUrl: './editar-turma.component.html',
-  styleUrl: './editar-turma.component.css'
+    selector: 'app-editar-turma',
+    templateUrl: './editar-turma.component.html',
+    styleUrl: './editar-turma.component.css',
+    standalone: false
 })
 
 export class EditarTurmaComponent {

@@ -12,9 +12,10 @@ import { Correcao } from '../../../shared/models/correcao.model';
 import { CorrecaoService } from '../../../services/featuresServices/CorrecaoService';
 
 @Component({
-  selector: 'app-listar-alunos-atividades',
-  templateUrl: './listar-alunos-atividades.component.html',
-  styleUrl: './listar-alunos-atividades.component.css'
+    selector: 'app-listar-alunos-atividades',
+    templateUrl: './listar-alunos-atividades.component.html',
+    styleUrl: './listar-alunos-atividades.component.css',
+    standalone: false
 })
 export class ListarAlunosAtividadesComponent implements OnInit {
   idAtividadeSelecionada: number;
@@ -60,12 +61,14 @@ export class ListarAlunosAtividadesComponent implements OnInit {
   }
 
   ObterCorrecaoCadastrada(idAluno: number, idAtividade: number): Correcao | undefined {
-    const CorrecaoCadastrada = this.correcoes.find((correcao) => correcao.id_aluno == idAluno && correcao.id_atividade == idAtividade)
-
-    if (CorrecaoCadastrada)
-      return CorrecaoCadastrada;
-    else
-      return undefined;
+    let correcaoCadastrada: Correcao | undefined;
+    
+    if(this.correcoes != undefined)
+      correcaoCadastrada = this.correcoes.find((correcao) => correcao.id_aluno == idAluno && correcao.id_atividade == idAtividade)
+      if (correcaoCadastrada)
+        return correcaoCadastrada;
+      else
+        return undefined;
   }
 
   verificaAcaoBotaoCorrecao(idAluno: number) : string {

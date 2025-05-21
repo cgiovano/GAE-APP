@@ -3,9 +3,10 @@ import { Aluno } from '../../../shared/models/aluno.model';
 import { AlunoService } from '../../../services/featuresServices/AlunoService';
 
 @Component({
-  selector: 'app-editar-aluno',
-  templateUrl: './editar-aluno.component.html',
-  styleUrl: './editar-aluno.component.css'
+    selector: 'app-editar-aluno',
+    templateUrl: './editar-aluno.component.html',
+    styleUrl: './editar-aluno.component.css',
+    standalone: false
 })
 export class EditarAlunoComponent {
   @Input() aluno: Aluno;

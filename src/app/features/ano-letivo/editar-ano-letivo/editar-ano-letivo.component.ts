@@ -4,9 +4,10 @@ import { AnoLetivo } from '../../../shared/models/ano_letivo.model';
 import { Observable } from 'rxjs';
 
 @Component({
-	selector: 'app-editar-ano-letivo',
-	templateUrl: './editar-ano-letivo.component.html',
-	styleUrl: './editar-ano-letivo.component.css'
+    selector: 'app-editar-ano-letivo',
+    templateUrl: './editar-ano-letivo.component.html',
+    styleUrl: './editar-ano-letivo.component.css',
+    standalone: false
 })
 export class EditarAnoLetivoComponent {
 	@Input() anoLetivo: AnoLetivo;

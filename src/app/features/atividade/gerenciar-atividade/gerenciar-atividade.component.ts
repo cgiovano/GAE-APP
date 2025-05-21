@@ -13,9 +13,10 @@ import { ModalComponent } from '../../../shared/components/modal/modal.component
 type CriterioSelecionado = { selecionado: boolean } & Criterio;
 
 @Component({
-  selector: 'app-gerenciar-atividade',
-  templateUrl: './gerenciar-atividade.component.html',
-  styleUrl: './gerenciar-atividade.component.css'
+    selector: 'app-gerenciar-atividade',
+    templateUrl: './gerenciar-atividade.component.html',
+    styleUrl: './gerenciar-atividade.component.css',
+    standalone: false
 })
 
 export class GerenciarAtividadeComponent implements OnInit {

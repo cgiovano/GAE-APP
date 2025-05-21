@@ -43,6 +43,16 @@ export class ApiService {
 	/**
 	 *
 	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
+	 * @param obj Lista de objetos/dados a serem atualizados na requisição.
+	 * @returns Retorna um item de tipo generico <T[]>.
+	 */
+	atualizarEmLista<T>(endpoint: string, obj: T[]): Observable<T[]> {
+		return this.http.put<T[]>(`${this.urlBase}/${endpoint}`, obj);
+	}
+
+	/**
+	 *
+	 * @param endpoint String com do endpoint a ser utilizado. Note que deve se seguir o endpoint da API.
 	 * @param id Id do objeto a ser deletado.
 	 * @returns Retorna <void>.
 	 */

@@ -6,9 +6,10 @@ import { ItemCriterioService } from '../../services/featuresServices/ItemCriteri
 import { ItemCriterio } from '../../shared/models/item_criterio.model';
 
 @Component({
-  selector: 'app-criterio',
-  templateUrl: './criterio.component.html',
-  styleUrl: './criterio.component.css'
+    selector: 'app-criterio',
+    templateUrl: './criterio.component.html',
+    styleUrl: './criterio.component.css',
+    standalone: false
 })
 
 export class CriterioComponent implements OnInit {

@@ -8,9 +8,10 @@ import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-atividade',
-  templateUrl: './atividade.component.html',
-  styleUrl: './atividade.component.css'
+    selector: 'app-atividade',
+    templateUrl: './atividade.component.html',
+    styleUrl: './atividade.component.css',
+    standalone: false
 })
 export class AtividadeComponent implements OnInit {
   atividades: Atividade[] = [];

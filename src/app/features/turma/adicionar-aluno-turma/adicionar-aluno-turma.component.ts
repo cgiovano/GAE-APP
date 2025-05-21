@@ -5,9 +5,10 @@ import { AlunoTurma } from '../../../shared/models/aluno_turma.model';
 import { AlunoTurmaService } from '../../../services/featuresServices/AlunoTurmaService';
 
 @Component({
-  selector: 'app-adicionar-aluno-turma',
-  templateUrl: './adicionar-aluno-turma.component.html',
-  styleUrl: './adicionar-aluno-turma.component.css'
+    selector: 'app-adicionar-aluno-turma',
+    templateUrl: './adicionar-aluno-turma.component.html',
+    styleUrl: './adicionar-aluno-turma.component.css',
+    standalone: false
 })
 export class AdicionarAlunoTurmaComponent implements OnChanges {
   @Input() idTurma: number;

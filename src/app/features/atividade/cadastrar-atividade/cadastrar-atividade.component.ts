@@ -7,9 +7,10 @@ import { Questao } from '../../../shared/models/questao.model';
 import { QuestaoService } from '../../../services/featuresServices/QuestaoService';
 
 @Component({
-  selector: 'app-cadastrar-atividade',
-  templateUrl: './cadastrar-atividade.component.html',
-  styleUrl: './cadastrar-atividade.component.css'
+    selector: 'app-cadastrar-atividade',
+    templateUrl: './cadastrar-atividade.component.html',
+    styleUrl: './cadastrar-atividade.component.css',
+    standalone: false
 })
 
 export class CadastrarAtividadeComponent implements OnInit {

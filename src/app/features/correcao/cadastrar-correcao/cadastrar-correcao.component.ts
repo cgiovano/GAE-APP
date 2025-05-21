@@ -12,11 +12,13 @@ import { CorrecaoQuestao } from '../../../shared/models/correcao_questao.model';
 import { CorrecaoCriterio } from '../../../shared/models/correcao_criterio.model';
 import { CorrecaoQuestaoService } from '../../../services/featuresServices/CorrecaoQuestaoService';
 import { CorrecaoCriterioService } from '../../../services/featuresServices/CorrecaoCriterioService';
+import { CorrecaoService } from '../../../services/featuresServices/CorrecaoService';
 
 @Component({
-  selector: 'app-cadastrar-correcao',
-  templateUrl: './cadastrar-correcao.component.html',
-  styleUrl: './cadastrar-correcao.component.css'
+    selector: 'app-cadastrar-correcao',
+    templateUrl: './cadastrar-correcao.component.html',
+    styleUrl: './cadastrar-correcao.component.css',
+    standalone: false
 })
 
 export class CadastrarCorrecaoComponent implements OnChanges {
@@ -28,7 +30,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
   correcaoQuestoes: CorrecaoQuestao[];
   correcaoCriterios: CorrecaoCriterio[];
 
-  constructor(private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) { }
+  constructor(private correcaoService: CorrecaoService, private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Estou funcionando!" + this.correcao.id);
@@ -52,7 +54,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
 
   questaoComCriterio(idQuestao: number): boolean {
     let quantidadeCriterios = this.criteriosAtividade.filter(criterio => criterio.id_questao == idQuestao);
-    return quantidadeCriterios ? true : false;
+    return quantidadeCriterios.length > 0 ? true : false;
   }
 
   obterCriterio(idCriterio: number | undefined): Criterio | undefined {
@@ -76,29 +78,47 @@ export class CadastrarCorrecaoComponent implements OnChanges {
       correcaoCriterio.valor = valor;
     }
 
+    this.correcaoQuestoes.forEach(correcaoQuestao => this.corrigirQuestao(correcaoQuestao));
+    this.corrigirAtividade(this.correcao);
+
     console.log(correcaoCriterio);
   }
 
-  corrigir() {
-    let valorQuestao: number;
-    let mediaDaPontuacaoCriterios: number;
+  estaMarcado(correcaoCriterio: CorrecaoCriterio, idItemCriterio: number) {
+    if(correcaoCriterio.id_item_criterio == idItemCriterio)
+      return true;
+    else
+      return false;
   }
 
   corrigirQuestao(correcaoQuestao: CorrecaoQuestao) {
     let criteriosQuestao = this.correcaoCriterios.filter(correcaoCriterio => correcaoCriterio.id_correcao_questao == correcaoQuestao.id);
+    let questao = this.questoes.find(questao => questao.id == correcaoQuestao.id_questao);
     let somaValorCriterio: number = 0;
 
     criteriosQuestao.forEach(correcaoCriterio => {
       somaValorCriterio += correcaoCriterio.valor;
     });
 
-    if(criteriosQuestao.length > 0)
-      correcaoQuestao.pontuacao = somaValorCriterio / criteriosQuestao.length;
+    if(criteriosQuestao.length > 0 && questao != undefined)
+      correcaoQuestao.pontuacao = questao?.valor*(somaValorCriterio / criteriosQuestao.length);
     else
       console.log("não existem criterios para esta questão!");
   }
 
   corrigirAtividade(correcao: Correcao) {
+    let somaPontosCorrecaoQuestoes: number = 0;
 
+    if(this.correcaoQuestoes.length > 0)
+      this.correcaoQuestoes.forEach(correcaoQuestoes => somaPontosCorrecaoQuestoes += correcaoQuestoes.pontuacao);
+
+    correcao.nota = somaPontosCorrecaoQuestoes;
+  }
+
+  gravarDados() {
+    console.log(this.correcao.nota);
+    this.correcaoCriterioService.atualizar(this.correcaoCriterios).subscribe();
+    this.correcaoQuestaoService.atualizar(this.correcaoQuestoes).subscribe();
+    this.correcaoService.atualizar(this.correcao.id, this.correcao).subscribe();
   }
 }

@@ -8,9 +8,10 @@ import { subscribe } from 'diagnostics_channel';
 import { Atividade } from '../../shared/models/atividade.model';
 
 @Component({
-  selector: 'app-correcao',
-  templateUrl: './correcao.component.html',
-  styleUrl: './correcao.component.css'
+    selector: 'app-correcao',
+    templateUrl: './correcao.component.html',
+    styleUrl: './correcao.component.css',
+    standalone: false
 })
 export class CorrecaoComponent implements OnInit {
 

@@ -4,9 +4,10 @@ import { CriterioQuestao } from '../../../shared/models/criterio_questao.model';
 import { CriterioQuestaoService } from '../../../services/featuresServices/CriterioQuestaoService';
 
 @Component({
-	selector: 'app-associar-criterio-questao',
-	templateUrl: './associar-criterio-questao.component.html',
-	styleUrl: './associar-criterio-questao.component.css'
+    selector: 'app-associar-criterio-questao',
+    templateUrl: './associar-criterio-questao.component.html',
+    styleUrl: './associar-criterio-questao.component.css',
+    standalone: false
 })
 export class AssociarCriterioQuestaoComponent implements OnChanges {
 	@Input() criterios: Criterio[] = [];
