@@ -40,9 +40,9 @@ const routes: Routes = [
   { path: 'criterio/gerenciar/:id', component: GerenciarCriterioComponent },
   { path: 'criterio/cadastrar', component: CadastrarCriterioComponent },
   { path: 'correcao', component: CorrecaoComponent },
-  { path: 'correcao/atividade/:id', component: ListarAlunosAtividadesComponent },
-  { path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent },
-  { path: 'atividade/gerenciar/:id/questao/cadastrar', component: CadastrarQuestaoComponent }
+  { path: 'correcao/atividade/:id', component: ListarAlunosAtividadesComponent }
+  //{ path: 'correcao/cadastrar', component: CadastrarCorrecaoComponent },
+  //{ path: 'atividade/gerenciar/:id/questao/cadastrar', component: CadastrarQuestaoComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

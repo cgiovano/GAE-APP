@@ -18,17 +18,15 @@ export class CadastrarCriterioComponent {
 
   pontuacaoPadrao = 100;
   criterio: Criterio = { id: 0, descricao: '', numero_criterios: 0, likert_scale: false };
-  listaItensCriterio: ItemCriterio[] = [ ];
+  listaItensCriterio: Omit<ItemCriterio, 'id'>[];
   idCriterio: number = 0;
 
   constructor(private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private router: Router) { }
 
   criarCriterio() {
-    console.log(this.listaItensCriterio);
-
     this.criterioService.criar(this.criterio).subscribe((dados) => { 
       this.atualizarLista(dados.id);
-      this.itemCriterioService.criar(this.listaItensCriterio).subscribe((dados) => {console.log(dados); this.cadastroConcluido.emit()});
+      this.itemCriterioService.criar(this.listaItensCriterio as ItemCriterio[]).subscribe((dados) => {console.log(dados); this.cadastroConcluido.emit()});
     });
   }
 
@@ -58,12 +56,12 @@ export class CadastrarCriterioComponent {
     if(valorAutomatico) {
       for (let i = 1; i <= quantidadeItens; i++) {
         let val: number = (valorItem * i) / 100;
-        this.listaItensCriterio.push({ id: 0, id_criterio: this.idCriterio, descricao: "", valor: val })
+        this.listaItensCriterio.push({id_criterio: this.idCriterio, descricao: "", valor: val })
       }
     } else {
       for (let i = 1; i <= quantidadeItens; i++) {
         let val: number = (valorItem * i) / 100;
-        this.listaItensCriterio.push({ id: 0, id_criterio: this.idCriterio, descricao: "", valor: 0 })
+        this.listaItensCriterio.push({id_criterio: this.idCriterio, descricao: "", valor: 0 })
       }
     }
 

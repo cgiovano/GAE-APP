@@ -3,6 +3,7 @@ export interface CorrecaoQuestao {
     id_questao: number, 
     id_correcao: number, 
 
+    escala: number,
     pontuacao: number,
     descricao_correcao: string
 }

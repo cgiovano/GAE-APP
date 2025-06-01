@@ -1,4 +1,4 @@
-.modal-content {
+.modal-container {
     background: #fff;
     box-shadow: 0 2px 8px #0D326A;
     min-width: 320px;
@@ -8,6 +8,12 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 11;
+  }
+
+  .modal-content {
+    min-height: 300px;
+    max-height: 80vh;
+    overflow-y: scroll;
   }
   
   .modal-overlay {

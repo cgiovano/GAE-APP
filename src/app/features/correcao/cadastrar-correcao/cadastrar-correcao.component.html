@@ -1,25 +1,26 @@
 <div class="content-sub-container">
     <h3>nota: {{correcao.nota}}</h3>
-    <div *ngFor="let correcaoQuestao of correcaoQuestoes; let i = index">
-        <div>{{obterDescricaoQuestao(correcaoQuestao.id_questao)}}</div>
-        <div>pontuacao: {{correcaoQuestao.pontuacao}}</div>
-        <label>Questão com criterio? {{questaoComCriterio(correcaoQuestao.id_questao)}}</label>
+    <div class="questao" *ngFor="let correcaoQuestao of correcaoQuestoes; let i = index">
+        <div class="descricao">
+            <p><strong>Questao {{i+1}}: </strong>{{obterDescricaoQuestao(correcaoQuestao.id_questao)}}</p>
+        </div>
 
         <div *ngIf="questaoComCriterio(correcaoQuestao.id_questao) == false">
-            <input type="number" [(ngModel)]="correcaoQuestao.pontuacao" />
+            <input type="number" min="0" max="100" [(ngModel)]="correcaoQuestao.escala" (ngModelChange)="corrigirQuestaoSemCriterio(correcaoQuestao, correcaoQuestao.id_questao); corrigirAtividade(correcao)"/><label>%</label>
+            <button (click)="imprimirEscalaAtual(correcaoQuestao.escala)">qual escala?</button>
         </div>
 
         <div *ngIf="questaoComCriterio(correcaoQuestao.id_questao)">
             <div *ngFor="let correcaoCriterio of obterCriteriosCorrecaoQuestao(correcaoQuestao.id); let j = index">
-                <div>
-                    <div>{{obterCriterio(correcaoCriterio.id_criterio)?.descricao}}</div>
-                    <div>{{obterCriterio(correcaoCriterio.id_criterio)?.likert_scale==true?"verdadeiro":"falso "}}</div>
-                    
+                <div class="criterio">
+                    <div class="titulo-criterio">{{obterCriterio(correcaoCriterio.id_criterio)?.descricao}}</div>
+
                     <div *ngIf="obterCriterio(correcaoCriterio.id)?.likert_scale == false">
                         <input type="number" [(ngModel)]="correcaoCriterio.valor" />
                     </div>
 
-                    <div *ngFor="let itemCriterio of obterItensCriterio(correcaoCriterio.id_criterio)">
+                    <div class="item-criterio"
+                        *ngFor="let itemCriterio of obterItensCriterio(correcaoCriterio.id_criterio)">
                         <!--um observação: no name para o radio button estou utilizando uma combinação dos ids da questao e critérios para impedir que quando o 
                     usuário marque um item critério que é compartilhado com outras questões, os critérios de determinada questão não sejam desmarcados
                     note que quando a questão 1 e 2 utilizam os mesmos critérios, o name definido, caso seja apenas o da correcao ou do próprio item critério
@@ -27,21 +28,26 @@
                     questão 2, ao clicar no radio da questão 2 (que tem o mesmo name dos radio buttons da questão 1) os radios da questão 1 serão desmarcados
                     Assim, fazendo a combinação do id questão e correcao é posssível garantir que os name dos itens critérios pertençam a uma questão em específico, mesmo que
                     tenham critérios compartilhados-->
-                        <input type="radio" [name]="'q'+i+'c'+j" [checked]="estaMarcado(correcaoCriterio, itemCriterio.id)" value={{itemCriterio.valor}}
+                        <input type="radio" [name]="'q'+i+'c'+j"
+                            [checked]="estaMarcado(correcaoCriterio, itemCriterio.id)" value={{itemCriterio.valor}}
                             (click)="selecionarItemCriterio(correcaoCriterio.id, itemCriterio.id, itemCriterio.valor)" />
                         <label>{{itemCriterio.descricao}}</label><br>
                     </div>
-                    <label>Pontuação: {{correcaoCriterio.valor}}</label>
                 </div>
             </div>
         </div>
-        
-        <div>
-            <div>Feedback</div>
+
+        <div class="feedback">
+            <label>Feedback</label>
             <input type="text" [(ngModel)]="correcaoQuestao.descricao_correcao" />
         </div>
+
+        <div class="pontuacao">
+            <p>pontuacao: {{correcaoQuestao.pontuacao}}</p>
+            <div></div>
+        </div>
     </div>
-    
+
     <div>
         <button (click)="gravarDados()">Salvar</button>
     </div>

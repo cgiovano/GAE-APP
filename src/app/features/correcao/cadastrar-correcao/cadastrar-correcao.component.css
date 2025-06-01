@@ -1,0 +1,42 @@
+
+.criterio {
+    background-color: #f2f2f2;
+    font-size: 10pt;
+    border: solid 1px #cfcccc;
+    margin-bottom: 10px;
+}
+
+.titulo-criterio {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.descricao>p {
+    font-size: 12pt;
+}
+
+.item-criterio {
+    display: inline-flex;
+}
+
+.item-criterio>label {
+    margin: 0px;
+}
+
+.pontuacao {
+    margin-top: 15px;
+}
+
+.pontuacao p{
+    width: fit-content;
+    margin: 0 0 0 auto;
+    padding: 5px;
+    text-align: center;
+    font-size: smaller;
+    background-color: #0D326A;
+    color: #fff;
+}
+
+.pontuacao div {
+    border-top: solid 1px #cfcccc; 
+}

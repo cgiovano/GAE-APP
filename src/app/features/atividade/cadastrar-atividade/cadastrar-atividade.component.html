@@ -19,6 +19,11 @@
             <p>Data de entrega</p>
             <input type="date" (change)="setDate(inputDate.value)" #inputDate />
         </div>
+        
+        <div id="item5">
+            <input type="checkbox" (change)="definirMetodoDeCalculoDeNota(metodoCalculoNota.checked)" #metodoCalculoNota/>
+            <label>Método de calculo de nota: {{metodoDeCalculoDeNota}}</label>
+        </div>
     </div>
 
     <button (click)="criarAtividade()">Cofirmar e adicionar questões</button>

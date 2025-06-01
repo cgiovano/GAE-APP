@@ -10,12 +10,13 @@ import { TurmaService } from '../../../services/featuresServices/TurmaService';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { Correcao } from '../../../shared/models/correcao.model';
 import { CorrecaoService } from '../../../services/featuresServices/CorrecaoService';
+import { AtividadeService } from '../../../services/featuresServices/AtividadeService';
 
 @Component({
-    selector: 'app-listar-alunos-atividades',
-    templateUrl: './listar-alunos-atividades.component.html',
-    styleUrl: './listar-alunos-atividades.component.css',
-    standalone: false
+  selector: 'app-listar-alunos-atividades',
+  templateUrl: './listar-alunos-atividades.component.html',
+  styleUrl: './listar-alunos-atividades.component.css',
+  standalone: false
 })
 export class ListarAlunosAtividadesComponent implements OnInit {
   idAtividadeSelecionada: number;
@@ -25,16 +26,20 @@ export class ListarAlunosAtividadesComponent implements OnInit {
   idAlunoSelecionado: number;
   correcaoAtivada: Correcao;
   correcoes: Correcao[];
+  urlAtual: any;
+  atividadeSelecionada: Atividade;
 
-  constructor(private alunoService: AlunoService, private atividadeAlunoService: AtividadeAlunoService, turmaService: TurmaService, private correcaoService: CorrecaoService, private activatedRoute: ActivatedRoute) {
+  constructor(private alunoService: AlunoService, private atividadeService: AtividadeService, turmaService: TurmaService, private correcaoService: CorrecaoService, private activatedRoute: ActivatedRoute) {
     this.idAtividadeSelecionada = activatedRoute.snapshot.params['id'];
-    console.log(this.idAtividadeSelecionada);
+    this.urlAtual = activatedRoute.snapshot.url;
     this.correcaoAtivada = { id: 0, id_aluno: 10, id_atividade: this.idAtividadeSelecionada, nota: 0 };
   }
 
   ngOnInit(): void {
+    this.atividadeService.obterItemPorId(this.idAtividadeSelecionada).subscribe((dados) => this.atividadeSelecionada = dados);
     this.alunoService.listarAlunosPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.alunos = dados);
     this.correcaoService.listarCorrecoesPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.correcoes = dados);
+    console.log("Teste" + this.urlAtual);
   }
 
   obterTurma(idAluno: number) {
@@ -42,8 +47,7 @@ export class ListarAlunosAtividadesComponent implements OnInit {
   }
 
   abrirModalCadastrarCorrecao(modal: ModalComponent, idAluno: number) {
-    modal.Abrir('corrigindo atividade');
-    //modal.Abrir('corrigindo atividade, id: ' + this.correcaoAtivada + 'idAluno: ' + idAluno);
+    modal.Abrir('corrigindo atividade: ' + this.correcaoAtivada.id);
     this.idAlunoSelecionado = idAluno;
     console.log(this.idAlunoSelecionado);
 
@@ -58,30 +62,39 @@ export class ListarAlunosAtividadesComponent implements OnInit {
         this.idAlunoSelecionado = idAluno;
       });
     }
+
+    console.log("corrigidno a atividade de id: " + this.correcaoAtivada);
   }
 
   ObterCorrecaoCadastrada(idAluno: number, idAtividade: number): Correcao | undefined {
     let correcaoCadastrada: Correcao | undefined;
-    
-    if(this.correcoes != undefined)
+
+    if (this.correcoes != undefined)
       correcaoCadastrada = this.correcoes.find((correcao) => correcao.id_aluno == idAluno && correcao.id_atividade == idAtividade)
-      if (correcaoCadastrada)
-        return correcaoCadastrada;
-      else
-        return undefined;
+    if (correcaoCadastrada)
+      return correcaoCadastrada;
+    else
+      return undefined;
   }
 
-  verificaAcaoBotaoCorrecao(idAluno: number) : string {
-    if(this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada) != undefined)
+  verificaAcaoBotaoCorrecao(idAluno: number): string {
+    if (this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada) != undefined)
       return "Alterar";
-    else 
+    else
       return "Corrigir";
   }
 
   excluirCorrecao(idAluno: number) {
     let idCorrecao = this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada)?.id;
-    
-    if(idCorrecao)
+
+    if (idCorrecao)
       this.correcaoService.excluir(idCorrecao).subscribe();
+  }
+
+
+  onResolvido(modal: ModalComponent) {
+    modal.Fechar();
+    this.alunoService.listarAlunosPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.alunos = dados);
+    this.correcaoService.listarCorrecoesPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.correcoes = dados);
   }
 }

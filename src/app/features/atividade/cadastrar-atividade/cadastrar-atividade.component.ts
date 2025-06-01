@@ -16,8 +16,8 @@ import { QuestaoService } from '../../../services/featuresServices/QuestaoServic
 export class CadastrarAtividadeComponent implements OnInit {
   @Output() cadastroConcluido = new EventEmitter<any>();
 
-  atividade: Atividade = { id: 0, descricao: '', data_inicio: '', data_fim: '', valor: 0, numero_questoes: 0 };
-
+  atividade: Atividade = { id: 0, descricao: '', data_inicio: '', data_fim: '', valor: 0, nota_calculada_soma: false, numero_questoes: 0 };
+  metodoDeCalculoDeNota: string = "";
 
   constructor(private atividadeService: AtividadeService, private questaoService: QuestaoService, private datePipe: DatePipe, private router: Router) { }
 
@@ -29,7 +29,12 @@ export class CadastrarAtividadeComponent implements OnInit {
     console.log(this.atividade);
     this.atividadeService.criar(this.atividade).subscribe((dados) => {
       let questoes: Questao[] = [];
-      let valorQuestao = 10 / this.atividade.numero_questoes as number;
+      let valorQuestao = 0;
+
+      if(this.atividade.nota_calculada_soma)
+        valorQuestao = 10 / this.atividade.numero_questoes as number;
+      else
+        valorQuestao = this.atividade.valor;
 
       for (let i = 0; i < this.atividade.numero_questoes; i++) {
         questoes.push({ descricao: '', id_atividade: dados.id, valor: valorQuestao });
@@ -44,4 +49,13 @@ export class CadastrarAtividadeComponent implements OnInit {
   setDate(value: string) {
     this.atividade.data_fim = value;
   }
+
+  definirMetodoDeCalculoDeNota(checado: boolean) {
+    this.atividade.nota_calculada_soma = checado;
+
+    if(checado)
+      this.metodoDeCalculoDeNota = "Soma"
+    else
+      this.metodoDeCalculoDeNota = "media"
+    }
 }

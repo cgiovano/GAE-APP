@@ -27,7 +27,7 @@ export class GerenciarAtividadeComponent implements OnInit {
   questaoSelecionada: number = 0;
   criteriosAtividade: CriterioQuestao[];
   questoes: Questao[] = [];
-  atividade: Atividade = { id: 0, descricao: '', valor: 0, data_inicio: '', data_fim: '', numero_questoes: 0 };
+  atividade: Atividade = { id: 0, descricao: '', valor: 0, data_inicio: '', data_fim: '', nota_calculada_soma: false, numero_questoes: 0 };
 
   constructor(private criterioQuestaoService: CriterioQuestaoService, private questaoService: QuestaoService, private atividadeService: AtividadeService, private criterioService: CriterioService, private activatedRoute: ActivatedRoute, private router: Router) { }
 

@@ -1,9 +1,9 @@
 <div class="content-sub-container">
+    <h4>Lista de atividades para correção</h4>
     <div *ngIf="atividades != undefined">
-        <div *ngIf="atividades.length != undefined">
+        <div class="cartao-container" *ngIf="atividades.length != undefined">
             <div *ngFor="let atividade of atividades">
-                <button [routerLink]="['atividade', atividade.id]">id: {{atividade.id}} descricao:
-                    {{atividade.descricao}}</button>
+                <button class="botao-cartao" [routerLink]="['atividade', atividade.id]">{{atividade.descricao}}</button>
             </div>
         </div>
     </div>
