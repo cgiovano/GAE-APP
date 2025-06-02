@@ -6,8 +6,7 @@
         </div>
 
         <div *ngIf="questaoComCriterio(correcaoQuestao.id_questao) == false">
-            <input type="number" min="0" max="100" [(ngModel)]="correcaoQuestao.escala" (ngModelChange)="corrigirQuestaoSemCriterio(correcaoQuestao, correcaoQuestao.id_questao); corrigirAtividade(correcao)"/><label>%</label>
-            <button (click)="imprimirEscalaAtual(correcaoQuestao.escala)">qual escala?</button>
+            <input type="number" min="0" max="100" [(ngModel)]="correcaoQuestao.escala" (ngModelChange)="corrigirQuestaoSemCriterio(correcaoQuestao, correcaoQuestao.id_questao, inputEscala.value); corrigirAtividade(correcao)" #inputEscala/><label>%</label>
         </div>
 
         <div *ngIf="questaoComCriterio(correcaoQuestao.id_questao)">

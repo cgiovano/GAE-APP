@@ -94,10 +94,6 @@ export class CadastrarCorrecaoComponent implements OnChanges {
       return false;
   }
 
-  imprimirEscalaAtual(escalaValor: number) {
-    console.log(escalaValor);
-  }
-
   corrigirQuestao(correcaoQuestao: CorrecaoQuestao) {
     let criteriosQuestao = this.correcaoCriterios.filter(correcaoCriterio => correcaoCriterio.id_correcao_questao == correcaoQuestao.id);
     let questao = this.questoes.find(questao => questao.id == correcaoQuestao.id_questao);
@@ -113,7 +109,10 @@ export class CadastrarCorrecaoComponent implements OnChanges {
       console.log("não existem criterios para esta questão!");
   }
 
-  corrigirQuestaoSemCriterio(correcaoQuestao: CorrecaoQuestao, idQuestao: number) {
+  corrigirQuestaoSemCriterio(correcaoQuestao: CorrecaoQuestao, idQuestao: number, valorEscala: string) {
+    //correcaoQuestao.escala = +valorEscala
+    //console.log(correcaoQuestao);
+    //console.log(typeof(correcaoQuestao.escala));
     let questao = this.questoes.find(questao => questao.id == correcaoQuestao.id_questao);
 
     if(questao != undefined)
