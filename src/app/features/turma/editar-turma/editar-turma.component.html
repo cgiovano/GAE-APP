@@ -1,7 +1,5 @@
 <div class="content-sub-container" *ngIf="turma != undefined && anosLetivos != undefined">
-    <p>Editaando {{turma.serie}} "{{turma.identificacao}}"</p>
-
-    <div><span>serie</span><input type="text" [(ngModel)]="turma.serie" /></div>
+    <div><span>Serie</span><input type="text" [(ngModel)]="turma.serie" /></div>
     <div><span>Identificação</span><input type="text" [(ngModel)]="turma.identificacao" /></div>
     <div>
         <span>ano letivo</span>
@@ -9,6 +7,6 @@
             <option *ngFor="let anoLetivo of anosLetivos" [value]="anoLetivo.id">{{anoLetivo.ano}}</option>
         </select>
 
-        <button (click)="atualizar()">Atualizar ano letivo</button>
+        <button (click)="atualizar()">Atualizar</button>
     </div>
 </div>

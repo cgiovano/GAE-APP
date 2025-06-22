@@ -13,7 +13,8 @@ import { CorrecaoCriterio } from '../../../shared/models/correcao_criterio.model
 import { CorrecaoQuestaoService } from '../../../services/featuresServices/CorrecaoQuestaoService';
 import { CorrecaoCriterioService } from '../../../services/featuresServices/CorrecaoCriterioService';
 import { CorrecaoService } from '../../../services/featuresServices/CorrecaoService';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Routes } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cadastrar-correcao',
@@ -33,10 +34,9 @@ export class CadastrarCorrecaoComponent implements OnChanges {
   correcaoQuestoes: CorrecaoQuestao[];
   correcaoCriterios: CorrecaoCriterio[];
 
-  constructor(private correcaoService: CorrecaoService, private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService, private router: Router) { }
+  constructor(private correcaoService: CorrecaoService, private correcaoQuestaoService: CorrecaoQuestaoService, private correcaoCriterioService: CorrecaoCriterioService, private questaoService: QuestaoService, private criterioService: CriterioService, private itemCriterioService: ItemCriterioService, private criterioQuestaoService: CriterioQuestaoService, private router: Router, private activateRoute: ActivatedRoute, private location: Location) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("Estou funcionando!" + this.correcao.id);
     this.questaoService.listarAssociacao(this.correcao.id_atividade).subscribe((dados) => this.questoes = dados);
     this.criterioService.listarTodos().subscribe((dados) => this.criterios = dados);
     this.itemCriterioService.listarTodos().subscribe((dados) => this.itensCriterios = dados);
@@ -104,7 +104,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     });
 
     if (criteriosQuestao.length > 0 && questao != undefined)
-      correcaoQuestao.pontuacao = questao?.valor * (somaValorCriterio / criteriosQuestao.length);
+      correcaoQuestao.pontuacao = Number((questao?.valor * (somaValorCriterio / criteriosQuestao.length)).toFixed(2));
     else
       console.log("não existem criterios para esta questão!");
   }
@@ -116,7 +116,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     let questao = this.questoes.find(questao => questao.id == correcaoQuestao.id_questao);
 
     if(questao != undefined)
-      correcaoQuestao.pontuacao = questao?.valor * (correcaoQuestao.escala / 100);
+      correcaoQuestao.pontuacao = Number((questao?.valor * (correcaoQuestao.escala / 100)).toFixed(2));
   }
 
   corrigirAtividade(correcao: Correcao) {
@@ -126,7 +126,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
       this.correcaoQuestoes.forEach(correcaoQuestoes => somaPontosCorrecaoQuestoes += correcaoQuestoes.pontuacao);
 
     if(!this.notaCalculadaPorSoma)
-      correcao.nota = somaPontosCorrecaoQuestoes / this.correcaoQuestoes.length;
+      correcao.nota = Number((somaPontosCorrecaoQuestoes / this.correcaoQuestoes.length).toFixed(2));
     else
       correcao.nota = somaPontosCorrecaoQuestoes;
   }
@@ -138,9 +138,14 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     this.correcaoService.atualizar(this.correcao.id, this.correcao).subscribe();
 
     try {
-      this.atualizacaoConcluida.emit();
+      this.atualizacaoConcluida.emit(this.recarregar());
     } catch (error) {
       console.log(error);
     }
+  }
+
+  recarregar() {
+    this.location.replaceState(this.location.path());
+    window.location.reload();
   }
 }

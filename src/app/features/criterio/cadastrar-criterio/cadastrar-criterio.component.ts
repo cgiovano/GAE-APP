@@ -51,16 +51,16 @@ export class CadastrarCriterioComponent {
 
   carregaItensCriterioUI(quantidadeItens: number, valorAutomatico: boolean) {
     this.listaItensCriterio = [];
-    let valorItem = 100 / quantidadeItens;
+    let valorItem = Number((100 / quantidadeItens).toFixed(2));
 
     if(valorAutomatico) {
       for (let i = 1; i <= quantidadeItens; i++) {
-        let val: number = (valorItem * i) / 100;
+        let val: number = Number(((valorItem * i) / 100).toFixed(2));
         this.listaItensCriterio.push({id_criterio: this.idCriterio, descricao: "", valor: val })
       }
     } else {
       for (let i = 1; i <= quantidadeItens; i++) {
-        let val: number = (valorItem * i) / 100;
+        let val: number = Number(((valorItem * i) / 100).toFixed(2));
         this.listaItensCriterio.push({id_criterio: this.idCriterio, descricao: "", valor: 0 })
       }
     }

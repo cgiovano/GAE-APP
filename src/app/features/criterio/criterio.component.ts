@@ -47,7 +47,7 @@ export class CriterioComponent implements OnInit {
 
   iniciarModalEditar(modal: ModalComponent, criterio: Criterio) {
     this.criterioSelecionado = criterio;
-    modal.Abrir(`Edtando criterio id: ${this.criterioSelecionado.id}, descricao: ${this.criterioSelecionado.descricao}`);
+    modal.Abrir(`Editando criterio id: ${this.criterioSelecionado.id}, descricao: ${this.criterioSelecionado.descricao}`);
   }
 
   ExcluirCriterio(id: number) {

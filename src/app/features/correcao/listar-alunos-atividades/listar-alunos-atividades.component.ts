@@ -32,14 +32,13 @@ export class ListarAlunosAtividadesComponent implements OnInit {
   constructor(private alunoService: AlunoService, private atividadeService: AtividadeService, turmaService: TurmaService, private correcaoService: CorrecaoService, private activatedRoute: ActivatedRoute) {
     this.idAtividadeSelecionada = activatedRoute.snapshot.params['id'];
     this.urlAtual = activatedRoute.snapshot.url;
-    this.correcaoAtivada = { id: 0, id_aluno: 10, id_atividade: this.idAtividadeSelecionada, nota: 0 };
+    this.correcaoAtivada = { id: 0, id_aluno: 0, id_atividade: this.idAtividadeSelecionada, nota: 0 };
   }
 
   ngOnInit(): void {
     this.atividadeService.obterItemPorId(this.idAtividadeSelecionada).subscribe((dados) => this.atividadeSelecionada = dados);
     this.alunoService.listarAlunosPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.alunos = dados);
     this.correcaoService.listarCorrecoesPorAtividade(this.idAtividadeSelecionada).subscribe((dados) => this.correcoes = dados);
-    console.log("Teste" + this.urlAtual);
   }
 
   obterTurma(idAluno: number) {
@@ -47,9 +46,9 @@ export class ListarAlunosAtividadesComponent implements OnInit {
   }
 
   abrirModalCadastrarCorrecao(modal: ModalComponent, idAluno: number) {
-    modal.Abrir('corrigindo atividade: ' + this.correcaoAtivada.id);
+    modal.Abrir('corrigindo atividade: ' + this.atividadeSelecionada.id);
     this.idAlunoSelecionado = idAluno;
-    console.log(this.idAlunoSelecionado);
+    //console.log(this.idAlunoSelecionado);
 
     const correcaoCadastrada = this.ObterCorrecaoCadastrada(idAluno, this.idAtividadeSelecionada);
 
@@ -58,12 +57,11 @@ export class ListarAlunosAtividadesComponent implements OnInit {
     } else {
       this.correcaoService.criar({ id: 0, id_aluno: this.idAlunoSelecionado, id_atividade: this.idAtividadeSelecionada, nota: 0 }).subscribe((dados) => {
         this.correcaoAtivada = dados;
-        modal.Abrir('corrigindo atividade, id: ' + this.correcaoAtivada.id);
+        modal.Abrir('corrigindo atividade, id: ' + this.atividadeSelecionada.id);
+        console.log(this.atividadeSelecionada.id);
         this.idAlunoSelecionado = idAluno;
       });
     }
-
-    console.log("corrigidno a atividade de id: " + this.correcaoAtivada);
   }
 
   ObterCorrecaoCadastrada(idAluno: number, idAtividade: number): Correcao | undefined {
