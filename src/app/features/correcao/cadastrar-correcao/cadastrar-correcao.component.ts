@@ -73,18 +73,28 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     return listaItensCriteriosPorCriterio;
   }
 
-  selecionarItemCriterio(idCorrecaoCriterio: number, idItemCriterio: number, valor: number) {
-    let correcaoCriterio = this.correcaoCriterios.find(item => item.id == idCorrecaoCriterio);
+  selecionarItemCriterio(correcaoCriterio: CorrecaoCriterio, idItemCriterio: number | undefined, valor: number | string) {
+    //let correcaoCriterio = this.correcaoCriterios.find(item => item.id == idCorrecaoCriterio);
 
     if (correcaoCriterio) {
-      correcaoCriterio.id_item_criterio = idItemCriterio;
-      correcaoCriterio.valor = valor;
+      if (idItemCriterio != undefined) {
+        correcaoCriterio.id_item_criterio = idItemCriterio;
+        correcaoCriterio.valor = Number(valor);
+      }
     }
 
     this.correcaoQuestoes.forEach(correcaoQuestao => this.corrigirQuestao(correcaoQuestao));
     this.corrigirAtividade(this.correcao);
 
-    console.log(correcaoCriterio);
+    //console.log(correcaoCriterio);
+  }
+
+  corrigirCriterioSemItem(correcaoCriterio: CorrecaoCriterio, valor: number | string) {
+    correcaoCriterio.valor = Number(valor);
+    //console.log(correcaoCriterio.valor);
+
+    this.correcaoQuestoes.forEach(correcaoQuestao => this.corrigirQuestao(correcaoQuestao));
+    this.corrigirAtividade(this.correcao);
   }
 
   estaMarcado(correcaoCriterio: CorrecaoCriterio, idItemCriterio: number) {
@@ -100,7 +110,14 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     let somaValorCriterio: number = 0;
 
     criteriosQuestao.forEach(correcaoCriterio => {
-      somaValorCriterio += correcaoCriterio.valor;
+      //console.log(correcaoCriterio.id_item_criterio)
+      if (this.obterCriterio(correcaoCriterio.id_criterio)?.likert_scale) {
+        somaValorCriterio += correcaoCriterio.valor;
+      }
+      else {
+        somaValorCriterio = somaValorCriterio + (correcaoCriterio.valor/100);
+      }
+
     });
 
     if (criteriosQuestao.length > 0 && questao != undefined)
@@ -115,7 +132,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     //console.log(typeof(correcaoQuestao.escala));
     let questao = this.questoes.find(questao => questao.id == correcaoQuestao.id_questao);
 
-    if(questao != undefined)
+    if (questao != undefined)
       correcaoQuestao.pontuacao = Number((questao?.valor * (correcaoQuestao.escala / 100)).toFixed(2));
   }
 
@@ -125,14 +142,14 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     if (this.correcaoQuestoes.length > 0)
       this.correcaoQuestoes.forEach(correcaoQuestoes => somaPontosCorrecaoQuestoes += correcaoQuestoes.pontuacao);
 
-    if(!this.notaCalculadaPorSoma)
+    if (!this.notaCalculadaPorSoma)
       correcao.nota = Number((somaPontosCorrecaoQuestoes / this.correcaoQuestoes.length).toFixed(2));
     else
       correcao.nota = somaPontosCorrecaoQuestoes;
   }
 
   gravarDados() {
-    console.log(this.correcao.id_atividade);
+    //console.log(this.correcao.id_atividade);
     this.correcaoCriterioService.atualizar(this.correcaoCriterios).subscribe();
     this.correcaoQuestaoService.atualizar(this.correcaoQuestoes).subscribe();
     this.correcaoService.atualizar(this.correcao.id, this.correcao).subscribe();

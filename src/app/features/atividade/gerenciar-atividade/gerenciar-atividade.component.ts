@@ -9,6 +9,7 @@ import { Atividade } from '../../../shared/models/atividade.model';
 import { AtividadeService } from '../../../services/featuresServices/AtividadeService';
 import { QuestaoService } from '../../../services/featuresServices/QuestaoService';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { AtividadeComponent } from '../atividade.component';
 
 type CriterioSelecionado = { selecionado: boolean } & Criterio;
 
@@ -41,7 +42,10 @@ export class GerenciarAtividadeComponent implements OnInit {
 
   confirmarMudancas() {
     for(let i=0; i < this.questoes.length; i++) {
-      this.questaoService.atualizar(this.questoes[i].id as number, this.questoes[i]).subscribe((dados) => console.log("inserido: " + dados));
+      this.questaoService.atualizar(this.questoes[i].id as number, this.questoes[i]).subscribe((dados) => {
+        console.log("inserido: " + dados);
+        this.router.navigate(['atividade']);
+      });
     }
   }
 

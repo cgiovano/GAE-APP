@@ -12,10 +12,10 @@
         <div *ngIf="questaoComCriterio(correcaoQuestao.id_questao)">
             <div *ngFor="let correcaoCriterio of obterCriteriosCorrecaoQuestao(correcaoQuestao.id); let j = index">
                 <div class="criterio">
-                    <div class="titulo-criterio">{{obterCriterio(correcaoCriterio.id_criterio)?.descricao}}</div>
+                    <div class="titulo-criterio">{{obterCriterio(correcaoCriterio.id_criterio)?.descricao}} é likert? {{obterCriterio(correcaoCriterio.id_criterio)?.likert_scale}}</div>
 
-                    <div *ngIf="obterCriterio(correcaoCriterio.id)?.likert_scale == false">
-                        <input type="number" [(ngModel)]="correcaoCriterio.valor" />
+                    <div *ngIf="obterCriterio(correcaoCriterio.id_criterio)?.likert_scale == false">
+                        <input type="number" min="0" max="100" [(ngModel)]="correcaoCriterio.valor" (ngModelChange)="corrigirCriterioSemItem(correcaoCriterio, inputEscala.value)" #inputEscala/><label>%</label>
                     </div>
 
                     <div class="item-criterio"
@@ -29,7 +29,7 @@
                     tenham critérios compartilhados-->
                         <input type="radio" [name]="'q'+i+'c'+j"
                             [checked]="estaMarcado(correcaoCriterio, itemCriterio.id)" value={{itemCriterio.valor}}
-                            (click)="selecionarItemCriterio(correcaoCriterio.id, itemCriterio.id, itemCriterio.valor)" />
+                            (click)="selecionarItemCriterio(correcaoCriterio, itemCriterio.id, itemCriterio.valor)" />
                         <label>{{itemCriterio.descricao}}</label><br>
                     </div>
                 </div>
