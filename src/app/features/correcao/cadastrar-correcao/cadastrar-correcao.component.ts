@@ -115,7 +115,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
         somaValorCriterio += correcaoCriterio.valor;
       }
       else {
-        somaValorCriterio = somaValorCriterio + (correcaoCriterio.valor/100);
+        somaValorCriterio = somaValorCriterio + (correcaoCriterio.valor / 100);
       }
 
     });
@@ -153,7 +153,7 @@ export class CadastrarCorrecaoComponent implements OnChanges {
     this.correcaoCriterioService.atualizar(this.correcaoCriterios).subscribe();
     this.correcaoQuestaoService.atualizar(this.correcaoQuestoes).subscribe();
     this.correcaoService.atualizar(this.correcao.id, this.correcao).subscribe();
-
+    
     try {
       this.atualizacaoConcluida.emit(this.recarregar());
     } catch (error) {
